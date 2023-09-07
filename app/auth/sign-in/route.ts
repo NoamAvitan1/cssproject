@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     password,
   })
 
-  const { error } = response
+  const { error } = await response
   console.log(response);
 
   if (error) {
