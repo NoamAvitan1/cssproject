@@ -11,15 +11,12 @@ export async function POST(request: Request) {
   const password = String(formData.get('password'))
   const supabase = createRouteHandlerClient({ cookies })
 
-  const response = await supabase.auth.signInWithPassword({
+  const res = await supabase.auth.signInWithPassword({
     email,
     password,
   })
 
-  const { error } = await response
-  console.log(response);
-
-  if (error) {
+  if (res.error) {
     return NextResponse.redirect(
       `${requestUrl.origin}/login?error=Could not authenticate user`,
       {

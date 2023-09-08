@@ -16,6 +16,9 @@ export async function POST(request: Request) {
     password,
     options: {
       emailRedirectTo: `${requestUrl.origin}/auth/callback`,
+      data: {
+        yampampuz: 'arbitraryyyyy'
+      }
     },
   })
 
