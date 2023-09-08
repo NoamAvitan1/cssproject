@@ -7,6 +7,7 @@ const supabase = createClient<Database>(
     {
         auth: {
             persistSession: false,
+            autoRefreshToken: true,
         },
     }
 )

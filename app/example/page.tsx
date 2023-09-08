@@ -7,10 +7,10 @@ export default async function page() {
 
 let user_id = "1ec38e46-69ac-4041-9982-e92b735beef6"
 let { data: user, error } = await supabase
-.from('modules')
+.from('module')
 .select(`
   *,
-  users (
+  profile (
     *
   )
 `)
