@@ -11,4 +11,5 @@ const supabase = createClient<Database>(
         },
     }
 )
+
 export default supabase;
