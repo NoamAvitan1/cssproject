@@ -4,8 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        // background: 'hsl(var(--background))',
+        // foreground: 'hsl(var(--foreground))',
+        "text": "var(----text)",
+        "background": "var(----background)",
+        "primary": "var(----primary)",
+        "secondary": "var(----secondary)",
+        "accent": "var(----accent)",
         btn: {
           background: 'hsl(var(--btn-background))',
           'background-hover': 'hsl(var(--btn-background-hover))',
