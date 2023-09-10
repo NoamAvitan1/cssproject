@@ -45,8 +45,6 @@ export default async function Index() {
     data: { user },
   } = await supabase.auth.getUser()
 
-  console.log(user);
-
   return (
     <div className="w-full flex flex-col items-center">
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">

@@ -6,14 +6,18 @@ export const revalidate = 0;
 export default async function page() {
 //   const { data: modules, error } = await supabase.from("modules").select("*");
 
-let { data: user, error } = await supabase
-.from('module')
-.select(`
-  *,
-  profile (
-    *
-  )
-`)
+// const { data: modules, error } = await supabase
+// .from('module')
+// .select(`
+//   *,
+//   profile (
+//     *
+//   )
+// `)
+
+const { data: profiles, error } = await supabase.from('profile').select()
+
+console.log(profiles)
 
   return (
     <div className="bg-white">

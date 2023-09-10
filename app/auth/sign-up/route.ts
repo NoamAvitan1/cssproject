@@ -10,6 +10,7 @@ export async function POST(request: Request) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
   const supabase = createRouteHandlerClient({ cookies })
+  console.log('herewego');
 
   const { error } = await supabase.auth.signUp({
     email,
@@ -17,8 +18,11 @@ export async function POST(request: Request) {
     options: {
       emailRedirectTo: `${requestUrl.origin}/auth/callback`,
       data: {
-        yampampuz: 'arbitraryyyyy'
-      }
+        name: 'some name',
+        role: 'some role',
+        profile_pic: 'link.example.png',
+        ways_of_contact: 'some-contact@example.com',
+      },
     },
   })
 
