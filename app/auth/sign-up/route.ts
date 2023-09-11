@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     options: {
       emailRedirectTo: `${requestUrl.origin}/auth/callback`,
       data: {
-        name: 'some name',
+        user_name: 'some name',
         role: 'some role',
         profile_pic: 'link.example.png',
         ways_of_contact: 'some-contact@example.com',

@@ -15,7 +15,7 @@ export const Greeting = ({ user: currentUser }: { user: User }) => {
 
   return (
     <div className='bg-secondary space-y-4'>
-      <h1>Greetings! Mr {currentUser?.user_metadata.name}</h1>
+      <h1>Greetings! Mr {currentUser?.user_metadata.user_name}</h1>
     </div>
   )
 }
