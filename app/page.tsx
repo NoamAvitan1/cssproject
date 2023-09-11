@@ -13,8 +13,8 @@ export default async function Index() {
   return (
     <div className=''>
       {user && <Greeting user={user} />}
-      <LogoutButton />
       <GithubLoginButton />
+      <LogoutButton />
     </div>
   )
 }

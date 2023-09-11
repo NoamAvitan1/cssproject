@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const requestUrl = new URL(request.url)
 
     const res = await supabase.auth.signInWithOAuth({
-        provider: 'github'
+        provider: 'github',
     })
 
     const user = await supabase.auth.getUser()
