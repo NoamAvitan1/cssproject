@@ -9,7 +9,10 @@ export default async function Index() {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <div className='bg-slate-200'>
+    <div className=''>
+      <div className='bg-primary'>
+        adsads
+      </div>
       {user && <Greeting user={user} />}
     </div>
   )
