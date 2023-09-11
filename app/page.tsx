@@ -12,9 +12,6 @@ export default async function Index() {
 
   return (
     <div className=''>
-      <div className='bg-primary'>
-        adsads
-      </div>
       {user && <Greeting user={user} />}
       <LogoutButton />
       <GithubLoginButton />
