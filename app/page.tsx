@@ -1,6 +1,8 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { Greeting } from './_components/Greeting'
+import LogoutButton from './_components/LogoutButton'
+import { GithubLoginButton } from './_components/GithubLoginButton'
 
 export default async function Index() {
 
@@ -14,6 +16,8 @@ export default async function Index() {
         adsads
       </div>
       {user && <Greeting user={user} />}
+      <LogoutButton />
+      <GithubLoginButton />
     </div>
   )
 }

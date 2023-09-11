@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { User } from '@supabase/supabase-js'
 import { useAtom } from 'jotai'
 import { userAtom } from '../_jotai/userAtoms'
+import Api from '../../utils/axios'
 
 export const Greeting = ({ user: currentUser }: { user: User }) => {
 
@@ -13,6 +14,8 @@ export const Greeting = ({ user: currentUser }: { user: User }) => {
   }, [])
 
   return (
-    <div className='bg-background'>Greetings! Mr {currentUser?.user_metadata.name}</div>
+    <div className='bg-secondary space-y-4'>
+      <h1>Greetings! Mr {currentUser?.user_metadata.name}</h1>
+    </div>
   )
 }
