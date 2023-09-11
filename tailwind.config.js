@@ -11,6 +11,7 @@ module.exports = {
         "primary": "var(--primary)",
         "secondary": "var(--secondary)",
         "accent": "var(--accent)",
+        "error": "var(--error)",
         btn: {
           background: 'hsl(var(--btn-background))',
           'background-hover': 'hsl(var(--btn-background-hover))',

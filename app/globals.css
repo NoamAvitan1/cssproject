@@ -9,6 +9,7 @@
     --primary: #bbcdd3;
     --secondary: #dcd0cb;
     --accent: #567a85;
+    --error: #b60c14;
   }
 
   /* @media (prefers-color-scheme: dark) {
