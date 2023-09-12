@@ -5,17 +5,13 @@ import { useAtom } from 'jotai'
 import { userAtom } from '../_jotai/userAtoms'
 import Api from '../../utils/axios'
 
-export const Greeting = ({ user: currentUser }: { user: User }) => {
+export const Greeting = () => {
 
   const [user, setUser] = useAtom(userAtom)
 
-  useEffect(() => {
-    setUser(currentUser)
-  }, [])
-
   return (
     <div className='bg-secondary space-y-4'>
-      <h1>Greetings! Mr {currentUser?.user_metadata.user_name}</h1>
+      <h1>Greetings! Mr {user?.user_metadata.user_name}</h1>
     </div>
   )
 }
