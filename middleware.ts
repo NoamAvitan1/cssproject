@@ -1,9 +1,7 @@
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
-import { useAtom } from 'jotai'
 import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
-import { userAtom } from './app/_jotai/userAtoms'
 
 export async function middleware(req: NextRequest) {
     
@@ -14,9 +12,7 @@ export async function middleware(req: NextRequest) {
 
   // Refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-  const session = await supabase.auth.getSession()
-
-  // localStorage.setItem('session', JSON.stringify(session.data.session?.user ?? null))
-
+  await supabase.auth.getSession()
+  
   return res
 }

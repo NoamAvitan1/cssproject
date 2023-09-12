@@ -9,6 +9,12 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
+  const supabase = createServerComponentClient({ cookies })
+
+  const user = await supabase.auth.getUser()
+
+  console.log(user);
+
   return (
     <html lang="en">
       <body>

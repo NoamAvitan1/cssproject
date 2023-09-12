@@ -11,7 +11,7 @@ export const GithubLoginButton = () => {
       const res = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: '/'
+          redirectTo: `${location.origin}/auth/callback`
         }
       })
     }}
