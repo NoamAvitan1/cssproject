@@ -1,9 +1,9 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-    const supabase = createServerComponentClient({ cookies })
+    const supabase = createServerActionClient({ cookies })
     const requestUrl = new URL(request.url)
 
     const res = await supabase.auth.getUser()
