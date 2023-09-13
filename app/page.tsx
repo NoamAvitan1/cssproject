@@ -9,8 +9,8 @@ export default async function Index() {
   return (
     <div className=''>
       <GithubLoginButton />
-      <LogoutButton />
-      <Greeting />
+       {/* <LogoutButton /> */}
+      {/* <Greeting />  */}
     </div>
   )
 }
