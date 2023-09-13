@@ -14,7 +14,7 @@
     --alert: #FBBF24;
   }
 
-  /* @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) {
     :root {
       --text: #fdfcfc;
       --background: #060504;
@@ -22,5 +22,5 @@
       --secondary: #090706;
       --accent: #abc2c9;
     }
-  } */
+  }
 }

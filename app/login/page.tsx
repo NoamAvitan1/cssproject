@@ -32,10 +32,10 @@ export default function Login() {
 
       <section className="flex flex-col gap-4">
         <ProviderSignInButton />
-        <div className="text-slate-500 flex min-[420px]:justify-between justify-center items-center w-full">
-          <span className="min-[420px]:block hidden w-[75px] h-[2px] bg-slate-500"></span>
-          <span>Or with email and password</span>
-          <span className="min-[420px]:block hidden w-[75px] h-[2px] bg-slate-500"></span>
+        <div className="text-text flex min-[420px]:justify-between justify-center items-center w-full">
+          <span className="grow bg-slate-500 h-[2px]"></span>
+          <p className="px-4 flex">Or<span className="hidden min-[400px]:block whitespace-pre"> with email and password</span></p>
+          <span className="grow bg-slate-500 h-[2px]"></span>
         </div>
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
@@ -50,7 +50,6 @@ export default function Login() {
               className="p-2 w-full"
               name="email"
               placeholder="you@example.com"
-              required
             />
             <span className="absolute right-2.5">{<MaterialDesign.AiOutlineMail/>}</span>
           </section>
@@ -77,12 +76,12 @@ export default function Login() {
               )}{" "}
             </span>
           </section>
-          <button className="bg-accent rounded px-4 py-2 text-white mb-2">
+          <button className="bg-secondary border border-primary rounded px-4 py-2 text-text mb-2">
             Sign In
           </button>
           <button
             formAction="/auth/sign-up"
-            className="border border-gray-700 rounded px-4 py-2 text-black mb-2"
+            className="bg-secondary border border-primary rounded px-4 py-2 text-text mb-2"
           >
             Sign Up
           </button>
