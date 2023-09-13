@@ -24,3 +24,18 @@
     }
   }
 }
+
+.square-container {
+  width: 200px; /* Adjust the width and height to match your image size */
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.square-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mask-image: radial-gradient(circle at center, transparent 40%, black 80%); /* Adjust the values for the desired softness */
+  -webkit-mask-image: radial-gradient(circle at center, transparent 40%, black 80%); /* For webkit browsers */
+}

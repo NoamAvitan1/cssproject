@@ -10,7 +10,6 @@ export async function POST(request: Request) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
   const supabase = createRouteHandlerClient({ cookies })
-  console.log('herewego');
 
   const { error } = await supabase.auth.signUp({
     email,
