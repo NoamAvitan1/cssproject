@@ -16,10 +16,18 @@ export default function Login() {
   const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
   const [validationError, setValidationError] = useState<yup.ValidationError | null>(null)
 
-  const authSchema = object({
-    email: string().email().required(),
-    password: string().min(8).password().required()
-  })
+  const authSchema = () => {
+    let passwordValidation = string().min(8).required();
+  
+    if (type === 'sign-up') {
+      passwordValidation = passwordValidation.password() as typeof passwordValidation;
+    }
+  
+    return object({
+      email: string().email().required(),
+      password: passwordValidation,
+    });
+  };
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     const inputs = e.target.elements
@@ -27,7 +35,7 @@ export default function Login() {
       email: inputs[0]?.value,
       password: inputs[1]?.value
     }
-    authSchema.validate(forValidation)
+    authSchema().validate(forValidation)
     .catch((error: yup.ValidationError) => {
       e.preventDefault()
       setValidationError(error)

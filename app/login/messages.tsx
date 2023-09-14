@@ -9,7 +9,7 @@ export default function Messages({ validationError }: {validationError: Validati
   const message = searchParams.get('message')
   return (
     <>
-      {error && (
+      {error || validationError && (
         <p className="mt-4 p-4 bg-error text-white text-center">
           {validationError?.message ?? error}
         </p>
