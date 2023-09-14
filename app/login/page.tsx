@@ -3,10 +3,37 @@ import Link from "next/link";
 import Messages from "./messages";
 import { ProviderSignInButton } from "../_components/ProviderSignInButton";
 import * as MaterialDesign from "react-icons/ai";
-import { useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
+import { object, string } from "yup";
+import * as yup from 'yup'
+import YupPassword from "yup-password";
 
 export default function Login() {
-  const [showPassword, setShowPassord] = useState<boolean>(false);
+  
+  YupPassword(yup)
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
+  const [validationError, setValidationError] = useState<yup.ValidationError | null>(null)
+
+  const authSchema = object({
+    email: string().email().required(),
+    password: string().min(8).password().required()
+  })
+
+  const handleSubmit = (e: BaseSyntheticEvent) => {
+    const inputs = e.target.elements
+    const forValidation = {
+      email: inputs[0]?.value,
+      password: inputs[1]?.value
+    }
+    authSchema.validate(forValidation)
+    .catch((error: yup.ValidationError) => {
+      e.preventDefault()
+      setValidationError(error)
+    })
+  }
+
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Link
@@ -34,13 +61,19 @@ export default function Login() {
         <ProviderSignInButton />
         <div className="text-text flex min-[420px]:justify-between justify-center items-center w-full">
           <span className="grow bg-slate-500 h-[2px]"></span>
-          <p className="px-4 flex">Or<span className="hidden min-[400px]:block whitespace-pre"> with email and password</span></p>
+          <p className="px-4 flex">
+            Or
+            <span className="hidden min-[400px]:block whitespace-pre">
+              with email and password
+            </span>
+          </p>
           <span className="grow bg-slate-500 h-[2px]"></span>
         </div>
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-          action="/auth/sign-in"
+          action={`/auth/${type}`}
           method="post"
+          onSubmit={(e) => handleSubmit(e)}
         >
           <label className="text-md" htmlFor="email">
             Email
@@ -51,7 +84,9 @@ export default function Login() {
               name="email"
               placeholder="you@example.com"
             />
-            <span className="absolute right-2.5">{<MaterialDesign.AiOutlineMail/>}</span>
+            <span className="absolute right-2.5">
+              {<MaterialDesign.AiOutlineMail />}
+            </span>
           </section>
           <label className="text-md" htmlFor="password">
             Password
@@ -67,25 +102,19 @@ export default function Login() {
             <span className="absolute right-2.5 cursor-pointer">
               {showPassword ? (
                 <MaterialDesign.AiOutlineEye
-                  onClick={() => setShowPassord(false)}
+                  onClick={() => setShowPassword(false)}
                 />
               ) : (
                 <MaterialDesign.AiOutlineEyeInvisible
-                  onClick={() => setShowPassord(true)}
+                  onClick={() => setShowPassword(true)}
                 />
               )}{" "}
             </span>
           </section>
           <button className="bg-secondary border border-primary rounded px-4 py-2 text-text mb-2">
-            Sign In
+            {type}
           </button>
-          <button
-            formAction="/auth/sign-up"
-            className="bg-secondary border border-primary rounded px-4 py-2 text-text mb-2"
-          >
-            Sign Up
-          </button>
-          <Messages />
+          <Messages validationError={validationError} />
         </form>
       </section>
     </div>
