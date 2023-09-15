@@ -21,7 +21,7 @@ export default function Login() {
 
     if (type === "sign-up") {
       passwordValidation =
-        passwordValidation.password() as typeof passwordValidation;
+      passwordValidation.password() as typeof passwordValidation;
     }
 
     return object({
@@ -31,17 +31,26 @@ export default function Login() {
   };
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
-    const inputs = e.target.elements;
-    const forValidation = {
-      email: inputs[0]?.value,
-      password: inputs[1]?.value,
-    };
-    authSchema()
-      .validate(forValidation)
-      .catch((error: yup.ValidationError) => {
+    try {
+      const inputs = e.target.elements;
+      const forValidation = {
+        email: inputs[0]?.value,
+        password: inputs[1]?.value,
+        confirmPassword: inputs[2]?.value,
+      };
+      if (type === 'sign-up' && forValidation.confirmPassword !== forValidation.password) {
         e.preventDefault();
-        setValidationError(error);
-      });
+        throw new Error("passwords do not match");
+      }
+      authSchema()
+        .validate(forValidation)
+        .catch((error: yup.ValidationError) => {
+          e.preventDefault();
+          setValidationError(error);
+        });
+    } catch (error : any) {
+      setValidationError(error);
+    }
   };
 
   return (
@@ -121,7 +130,31 @@ export default function Login() {
               )}{" "}
             </span>
           </section>
-          <p className="text-lg">
+          {type === 'sign-up' && <div>
+          <label className="text-md" htmlFor="password">
+            Confirm Password
+          </label>
+          <section className="rounded-md border mb-6 flex justify-between items-center relative">
+            <input
+              className="p-2 w-full"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              required
+            />
+            <span className="absolute right-2.5 cursor-pointer">
+              {showPassword ? (
+                <MaterialDesign.AiOutlineEye
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <MaterialDesign.AiOutlineEyeInvisible
+                  onClick={() => setShowPassword(true)}
+                />
+              )}{" "}
+            </span>
+          </section>
+            </div>}
+          <p className="text-sm">
             {type === "sign-in" ? "Not a user?" : "Login User?"}{" "}
             <button className="text-blue-700"
               type="button"
