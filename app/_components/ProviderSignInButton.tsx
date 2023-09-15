@@ -21,13 +21,13 @@ export const ProviderSignInButton = () => {
     <div className="flex flex-col justify-between items-center h-[100px] w-full">
       <button
         onClick={() => SignInWithAuthProvider("github")}
-        className="flex justify-between w-full items-center font-serif text-slate-700 dark:text-slate-300 border border-slate-400 p-2 px-6 rounded shadow-sm hover:ring-[6px] ring-slate-700 ring-opacity-5 duration-150">
+        className="flex justify-between w-full items-center font-serif text-text border border-slate-400 p-2 px-6 rounded shadow-sm hover:ring-[6px] ring-slate-700 ring-opacity-5 duration-150">
         <p>Sign In With GitHub</p>
         <BsGithub className="text-2xl" />
       </button>
       <button
         onClick={() => SignInWithAuthProvider("google")}
-        className="flex justify-between w-full items-center font-serif text-slate-700 dark:text-slate-300 border border-slate-400 p-2 px-6 rounded shadow-sm hover:ring-[6px] ring-slate-700 ring-opacity-5 duration-150">
+        className="flex justify-between w-full items-center font-serif text-text border border-slate-400 p-2 px-6 rounded shadow-sm hover:ring-[6px] ring-slate-700 ring-opacity-5 duration-150">
         <p>Sign In With Google</p>
         <MaterialDesign.FcGoogle className="text-2xl" />
       </button>

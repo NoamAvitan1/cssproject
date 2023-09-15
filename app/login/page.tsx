@@ -81,7 +81,7 @@ export default function Login() {
         <div className="text-text flex min-[420px]:justify-between justify-center items-center w-full">
           <span className="grow bg-slate-500 h-[2px]"></span>
           <p className="px-4 flex">
-            Or 
+            Or
             <span className="hidden min-[400px]:block whitespace-pre ml-2">
             with email and password
             </span>
@@ -99,7 +99,7 @@ export default function Login() {
           </label>
           <section className="rounded-md border mb-6 flex justify-between items-center relative">
             <input
-              className="p-2 w-full"
+              className="p-2 w-full text-[#060504]"
               name="email"
               placeholder="you@example.com"
             />
@@ -112,7 +112,7 @@ export default function Login() {
           </label>
           <section className="rounded-md border mb-6 flex justify-between items-center relative">
             <input
-              className="p-2 w-full"
+              className="p-2 w-full text-[#060504]"
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="••••••••"
@@ -136,7 +136,7 @@ export default function Login() {
           </label>
           <section className="rounded-md border mb-6 flex justify-between items-center relative">
             <input
-              className="p-2 w-full"
+              className="p-2 w-full text-[#060504]"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               required
@@ -155,8 +155,8 @@ export default function Login() {
           </section>
             </div>}
           <p className="text-sm">
-            {type === "sign-in" ? "Not a user?" : "Login User?"}{" "}
-            <button className="text-blue-700"
+            {(type === "sign-in" ? "Not a user?" : "Login User?")+" "}
+            <button className="text-blue-400"
               type="button"
               onClick={() => {
                 type === "sign-in" ? setType("sign-up") : setType("sign-in");

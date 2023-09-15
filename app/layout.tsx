@@ -3,6 +3,7 @@ import './globals.css'
 import { cookies } from 'next/headers'
 import { UserSetter } from './_components/UserSetter'
 import { ThemeChangeButton } from './_components/ThemeChangeButton(out)'
+import { AppStarter } from './_components/AppStarter'
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,12 +16,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  console.log(user);
 
+  
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen bg-background flex flex-col items-center justify-center">
+        <AppStarter />
+        <main className="min-h-screen bg-background flex flex-col items-center justify-center text-text">
           <ThemeChangeButton />
           <UserSetter user={user} />
           {children}
