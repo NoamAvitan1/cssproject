@@ -40,7 +40,7 @@ export default function Login() {
       };
       if (type === 'sign-up' && forValidation.confirmPassword !== forValidation.password) {
         e.preventDefault();
-        throw new Error("passwords do not match");
+        throw new Error("Passwords do not match");
       }
       authSchema()
         .validate(forValidation)
