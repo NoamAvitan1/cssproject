@@ -40,7 +40,7 @@ export const ThemeChangeButton: React.FC<Props> = (props) => {
   }, [])
 
   return (
-    <button onClick={changeGlobalTheme} className="fixed top-8 right-8 text-text">
+    <button onClick={changeGlobalTheme} className="top-8 right-8 text-text">
       {theme == 'light' ? <BsSun /> : <BsMoon />}
     </button>
   );

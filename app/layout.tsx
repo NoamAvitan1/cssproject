@@ -23,7 +23,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center text-text">
           <NavBar/>
-          {/* <ThemeChangeButton /> */}
           <UserSetter user={user} />
           {children}
         </main>

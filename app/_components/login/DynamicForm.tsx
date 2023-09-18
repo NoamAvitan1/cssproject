@@ -130,7 +130,7 @@ export const DynamicForm: React.FC<Props> = (props) => {
           {type === "sign-in" ? "sign-up" : "sign-in"}
         </button>
       </p>
-      <button className="bg-secondary border border-primary rounded px-4 py-2 text-text mb-2">
+      <button className="bg-secondary rounded px-4 py-2 text-text mb-2">
         {type}
       </button>
       <Messages validationError={validationError} />
