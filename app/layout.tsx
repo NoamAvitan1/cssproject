@@ -1,8 +1,8 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import './globals.css'
 import { cookies } from 'next/headers'
-import { UserSetter } from './_components/UserSetter'
-import { ThemeChangeButton } from './_components/ThemeChangeButton(out)'
+import { UserSetter } from './_components/login/UserSetter'
+import { ThemeChangeButton } from './_components/common/ThemeChangeButton(out)'
 
 export const metadata = {
   title: 'CSStore',

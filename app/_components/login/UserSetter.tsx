@@ -1,7 +1,7 @@
 'use client'
 
 import { useAtom } from "jotai"
-import { userAtom } from "../_jotai/userAtoms"
+import { userAtom } from "../../_jotai/userAtoms"
 import { User } from "@supabase/supabase-js"
 import { useEffect } from "react"
 

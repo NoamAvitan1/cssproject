@@ -1,6 +1,6 @@
 "use client";
 import Messages from "./messages";
-import { ProviderSignInButton } from "../_components/ProviderSignInButton";
+import { ProviderSignInButton } from "../_components/login/ProviderSignInButton";
 import * as MaterialDesign from "react-icons/ai";
 import { BaseSyntheticEvent, useState } from "react";
 import { object, string } from "yup";
