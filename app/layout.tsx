@@ -3,6 +3,7 @@ import './globals.css'
 import { cookies } from 'next/headers'
 import { UserSetter } from './_components/login/UserSetter'
 import { ThemeChangeButton } from './_components/common/ThemeChangeButton(out)'
+import { NavBar } from './navbar/Navbar'
 
 export const metadata = {
   title: 'CSStore',
@@ -20,8 +21,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen bg-background flex flex-col items-center justify-center text-text">
-          <ThemeChangeButton />
+        <main className="min-h-screen bg-background flex flex-col items-center text-text">
+          <NavBar/>
+          {/* <ThemeChangeButton /> */}
           <UserSetter user={user} />
           {children}
         </main>

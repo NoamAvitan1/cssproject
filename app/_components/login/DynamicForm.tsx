@@ -85,11 +85,11 @@ export const DynamicForm: React.FC<Props> = (props) => {
         />
         <span className="absolute right-2.5 cursor-pointer">
           {showPassword ? (
-            <AiOutlineEye
+            <AiOutlineEye className="text-slate-900"
               onClick={() => setShowPassword(false)}
             />
           ) : (
-            <AiOutlineEyeInvisible
+            <AiOutlineEyeInvisible className="text-slate-900"
               onClick={() => setShowPassword(true)}
             />
           )}{" "}
@@ -108,11 +108,11 @@ export const DynamicForm: React.FC<Props> = (props) => {
         />
         <span className="absolute right-2.5 cursor-pointer">
           {showPassword ? (
-            <AiOutlineEye
+            <AiOutlineEye className="text-slate-900"
               onClick={() => setShowPassword(false)}
             />
           ) : (
-            <AiOutlineEyeInvisible
+            <AiOutlineEyeInvisible className="text-slate-900"
               onClick={() => setShowPassword(true)}
             />
           )}{" "}
