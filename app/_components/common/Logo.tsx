@@ -8,6 +8,6 @@ type Props = {
 export const Logo: React.FC<Props> = (props) => {
 
   return (
-    <Image className='rounded-2xl' src={ImageSite} alt='logo site'/>
+    <Image className='rounded' src={ImageSite} alt='site logo'/>
   )
 };

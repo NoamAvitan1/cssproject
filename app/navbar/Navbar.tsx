@@ -12,9 +12,9 @@ export const NavBar: React.FC<Props> = (props) => {
 
 
   return (
-    <div className="w-full h-[70px] bg-background shadow flex justify-between items-center px-4">
-      <div className='w-[45px] h-[45px]'>
-      <Logo/>
+    <div className="relative w-full p-3 bg-secondary shadow flex justify-between items-center px-4">
+      <div className='max-w-[2rem]'>
+        <Logo/>
       </div>
       <Search/>
       <ThemeChangeButton/>

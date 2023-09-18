@@ -7,9 +7,11 @@ type Props = {
 export const Search: React.FC<Props> = (props) => {
 
   return (
-    <div className='flex justify-center items-center'>
-        <section className='border border-gray-600 p-2 border-r-0 rounded-l-md'>{<AiOutlineSearch className=''/>}</section>
-        <section className=''><input className='bg-background w-[600px] p-1 rounded-r-md outline-none  border border-gray-600' type="text" placeholder='search'/></section>
+    <div className='absolute w-2/3 max-w-[600px] flex justify-center bg-background items-center border border-aura rounded-lg overflow-hidden left-1/2 -translate-top-1/2 -translate-x-1/2'>
+        <figure className='p-2'>
+          <AiOutlineSearch/>
+        </figure>
+        <input className='w-full p-1 rounded-r-md focus:outline-none bg-transparent' type="text" placeholder='search'/>
     </div>
   );
 };
