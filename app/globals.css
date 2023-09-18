@@ -12,6 +12,7 @@
     --error: #EF4444;
     --success: #84CC16;
     --alert: #FBBF24;
+    --aura:#e2e2d0;
   }
 
   [globalTheme="dark"] {
@@ -20,5 +21,6 @@
     --primary: #bbcdd3;
     --secondary: #090706;
     --accent: #abc2c9;
+    --aura:#4f4f4d;
   }
 }

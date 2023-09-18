@@ -14,6 +14,7 @@ module.exports = {
         "error": "var(--error)",
         "success": "var(--success)",
         "alert": "var(--alert)",
+        "aura": "var(--aura)",
         btn: {
           background: 'hsl(var(--btn-background))',
           'background-hover': 'hsl(var(--btn-background-hover))',
