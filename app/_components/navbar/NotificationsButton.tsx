@@ -3,11 +3,11 @@ type Props = {
 
 };
 
-export const Notifacation: React.FC<Props> = (props) => {
+export const NotificationsButton: React.FC<Props> = (props) => {
 
   return (
     <button className=''>
-        <MdOutlineEmail/>
+        <MdOutlineEmail />
     </button>
   );
 };
