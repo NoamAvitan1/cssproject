@@ -9,13 +9,8 @@
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
-<<<<<<< HEAD
-    "axios": "1.5.0",
-    "jotai": "2.4.2",
-=======
     "axios": "^1.5.0",
     "jotai": "^2.4.2",
->>>>>>> 9430af9 (next update)
     "next": "latest",
     "postcss": "8.4.24",
     "react": "18.2.0",
