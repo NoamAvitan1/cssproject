@@ -5,6 +5,7 @@ import { UserSetter } from './_components/login/UserSetter'
 import { ThemeChangeButton } from './_components/common/ThemeChangeButton(out)'
 import { NavBar } from './navbar/Navbar'
 
+
 export const metadata = {
   title: 'CSStore',
   description: 'Find your CSS needs, all in one place',
@@ -22,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center text-text">
-          <NavBar />
+          <NavBar/>
           <UserSetter user={user} />
           {children}
         </main>
