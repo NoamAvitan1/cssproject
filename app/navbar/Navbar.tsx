@@ -19,9 +19,10 @@ export const NavBar: React.FC<Props> = (props) => {
         <Logo />
       </div>
       <SearchBar />
-      <div className='flex justify-end items-center gap-10'>
+      <div className='flex justify-end items-center gap-10 text-2xl'>
         <ThemeChangeButton />
         <NotificationsButton />
+        <ProfileButton/>
       </div>
 </div>
 );
