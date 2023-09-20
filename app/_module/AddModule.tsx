@@ -17,7 +17,7 @@ export const AddModule: React.FC<Props> = (props) => {
         description:"test",
         code: "your_code_value",
         price: 99.99,
-        profile_id:`${user?.identities?.[0]?.id}`,
+        profile_id:`${user?.id}`,
       },
     ];
   
