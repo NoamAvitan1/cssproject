@@ -3,7 +3,7 @@ import './globals.css'
 import { cookies } from 'next/headers'
 import { UserSetter } from './_components/login/UserSetter'
 import { ThemeChangeButton } from './_components/common/ThemeChangeButton(out)'
-import { NavBar } from './navbar/Navbar'
+import { NavBar } from './_navbar/Navbar'
 
 
 export const metadata = {
