@@ -21,6 +21,7 @@ export async function POST(request: Request) {
         role: 'some role',
         profile_pic: 'link.example.png',
         ways_of_contact: 'some-contact@example.com',
+        profile_id: 'unverified',
       },
     },
   })
