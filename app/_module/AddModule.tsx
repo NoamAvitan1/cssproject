@@ -5,6 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAtom } from "jotai"
 import { userAtom } from "../../app/_jotai/userAtoms"
 
+
 type Props = {};
 
 
@@ -21,17 +22,23 @@ export const AddModule: React.FC<Props> = (props) => {
       },
     ];
   
-      const handleButton = async() => {
-        const { data, error } = await supabase
-        .from("module")
-        .insert(moduleData)
-        .select();
+    //   const handleButton = async() => {
+    //     const { data, error } = await supabase
+    //     .from("module")
+    //     .insert(moduleData)
+    //     .select();
 
-        console.log(error);
-      } 
+    //     console.log(error);
+    //   } 
+  const handleRoute = async() => {
+    await fetch(`auth/module`,{
+      method : "POST",
+      body: JSON.stringify(moduleData)
+    })
+  }
   
   
-    return <button onClick={handleButton}> 
+    return <button onClick={handleRoute}> 
       press here 
     </button>;
   };
