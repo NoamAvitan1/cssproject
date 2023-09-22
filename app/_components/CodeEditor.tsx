@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 type Props = {
 // config: {
@@ -10,39 +10,33 @@ type Props = {
 
 export const CodeEditor: React.FC<Props> = (props) => {
 
-    const [code, setCode] = useState<Array<string>>(['// your code here'])
-    const [currentRow, setCurrentRow] = useState<number>(0)
+    const [codeLines, setCodeLines] = useState<Array<string>>(['// your code here'])
+    const refs = useRef<Array<HTMLSpanElement | null>>([])
 
-    const pRef = useRef<HTMLParagraphElement | null>(null)
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key == 'Enter') {
-            e.preventDefault()
-            setCode(prev => [...prev, ''])
-        } else if (e.key == 'Backspace') {
-            if (code.length > 1 && code[currentRow].length === 0)
-                console.log(code[currentRow])
-                setCode(prev => prev.filter((_, i) => i !== currentRow))
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>, index: number) => {
+        if (e.key == 'Backspace') {
+            if (codeLines[index] === '') {
+                setCodeLines(prev => prev.filter((_, i) => i !== index))
+            }
         }
     }
 
-    useEffect(() => {
-        if(pRef.current)
-            pRef.current.focus()
-    }, [code])
+    const handleInput = (e: React.BaseSyntheticEvent, index:number) => {
+        const value = e.target.innerHTML
+        setCodeLines(prev => prev.map((_, i) => i === index ? value : _))
+    }
 
   return (
     <div>
-        <article onKeyDown={handleKeyDown} className="border border-aura rounded p-2 min-w-[600px]">
-            {code.map((row, i) => (
-                <span className="w-full flex items-center">
-                    <p className="px-1 pr-2">{i}</p>
-                    <p contentEditable
-                        onFocus={() => setCurrentRow(i)}
-                        autoFocus={i == code.length - 1}
-                        ref={pRef}
-                        className="focus:outline-none focus:bg-aura grow pl-1">{row}</p>
-                </span>
+        <article className="border border-aura rounded p-2 w-[600px] min-h-[80vh] overflow-auto">
+            {codeLines.map((code, i) => (
+                <span
+                ref={el => refs.current[i] = el}
+                contentEditable
+                suppressContentEditableWarning
+                onInput={e => handleInput(e, i)}
+                onKeyDown={e => handleKeyDown(e, i)}
+                className="w-full whitespace-pre focus:outline-none focus:bg-aura">{code}</span>
             ))}
         </article>
     </div>

@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       data: {
         user_name: 'some name',
         role: 'some role',
-        profile_pic: 'link.example.png',
+        profile_pic: null,
         ways_of_contact: 'some-contact@example.com',
       },
     },
