@@ -1,10 +1,10 @@
-import { CodeEditor } from "../_components/CodeEditor";
+import { Monaco } from "../_components/Monaco";
 
 export default async function New() {
 
   return (
    <div>
-    <CodeEditor />
+    <Monaco />
    </div>   
   )
 }

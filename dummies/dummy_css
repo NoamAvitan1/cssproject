@@ -1,0 +1,274 @@
+FILE A
+/* Global rules */
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+/* Layout */
+
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+main {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+footer {
+  width: 100%;
+  height: 50px;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Colors */
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: blue;
+}
+
+/* Advanced CSS rules */
+
+/* CSS animations */
+
+.fade-in {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* CSS media queries */
+
+@media (max-width: 768px) {
+  main {
+    max-width: 768px;
+  }
+}
+
+/* CSS pseudo-classes */
+
+a:hover {
+  color: blue;
+}
+
+/* CSS pseudo-elements */
+
+::before {
+  content: "Hello, world!";
+}
+
+FILE b
+/* This is a complex dummy CSS file with more complexity, but still under 1000 characters. It contains a variety of CSS rules, including some that are more advanced and less commonly used. */
+
+/* Global rules */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
+  
+  /* Typography */
+  
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  h3 {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  p {
+    margin-top: 0;
+  }
+  
+  /* Layout */
+  
+  header {
+    width: 100%;
+    height: 100px;
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  
+  main {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  footer {
+    width: 100%;
+    height: 50px;
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  
+  /* Colors */
+  
+  .red {
+    color: red;
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .blue {
+    color: blue;
+  }
+  
+  /* Advanced CSS rules */
+  
+  /* CSS animations */
+  
+  .fade-in {
+    animation: fade-in 1s;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* CSS media queries */
+  
+  @media (max-width: 768px) {
+    main {
+      max-width: 768px;
+    }
+  }
+  
+  /* CSS pseudo-classes */
+  
+  a:hover {
+    color: blue;
+  }
+  
+  /* CSS pseudo-elements */
+  
+  ::before {
+    content: "Hello, world!";
+  }
+  
+  /* CSS gradients */
+  
+  .gradient {
+    background-image: linear-gradient(to right, red, blue);
+  }
+  
+  /* CSS transforms */
+  
+  .rotate {
+    transform: rotate(45deg);
+  }
+  
+  /* CSS transitions */
+  
+  .transition {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  /* More complex CSS rules */
+  
+  /* CSS variables */
+  
+  :root {
+    --primary-color: red;
+    --secondary-color: blue;
+  }
+  
+  .primary {
+    color: var(--primary-color);
+  }
+  
+  .secondary {
+    color: var(--secondary-color);
+  }
+  
+  /* CSS nesting */
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+  
+    .header {
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+  
+    .main {
+      flex: 1;
+    }
+  
+    .footer {
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+  }
+  
+  /* CSS grid */
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .grid-item {
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  
