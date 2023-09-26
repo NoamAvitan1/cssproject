@@ -7,9 +7,8 @@ type Props = {
 };
 
 export const ThemeChangeButton: React.FC<Props> = (props) => {
-
   const [theme, setTheme] = useState<string>()
-
+  
   const defineGlobalTheme = () => {
     let globalTheme="light"
 
@@ -32,7 +31,7 @@ export const ThemeChangeButton: React.FC<Props> = (props) => {
     setTheme(newTheme)
     localStorage.setItem("globalTheme", newTheme)
     document.documentElement.setAttribute("globalTheme", newTheme)
-    // console.log(document.documentElement.getAttribute('globalTheme'));
+    // console.log(document.documentElement.getAttribute('globalTheme'));   
   }
 
   useEffect(() => {

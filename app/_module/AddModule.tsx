@@ -4,6 +4,7 @@ import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAtom } from "jotai"
 import { userAtom } from "../../app/_jotai/userAtoms"
+import Api from '../../utils/axios'
 
 
 type Props = {};
