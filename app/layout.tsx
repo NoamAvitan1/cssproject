@@ -2,8 +2,8 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import './globals.css'
 import { cookies } from 'next/headers'
 import { UserSetter } from './_components/login/UserSetter'
-import { ThemeChangeButton } from './_components/common/ThemeChangeButton(out)'
 import { NavBar } from './_navbar/Navbar'
+import Script from 'next/script'
 
 
 export const metadata = {
@@ -21,6 +21,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   
   return (
     <html lang="en">
+      <Script src="https://unpkg.com/prettier@3.0.3/standalone.js" />
+      <Script src="https://unpkg.com/prettier@3.0.3/plugins/postcss.js" />
+      <Script src="https://unpkg.com/prettier@3.0.3/plugins/html.js" />
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center text-text">
           <NavBar/>
