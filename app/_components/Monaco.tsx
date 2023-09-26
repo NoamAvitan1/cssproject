@@ -30,7 +30,7 @@ export const Monaco = (props: Props) => {
   const handleChange = (value: string | undefined) => {
     if (!value) return
     setCode(value)
-    handleChange(value)
+    if (props.handleChange) props.handleChange(value)
   }
 
   useEffect(() => {
