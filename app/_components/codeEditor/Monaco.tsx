@@ -45,18 +45,14 @@ export const Monaco = (props: Props) => {
   }, [code])
 
   return (
-    <div style={{
-      width: props.w ?? '600px',
-      height: props.h ?? '600px'
-    }}
-    className='rounded-lg overflow-hidden'
-    >
+    <div >
+      
       <Editor
       theme={props.theme ?? 'vs-dark'}
       language={props.lang ?? 'css'}
       value={code}
-      height={'100%'}
-      width={'100%'}
+      height={props.h ?? '100%'}
+      width={props.w ??'100%'}
       onChange={handleChange}
       onMount={handleEditorDidMount}
       options={

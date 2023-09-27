@@ -1,4 +1,4 @@
-import { Monaco } from "../_components/Monaco";
+import { Monaco } from "../_components/codeEditor/Monaco";
 
 export default async function New() {
 
