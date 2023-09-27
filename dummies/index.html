@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .square {
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background-color: blueviolet;
+  opacity: 0.5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  animation: show 300ms forwards ease-out;
+}
+
+@keyframes show {
+  from {
+    transform: translate(-50%, -50%) scale(0) rotate(200deg);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+  }
+}
+
+    </style>
+    <div class="square">
+        <div class="overlay"></div>
+    </div>
+</body>
+</html>
