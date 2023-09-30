@@ -31,7 +31,6 @@ export const ThemeChangeButton: React.FC<Props> = (props) => {
     setTheme(newTheme)
     localStorage.setItem("globalTheme", newTheme)
     document.documentElement.setAttribute("globalTheme", newTheme)
-    // console.log(document.documentElement.getAttribute('globalTheme'));   
   }
 
   useEffect(() => {

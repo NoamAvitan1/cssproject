@@ -12,8 +12,13 @@ export const PrettierButton = ({ instance, code }: Props) => {
   
   const [isHovered, setIsHovered] = useState(false) 
   
-  // @ts-ignore
-  const prettier = window.prettier, prettierPlugins = window.prettierPlugins
+  let prettier: any
+  let prettierPlugins: any
+  
+  if (typeof window !== 'undefined') {
+    // @ts-ignore
+    prettier = window.prettier, prettierPlugins = window.prettierPlugins
+  }
   
   const handleClick = async () => {
     const formatted = await prettier.format(code, {
