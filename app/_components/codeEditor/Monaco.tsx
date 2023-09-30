@@ -24,7 +24,6 @@ export const Monaco = (props: Props) => {
   const editorRef = useRef<any>(null)
 
   const handleEditorDidMount = (editor: any, monaco: any) => {
-    console.log(editor, monaco);
     editorRef.current = editor
   }
 
@@ -36,8 +35,8 @@ export const Monaco = (props: Props) => {
 
   useEffect(() => {
     const editor = editorRef.current
-    if (editor && code && code.length > (props.limit ?? 1000)) {
-      editor.setValue(code.substring(0, (props.limit ?? 1000)))
+    if (editor && code && code.length > (props.limit ?? 3000)) {
+      editor.setValue(code.substring(0, (props.limit ?? 3000)))
       const totalLines = editor.getModel().getLineCount()
       const lastLineLength = editor.getModel().getLineMaxColumn(totalLines)
       const selection = new monaco.Selection(totalLines, lastLineLength, totalLines, lastLineLength)

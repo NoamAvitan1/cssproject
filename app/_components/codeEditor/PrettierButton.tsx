@@ -17,8 +17,12 @@ export const PrettierButton = ({ instance, code }: Props) => {
   }
 
   return (
-    <button onClick={handleClick} className="font-extrabold">
-        PRETTIER
+    <button onClick={handleClick} className="font-extrabold flex items-center">
+        <p>P</p>
+        <div>
+          <p>Y</p>
+          <p>X</p>
+        </div>
     </button>
   );
 };
