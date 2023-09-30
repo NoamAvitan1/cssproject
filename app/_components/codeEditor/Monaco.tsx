@@ -19,7 +19,7 @@ type Props = {
 
 export const Monaco = (props: Props) => {
 
-  const [code, setCode] = useState(props.initialValue ?? '// your code here')
+  const [code, setCode] = useState(props.initialValue ?? '/* your code here */')
   
   const editorRef = useRef<any>(null)
 

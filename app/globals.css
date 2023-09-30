@@ -25,13 +25,3 @@
     --aura: #4f4f4d;
   }
 }
-
-@layer utilities {
-  .grid-opener {
-    grid-template-rows: 1;
-  }
-
-  .grid-closer {
-    grid-template-rows: 0;
-  }
-}
