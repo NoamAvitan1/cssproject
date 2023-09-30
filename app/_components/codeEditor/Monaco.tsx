@@ -46,14 +46,17 @@ export const Monaco = (props: Props) => {
   }, [code])
 
   return (
-    <div >
+    <div style={{
+      height: props.h ?? "600px",
+      width: props.w ?? "600px"
+    }}>
       <PrettierButton instance={editorRef.current} code={code} />
       <Editor
       theme={props.theme ?? 'vs-dark'}
       language={props.lang ?? 'css'}
       value={code}
-      height={props.h ?? '100%'}
-      width={props.w ??'100%'}
+      height={'100%'}
+      width={'100%'}
       onChange={handleChange}
       onMount={handleEditorDidMount}
       options={
