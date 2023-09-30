@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor'
+import { PrettierButton } from './PrettierButton';
 
 type Props = {
   initialValue?: string
@@ -46,7 +47,7 @@ export const Monaco = (props: Props) => {
 
   return (
     <div >
-      
+      <PrettierButton instance={editorRef.current} code={code} />
       <Editor
       theme={props.theme ?? 'vs-dark'}
       language={props.lang ?? 'css'}

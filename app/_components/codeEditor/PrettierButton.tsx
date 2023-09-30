@@ -5,10 +5,10 @@ type Props = {
 };
 
 export const PrettierButton = (props: Props) => {
-
+console.log(prettier)
   return (
     <button className="font-extrabold">
-        P
+        PRETTIER
     </button>
   );
 };
