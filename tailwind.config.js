@@ -15,15 +15,14 @@ module.exports = {
         "success": "var(--success)",
         "alert": "var(--alert)",
         "aura": "var(--aura)",
-        btn: {
-          background: 'hsl(var(--btn-background))',
-          'background-hover': 'hsl(var(--btn-background-hover))',
-        },
       },
       transitionProperty: {
         width: 'width',
         height: 'height',
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
+      }
     },
   },
   plugins: [],

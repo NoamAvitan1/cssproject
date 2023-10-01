@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from "react";
+import Image from "next/image";
+import prettierLogo from '../../_assets/prettier.png'
 
 type Props = {
     instance: any
@@ -9,9 +10,7 @@ type Props = {
 
 
 export const PrettierButton = ({ instance, code }: Props) => {
-  
-  const [isHovered, setIsHovered] = useState(false) 
-  
+    
   let prettier: any
   let prettierPlugins: any
   
@@ -26,16 +25,12 @@ export const PrettierButton = ({ instance, code }: Props) => {
       plugins: prettierPlugins,
     });
     instance.setValue(formatted)
-  }
+  }  
 
   return (
-    <button onClick={handleClick} onPointerEnter={() => setIsHovered(true)} onPointerLeave={() => setIsHovered(false)}
-    className="font-extrabold flex items-center">
-        <p>P</p>
-        <div className={`${isHovered ? 'w-[50px]' : 'w-0'} overflow-hidden duration-1000`}>
-          <p>Y</p>
-          <p>X</p>
-        </div>
+    code.length > 3 && <button onClick={handleClick} title="format code with Prettier"
+    className="font-extrabold flex justify-center w-6 h-6 overflow-hidden rounded-lg items-center bg-gradient-radial text-violet-800 from-sky-500 to-violet-300">
+        <Image src={prettierLogo} alt="P" />
     </button>
   );
 };

@@ -11,7 +11,11 @@ export const SearchBar: React.FC<Props> = (props) => {
         <figure className='p-2'>
           <AiOutlineSearch />
         </figure>
-        <input className='w-full p-1 rounded-r-md focus:outline-none bg-transparent border-l border-l-aura ' type="text" placeholder='search'/>
+        <input className='w-full p-1 rounded-r-md focus:outline-none bg-transparent border-l border-l-aura ' type="text" placeholder='search'
+        defaultValue={`אַשְׁרֵי הַגַּפְרוּר שֶׁנִּשְׂרַף וְהִצִּית לֶהָבוֹת,
+        אַשְׁרֵי הַלֶּהָבָה שֶׁבָּעֲרָה בְּסִתְרֵי לְבָבוֹת.
+        אַשְׁרֵי הַלְּבָבוֹת שֶׁיָדְעוּ לַחְדֹּל בְּכָבוֹד.
+        אַשְׁרֵי הַגַּפְרוּר שֶׁנִּשְׂרַף וְהִצִּית לֶהָבוֹת.`}/>
     </div>
   );
 };
