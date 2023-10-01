@@ -1,7 +1,8 @@
 'use client'
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
-import { Editor } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor'
+import { PrettierButton } from './PrettierButton';
 
 type Props = {
   initialValue?: string
@@ -17,13 +18,16 @@ type Props = {
 };
 
 export const Monaco = (props: Props) => {
+  const Editor = dynamic(
+    () => import('@monaco-editor/react').then(module => module.Editor),
+    { ssr: false }
+  )
 
-  const [code, setCode] = useState(props.initialValue ?? '// your code here')
+  const [code, setCode] = useState(props.initialValue ?? '/* your code here */')
   
   const editorRef = useRef<any>(null)
 
   const handleEditorDidMount = (editor: any, monaco: any) => {
-    console.log(editor, monaco);
     editorRef.current = editor
   }
 
@@ -35,24 +39,32 @@ export const Monaco = (props: Props) => {
 
   useEffect(() => {
     const editor = editorRef.current
-    if (editor && code && code.length > (props.limit ?? 1000)) {
-      editor.setValue(code.substring(0, (props.limit ?? 1000)))
+    if (editor && code && code.length > (props.limit ?? 3000)) {
+      editor.setValue(code.substring(0, (props.limit ?? 3000)))
       const totalLines = editor.getModel().getLineCount()
       const lastLineLength = editor.getModel().getLineMaxColumn(totalLines)
-      const selection = new monaco.Selection(totalLines, lastLineLength, totalLines, lastLineLength)
+      const selection = {
+        selectionStartLineNumber: totalLines,
+        selectionStartColumn: lastLineLength,
+        positionLineNumber: totalLines,
+        positionColumn: lastLineLength
+      }
       editor.setSelection(selection)
     }
   }, [code])
 
   return (
-    <div >
-      
+    <div style={{
+      height: props.h ?? "600px",
+      width: props.w ?? "600px"
+    }}>
+      <PrettierButton instance={editorRef.current} code={code} />
       <Editor
       theme={props.theme ?? 'vs-dark'}
       language={props.lang ?? 'css'}
       value={code}
-      height={props.h ?? '100%'}
-      width={props.w ??'100%'}
+      height={'100%'}
+      width={'100%'}
       onChange={handleChange}
       onMount={handleEditorDidMount}
       options={

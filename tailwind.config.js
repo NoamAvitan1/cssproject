@@ -20,6 +20,10 @@ module.exports = {
           'background-hover': 'hsl(var(--btn-background-hover))',
         },
       },
+      transitionProperty: {
+        width: 'width',
+        height: 'height',
+      },
     },
   },
   plugins: [],
