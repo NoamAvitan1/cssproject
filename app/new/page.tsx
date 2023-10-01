@@ -4,7 +4,7 @@ export default async function New() {
 
   return (
    <div>
-    <Monaco />
+    
    </div>   
   )
 }
