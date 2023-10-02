@@ -23,7 +23,7 @@ export const MenuModule = (props: Props) => {
         {toggle ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
         <div
-          className={`absolute bg-opacity-30 inset-0 duration-200 bg-black  ${
+          className={`absolute bg-opacity-30 inset-0 duration-300 bg-black  ${
             !toggle && "translate-x-full"
           }`}
         ></div>
