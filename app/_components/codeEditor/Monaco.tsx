@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { PrettierButton } from './PrettierButton';
 import { useSetEditorSelection } from '@/app/_hooks/useSetEditorSelection';
+import { useAtom } from 'jotai';
+import { themeAtom } from '@/app/_jotai/themeAtoms';
 
 // dynamic imports
 const Editor = dynamic(() => import('@monaco-editor/react').then(module => module.Editor), { ssr: false });
@@ -17,15 +19,17 @@ type Props = {
   lineNumbers?: boolean
   minimap?: boolean
   paddingTop?: number
+  contrastBorder?: boolean
+  rounded?: boolean
   handleChange?: (code: string) => void
 };
 
 export const Monaco = (props: Props) => {
 
-  // let Editor: any = null
-
   const [code, setCode] = useState(props.initialValue ?? '/* your code here */')
   const [isMounted, setIsMounted] = useState(false)
+
+  const [theme] = useAtom(themeAtom)
   
   const editorRef = useRef<any>(null)
 
@@ -53,9 +57,10 @@ export const Monaco = (props: Props) => {
       height: props.h ?? "600px",
       width: props.w ?? "600px",
       position: 'relative',
-    }}>
+    }}
+    className={`overflow-hidden ${props.contrastBorder && 'border border-text'} ${props.rounded && 'rounded-lg'}`}>
       <Editor
-      theme={props.theme ?? 'vs-dark'}
+      theme={props.theme ?? theme == 'dark' ? 'vs-dark' : ''}
       language={props.lang ?? 'css'}
       value={code}
       height={'100%'}
@@ -75,7 +80,7 @@ export const Monaco = (props: Props) => {
         }
       }
       />
-      {isMounted && <div className='absolute top-10 right-0 [&_button]:hover:animate-bounce'>
+      {isMounted && <div className='absolute top-0 right-0 opacity-20 hover:opacity-100'>
         <PrettierButton instance={editorRef.current} code={code} />
       </div>}
     </div>

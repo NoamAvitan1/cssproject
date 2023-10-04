@@ -1,5 +1,5 @@
 import { Logo } from '../_components/common/Logo';
-import { ThemeChangeButton } from '../_components/common/ThemeChangeButton(out)';
+import { ThemeChangeButton } from '../_components/common/ThemeChangeButton';
 import { NotificationsButton } from '../_components/navbar/NotificationsButton';
 import { ProfileButton } from '../_components/navbar/ProfileButton';
 import { SearchBar } from '../_components/navbar/SearchBar';

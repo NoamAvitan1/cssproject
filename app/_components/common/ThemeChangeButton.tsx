@@ -1,13 +1,15 @@
 'use client'
+import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
+import { themeAtom } from '../../_jotai/themeAtoms'
 
 type Props = {
   
 };
 
 export const ThemeChangeButton: React.FC<Props> = (props) => {
-  const [theme, setTheme] = useState<string>()
+  const [theme, setTheme] = useAtom(themeAtom)
   
   const defineGlobalTheme = () => {
     let globalTheme="light"

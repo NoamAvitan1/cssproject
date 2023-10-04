@@ -29,7 +29,7 @@ export const PrettierButton = ({ instance, code }: Props) => {
 
   return (
     code.length > 3 && <button onClick={handleClick} title="format code with Prettier"
-    className="font-extrabold flex justify-center w-6 h-6 overflow-hidden rounded-lg items-center bg-gradient-radial text-violet-800 from-sky-500 to-violet-300">
+    className="font-extrabold flex justify-center w-10 h-10 overflow-hidden items-center bg-gradient-radial text-violet-800 from-sky-500 to-violet-300">
         <Image src={prettierLogo} alt="P" />
     </button>
   );
