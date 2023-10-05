@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+
+    /* light theme colors */
+
     --text: #1d1301;
     --background: #ffffff;
     --primary: #246df5;
@@ -13,9 +18,16 @@
     --success: #84cc16;
     --alert: #fbbf24;
     --aura: #e2e2d0;
+
+    /* fonts */
+    
+    --pixelify: 'Pixelify Sans', cursive;
   }
 
   [globalTheme="dark"] {
+
+    /* dark theme colors */
+
     --text: #ffffff;
     --background: #110e08;
     --primary: #246df5;

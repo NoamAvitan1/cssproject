@@ -29,7 +29,7 @@ export default async function RootLayout({
       <Script src="https://unpkg.com/prettier@3.0.3/plugins/html.js" />
       <body>
         <JotaiProvider>
-          <main className="min-h-screen bg-background flex flex-col items-center text-text">
+          <main className="flex min-h-screen flex-col items-center bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
             {children}

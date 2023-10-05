@@ -3,6 +3,9 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      fontFamily: {
+        pixelify: "var(--pixelify)"
+      },
       colors: {
         // background: 'hsl(var(--background))',
         // foreground: 'hsl(var(--foreground))',
