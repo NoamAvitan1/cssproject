@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { useStringToNode } from "../_hooks/useStringToNode";
+import { useStringToNode } from "../../_hooks/useStringToNode";
 
 type Props = {
   html: string;

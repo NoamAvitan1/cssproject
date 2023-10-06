@@ -39,8 +39,10 @@ export const Monaco = (props: Props) => {
   const editorRef = useRef<any>(null);
 
   const handleEditorDidMount = (editor: any, monaco: any) => {
-    if (props.lang == "css") emmetCSS(monaco);
-    else if (props.lang == "html") emmetHTML(monaco);
+    if (typeof window !== "undefined") {
+      if (props.lang == "css") emmetCSS(monaco, ["css"]);
+      else if (props.lang == "html") emmetHTML(monaco, ["html"]);
+    }
     setIsMounted(true);
     editorRef.current = editor;
   };

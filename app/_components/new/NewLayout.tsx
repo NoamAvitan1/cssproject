@@ -3,43 +3,12 @@
 import { FileTypeHeader } from "@/app/new/FileTypeHeader";
 import { useState } from "react";
 import { Monaco } from "../codeEditor/Monaco";
-import { HTMLDisplay } from "@/app/new/HTMLDisplay";
+import { HTMLDisplay } from "./HTMLDisplay";
+import { dummyCss, dummyHtml } from "./dummyFiles";
 
 export const NewLayout = () => {
-  const defaultCss = `.box {
-    background-color: #000;
-    font-family: sans-serif;
-  }
-  .cool-text {
-    color: black;
-    font-size: 50px;
-    text-align: center;
-    animation: cool-text 1s infinite;
-  }
-  @keyframes cool-text {
-    0% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(1deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    75% {
-      transform: rotate(-1deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  `;
-  const defaultHtml = `<div className="box">
-  <div class="cool-text">Hello World!</div>
-</div>
-`;
-
-  const [htmlString, setHtmlString] = useState(defaultHtml);
-  const [cssString, setCssString] = useState(defaultCss);
+  const [htmlString, setHtmlString] = useState(dummyHtml);
+  const [cssString, setCssString] = useState(dummyCss);
 
   return (
     <div className="grid h-full w-full grow grid-cols-3 space-x-px border-t border-aura bg-aura">
@@ -53,7 +22,7 @@ export const NewLayout = () => {
           lineNumbers={true}
         />
       </section>
-      <section className="flex flex-col overflow-aut">
+      <section className="overflow-aut flex flex-col">
         <FileTypeHeader type="html" />
         <Monaco
           h="50%"
