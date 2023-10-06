@@ -8,7 +8,7 @@ type Props = {
   c: React.ReactNode;
 };
 
-export const SectionsWrapper = (props: Props) => {
+export const EditorFilesWrapper = (props: Props) => {
   const [current, setCurrent] = useState<"a" | "b" | "c">("a");
   return (
     <div className="flex w-full">
