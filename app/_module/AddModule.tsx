@@ -15,9 +15,9 @@ export const AddModule: React.FC<Props> = (props) => {
     const [user, setUser] = useAtom(userAtom)
     const moduleData = [
       { 
-        title: "test3",
-        description:"test3",
-        code: "your_code_value3",
+        title: "test4",
+        description:"test4",
+        code: "your_code_value4",
         price: 99.99,
         profile_id:`${user?.id}`,
       },
