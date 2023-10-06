@@ -17,16 +17,23 @@ export const MenuModule = (props: Props) => {
   return (
     <div className="">
       <button
-        className="z-20 absolute right-2 top-4 text-text"
+        className="absolute right-2 top-4 z-20 text-text"
         onClick={() => setToggle(!toggle)}
       >
         {toggle ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
-        <div
-          className={`absolute bg-opacity-30 inset-0 duration-300 bg-black  ${
-            !toggle && "translate-x-full"
-          }`}
-        ></div>
+      <div
+        className={`absolute inset-0 bg-background bg-opacity-90 duration-300  ${
+          !toggle && "translate-x-full"
+        }`}
+      >
+        <p className="p-2">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit corporis
+          fugiat commodi fuga consequatur! Animi, iusto reprehenderit et odit
+          placeat in ab repudiandae doloribus recusandae minus dolorum, esse
+          quas provident?
+        </p>
+      </div>
     </div>
   );
 };

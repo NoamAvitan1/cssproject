@@ -1,26 +1,27 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import './globals.css'
-import { cookies } from 'next/headers'
-import { UserSetter } from './_components/login/UserSetter'
-import { NavBar } from './_navbar/Navbar'
-import Script from 'next/script'
-import { JotaiProvider } from './_jotai/JotaiProvider'
-// import { JotaiProvider } from './_jotai/JotaiProvider'
-
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import "./globals.css";
+import { cookies } from "next/headers";
+import { UserSetter } from "./_components/login/UserSetter";
+import { NavBar } from "./_navbar/Navbar";
+import Script from "next/script";
+import { JotaiProvider } from "./_jotai/JotaiProvider";
 
 export const metadata = {
-  title: 'CSStore',
-  description: 'Find your CSS needs, all in one place',
-}
+  title: "CSStore",
+  description: "Find your CSS needs, all in one place",
+};
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const supabase = createServerComponentClient({ cookies });
 
-  const supabase = createServerComponentClient({ cookies })
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const { data: { user } } = await supabase.auth.getUser()
-
-
-  
   return (
     <html lang="en">
       <Script src="https://unpkg.com/prettier@3.0.3/standalone.js" />
@@ -28,13 +29,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Script src="https://unpkg.com/prettier@3.0.3/plugins/html.js" />
       <body>
         <JotaiProvider>
-        <main className="min-h-screen bg-background flex flex-col items-center text-text">
-          <NavBar/>
-          <UserSetter user={user} />
-          {children}
-        </main>
+          <main className="flex min-h-screen flex-col items-center bg-background text-text">
+            <NavBar />
+            <UserSetter user={user} />
+            {children}
+          </main>
         </JotaiProvider>
       </body>
     </html>
-  )
+  );
 }
