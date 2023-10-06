@@ -6,10 +6,11 @@ import prettierLogo from '../../_assets/prettier.png'
 type Props = {
     instance: any
     code: string
+    lang: string
 };
 
 
-export const PrettierButton = ({ instance, code }: Props) => {
+export const PrettierButton = ({ instance, code, lang = "css" }: Props) => {
     
   let prettier: any
   let prettierPlugins: any
@@ -21,7 +22,7 @@ export const PrettierButton = ({ instance, code }: Props) => {
   
   const handleClick = async () => {
     const formatted = await prettier.format(code, {
-      parser: "css",
+      parser: lang,
       plugins: prettierPlugins,
     });
     instance.setValue(formatted)
