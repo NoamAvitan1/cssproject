@@ -8,8 +8,8 @@ export default async function Packages(props: Props) {
 
   let { data: packages, error } = await supabase.from("package").select(`
   *,
-  package_module_join (
-    *
+  module (
+    id , 
   )
 `);
 
