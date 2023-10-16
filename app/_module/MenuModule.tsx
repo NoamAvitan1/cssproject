@@ -23,11 +23,11 @@ export const MenuModule = (props: Props) => {
         {toggle ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
       <div
-        className={`absolute inset-0 border rounded-md border-secondary bg-background duration-300  ${
+        className={`absolute inset-0 border opacity-70 rounded-md border-secondary bg-background duration-300  ${
           !toggle && "translate-x-full"
         }`}
       >
-        <p className="p-2">
+        <p className="p-2 mt-6">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit corporis
           fugiat commodi fuga consequatur! Animi, iusto reprehenderit et odit
           placeat in ab repudiandae doloribus recusandae minus dolorum, esse

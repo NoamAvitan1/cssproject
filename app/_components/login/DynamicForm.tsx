@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BaseSyntheticEvent, useState } from "react";
 import { object, string } from "yup";
@@ -6,41 +6,53 @@ import * as yup from "yup";
 import YupPassword from "yup-password";
 import Messages from "./messages";
 
-type Props = {
-
-};
+type Props = {};
 
 export const DynamicForm: React.FC<Props> = (props) => {
-
   YupPassword(yup);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
-  const [validationError, setValidationError] = useState<yup.ValidationError | null>(null);
+  const [validationError, setValidationError] =
+    useState<yup.ValidationError | null>(null);
 
   const authSchema = () => {
     let passwordValidation = string().min(8).required();
-
-    if (type === "sign-up") {
-      passwordValidation =
-      passwordValidation.password() as typeof passwordValidation;
-    }
-
-    return object({
+    let authObject = {
       email: string().email().required(),
-      password: passwordValidation,
-    });
+    };
+
+    // if (type === "sign-up") {
+    //   passwordValidation = passwordValidation.password() as typeof passwordValidation;
+    // }
+
+    return object(
+      type === "sign-up"
+        ? {
+            ...authObject,
+            name: string().min(3).required(),
+            password: passwordValidation.password(),
+          }
+        : {
+            ...authObject,
+            password: passwordValidation,
+          },
+    );
   };
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     try {
       const inputs = e.target.elements;
-      const forValidation = {
-        email: inputs[0]?.value,
-        password: inputs[1]?.value,
-        confirmPassword: inputs[2]?.value,
+      let forValidation = {
+        name: inputs.name?.value,
+        email: inputs.email?.value,
+        password: inputs.password?.value,
+        confirmPassword: inputs.ConfirmPassword?.value,
       };
-      if (type === 'sign-up' && forValidation.confirmPassword !== forValidation.password) {
+      if (
+        type === "sign-up" &&
+        forValidation.confirmPassword !== forValidation.password
+      ) {
         e.preventDefault();
         throw new Error("Passwords do not match");
       }
@@ -50,24 +62,39 @@ export const DynamicForm: React.FC<Props> = (props) => {
           e.preventDefault();
           setValidationError(error);
         });
-    } catch (error : any) {
+    } catch (error: any) {
       setValidationError(error);
     }
   };
 
   return (
     <form
-      className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+      className="text-foreground flex w-full flex-col justify-center gap-1"
       action={`/auth/${type}`}
       method="post"
       onSubmit={(e) => handleSubmit(e)}
     >
+      {type === "sign-up" && (
+        <div className="flex flex-col gap-1">
+          <label className="text-md" htmlFor="name">
+            Name
+          </label>
+          <section className="relative mb-6 flex items-center justify-between rounded-md border">
+            <input
+              className="w-full p-2 text-[#060504]"
+              name="name"
+              placeholder="Mary Popins"
+              required
+            />
+          </section>
+        </div>
+      )}
       <label className="text-md" htmlFor="email">
         Email
       </label>
-      <section className="rounded-md border mb-6 flex justify-between items-center relative">
+      <section className="relative mb-6 flex items-center justify-between rounded-md border">
         <input
-          className="p-2 w-full text-[#060504]"
+          className="w-full p-2 text-[#060504]"
           name="email"
           placeholder="you@example.com"
         />
@@ -75,9 +102,9 @@ export const DynamicForm: React.FC<Props> = (props) => {
       <label className="text-md" htmlFor="password">
         Password
       </label>
-      <section className="rounded-md border mb-6 flex justify-between items-center relative">
+      <section className="relative mb-6 flex items-center justify-between rounded-md border">
         <input
-          className="p-2 w-full text-[#060504]"
+          className="w-full p-2 text-[#060504]"
           type={showPassword ? "text" : "password"}
           name="password"
           placeholder="••••••••"
@@ -85,43 +112,51 @@ export const DynamicForm: React.FC<Props> = (props) => {
         />
         <span className="absolute right-2.5 cursor-pointer">
           {showPassword ? (
-            <AiOutlineEye className="text-slate-900"
+            <AiOutlineEye
+              className="text-slate-900"
               onClick={() => setShowPassword(false)}
             />
           ) : (
-            <AiOutlineEyeInvisible className="text-slate-900"
+            <AiOutlineEyeInvisible
+              className="text-slate-900"
               onClick={() => setShowPassword(true)}
             />
           )}{" "}
         </span>
       </section>
-      {type === 'sign-up' && <div>
-      <label className="text-md" htmlFor="password">
-        Confirm Password
-      </label>
-      <section className="rounded-md border mb-6 flex justify-between items-center relative">
-        <input
-          className="p-2 w-full text-[#060504]"
-          type={showPassword ? "text" : "password"}
-          placeholder="••••••••"
-          required
-        />
-        <span className="absolute right-2.5 cursor-pointer">
-          {showPassword ? (
-            <AiOutlineEye className="text-slate-900"
-              onClick={() => setShowPassword(false)}
+      {type === "sign-up" && (
+        <div className="flex flex-col gap-1">
+          <label className="text-md" htmlFor="Confirm password">
+            Confirm Password
+          </label>
+          <section className="relative mb-6 flex items-center justify-between rounded-md border">
+            <input
+              className="w-full p-2 text-[#060504]"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              name="ConfirmPassword"
+              required
             />
-          ) : (
-            <AiOutlineEyeInvisible className="text-slate-900"
-              onClick={() => setShowPassword(true)}
-            />
-          )}{" "}
-        </span>
-      </section>
-        </div>}
+            <span className="absolute right-2.5 cursor-pointer">
+              {showPassword ? (
+                <AiOutlineEye
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}{" "}
+            </span>
+          </section>
+        </div>
+      )}
       <p className="text-sm">
-        {(type === "sign-in" ? "Not a user?" : "Login User?")+" "}
-        <button className="text-blue-400"
+        {(type === "sign-in" ? "Not a user?" : "Login User?") + " "}
+        <button
+          className="text-blue-400"
           type="button"
           onClick={() => {
             type === "sign-in" ? setType("sign-up") : setType("sign-in");
@@ -130,7 +165,7 @@ export const DynamicForm: React.FC<Props> = (props) => {
           {type === "sign-in" ? "sign-up" : "sign-in"}
         </button>
       </p>
-      <button className="bg-secondary rounded px-4 py-2 text-text mb-2">
+      <button className="mb-2 rounded bg-secondary px-4 py-2 text-text">
         {type}
       </button>
       <Messages validationError={validationError} />

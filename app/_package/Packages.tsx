@@ -13,8 +13,6 @@ export default async function Packages(props: Props) {
   )
 `);
 
-  console.log(packages);
-
   return (
     <div className="w-10/12 space-y-6">
       <h1 className="border-b-2 text-2xl w-full">

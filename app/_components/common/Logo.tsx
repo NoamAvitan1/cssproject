@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import ImageSite from '../../_assets/logo2.jpeg'
 import Image from 'next/image'
 type Props = {
@@ -8,8 +8,7 @@ type Props = {
 };
 
 export const Logo: React.FC<Props> = (props) => {
-  const router = useRouter();
   return (
-    <Image onClick={()=>router.push('/') } className='rounded cursor-pointer' src={ImageSite} alt='site logo'/>
+    <Link href={'/'}><Image className='rounded cursor-pointer' src={ImageSite} alt='site logo'/></Link>
   )
 };
