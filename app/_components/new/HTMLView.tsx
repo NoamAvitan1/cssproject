@@ -7,7 +7,7 @@ type Props = {
   css: string;
 };
 
-export const HTMLDisplay = (props: Props) => {
+export const HTMLView = (props: Props) => {
   const showcaseRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
