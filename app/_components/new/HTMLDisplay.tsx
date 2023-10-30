@@ -22,7 +22,7 @@ export const HTMLDisplay = (props: Props) => {
   }, [props.css, props.html]);
 
   return (
-    <div className="h-1/2 overflow-auto bg-white">
+    <div className="h-full overflow-auto bg-white text-black">
       <div id="showcase" ref={showcaseRef} className="relative"></div>
     </div>
   );

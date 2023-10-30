@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DiCss3, DiHtml5, DiJavascript } from "react-icons/di";
 
 type Props = {
@@ -5,6 +6,8 @@ type Props = {
 };
 
 export const FileTypeHeader = (props: Props) => {
+  const [dragging, setDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const typeIcons = {
     css: {
       icon: <DiCss3 className="font-pixelify text-xl text-sky-500" />,
@@ -22,10 +25,38 @@ export const FileTypeHeader = (props: Props) => {
 
   const element = typeIcons[props.type as "css" | "html" | "js"];
 
+  const handleDrag = (e: React.DragEvent<HTMLElement>) => {
+    console.log(e);
+    setDragging(true);
+  };
+
+  const handleDragEnd = (e: React.DragEvent<HTMLElement>) => {
+    setDragging(false);
+  };
+
+  const handleDragOver = () => {
+    setIsHovered(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
-    <header className="font-pixelify flex items-center gap-2 bg-secondary p-2">
-      {element.icon}
-      <p className="text-sm">{element.fileName}</p>
+    <header
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      className={`gap-2 bg-secondary px-2 font-pixelify`}
+    >
+      <div
+        draggable
+        onDragCapture={handleDrag}
+        onDragEnd={handleDragEnd}
+        className={`flex w-fit items-center ${isHovered && 'border-r border-dashed border-slate-500'}`}
+      >
+        {element.icon}
+        <p className="p-2 text-sm">{element.fileName}</p>
+      </div>
     </header>
   );
 };
