@@ -22,6 +22,7 @@ type Props = {
   theme?: string;
   lineNumbers?: boolean;
   minimap?: boolean;
+  hidden?: boolean;
   paddingTop?: number;
   contrastBorder?: boolean;
   rounded?: boolean;
@@ -67,10 +68,14 @@ export const Monaco = (props: Props) => {
         height: props.h ?? "600px",
         width: props.w ?? "600px",
         position: "relative",
+        display: props.hidden ? "none" : "block"
       }}
-      className={`overflow-hidden ${
-        props.contrastBorder && "border border-text"
-      } ${props.rounded && "rounded-lg"}`}
+      className={
+        props.classes +
+        `overflow-hidden ${props.contrastBorder && "border border-text"} ${
+          props.rounded && "rounded-lg"
+        }`
+      }
     >
       <Editor
         theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
