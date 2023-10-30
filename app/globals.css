@@ -8,7 +8,7 @@
   :root {
 
     /* light theme colors */
-
+    --dark:#1d1301;
     --text: #1d1301;
     --background: #ffffff;
     --primary: #246df5;
@@ -27,7 +27,7 @@
   [globalTheme="dark"] {
 
     /* dark theme colors */
-
+    --dark:#ffffff;
     --text: #ffffff;
     --background: #110e08;
     --primary: #246df5;
