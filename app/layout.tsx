@@ -5,6 +5,7 @@ import { UserSetter } from "./_components/login/UserSetter";
 import { NavBar } from "./_navbar/Navbar";
 import Script from "next/script";
 import { JotaiProvider } from "./_jotai/JotaiProvider";
+import { inspectify } from "../utils/inspectify"
 
 export const metadata = {
   title: "CSStore",
@@ -21,7 +22,11 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  
+
+  const data = await supabase.from("package").select(`
+  *,
+  module(*)`);
+  inspectify(data)
 
   return (
     <html lang="en">
