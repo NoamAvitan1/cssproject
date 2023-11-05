@@ -21,11 +21,7 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const data = await supabase.from("package").select(`
-  *,
-  module(*)`);
-  inspectify(data)
+ 
 
   return (
     <html lang="en">
