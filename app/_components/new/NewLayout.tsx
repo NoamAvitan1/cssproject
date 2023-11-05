@@ -1,16 +1,15 @@
 "use client";
 
-import { FileTypeHeader } from "@/app/new/FileTypeHeader";
 import { useState } from "react";
-import { Monaco } from "../codeEditor/Monaco";
 import { HTMLView } from "./HTMLView";
 import { dummyCss, dummyHtml } from "./dummyFiles";
-import { JsxElement } from "typescript";
 import { LargeScreenViews } from "./LargeScreenViews";
 import { SmallScreenViews } from "./SmallScreenViews";
+import { HTMLExamplesHeaders } from "./HTMLExamplesHeaders";
 
 export const NewLayout = () => {
-  const [htmlString, setHtmlString] = useState(dummyHtml);
+  const [htmlExamples, setHtmlExamples] = useState([dummyHtml]);
+  const [selectedExample, setSelectedExample] = useState(0);
   const [cssString, setCssString] = useState(dummyCss);
 
   return (
@@ -19,17 +18,21 @@ export const NewLayout = () => {
         <LargeScreenViews
           cssString={cssString}
           setCssString={setCssString}
-          htmlString={htmlString}
-          setHtmlString={setHtmlString}
+          htmlExamples={htmlExamples}
+          setHtmlExamples={setHtmlExamples}
+          selectedExample={selectedExample}
+          setSelectedExample={setSelectedExample}
         />
         <SmallScreenViews
           cssString={cssString}
           setCssString={setCssString}
-          htmlString={htmlString}
-          setHtmlString={setHtmlString}
+          htmlExamples={htmlExamples}
+          setHtmlExamples={setHtmlExamples}
+          selectedExample={selectedExample}
+          setSelectedExample={setSelectedExample}
         />
         <div className="grow">
-          <HTMLView html={htmlString} css={cssString} />
+          <HTMLView html={htmlExamples[selectedExample]} css={cssString} />
         </div>
       </section>
       <section className="flex flex-col bg-background">

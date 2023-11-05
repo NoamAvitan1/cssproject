@@ -8,7 +8,7 @@ import { JotaiProvider } from "./_jotai/JotaiProvider";
 
 export const metadata = {
   title: "CSStore",
-  description: "Find your CSS needs, all in one place",
+  description: "Find your CSS, tailored just for you",
 };
 
 export default async function RootLayout({
@@ -22,6 +22,10 @@ export default async function RootLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
+  const data = await supabase.from("package").select(`
+  *,
+  module(*)`);
+  inspectify(data)
 
   return (
     <html lang="en">
