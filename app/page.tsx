@@ -1,4 +1,3 @@
-import { AddModule } from "./_module/AddModule";
 import Modules from "./_module/Modules";
 import Packages from "./_package/Packages";
 
