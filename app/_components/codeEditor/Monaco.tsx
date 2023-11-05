@@ -14,7 +14,7 @@ const Editor = dynamic(
 );
 
 type Props = {
-  initialValue?: string;
+  code: string;
   h?: string;
   w?: string;
   limit?: number;
@@ -28,11 +28,7 @@ type Props = {
   rounded?: boolean;
   handleChange?: (code: string) => void;
 };
-
 export const Monaco = (props: Props) => {
-  const [code, setCode] = useState(
-    props.initialValue ?? "/* your code here */",
-  );
   const [isMounted, setIsMounted] = useState(false);
 
   const [theme] = useAtom(themeAtom);
@@ -50,17 +46,16 @@ export const Monaco = (props: Props) => {
 
   const handleChange = (value: string | undefined) => {
     if (!value) return;
-    setCode(value);
     if (props.handleChange) props.handleChange(value);
   };
 
   useEffect(() => {
     const editor = editorRef.current;
-    if (editor && code && code.length > (props.limit ?? 3000)) {
-      editor.setValue(code.substring(0, props.limit ?? 3000));
+    if (editor && props.code && props.code.length > (props.limit ?? 3000)) {
+      editor.setValue(props.code.substring(0, props.limit ?? 3000));
       useSetEditorSelection(editor);
     }
-  }, [code]);
+  }, [props.code]);
 
   return (
     <div
@@ -68,19 +63,16 @@ export const Monaco = (props: Props) => {
         height: props.h ?? "600px",
         width: props.w ?? "600px",
         position: "relative",
-        display: props.hidden ? "none" : "block"
+        display: props.hidden ? "none" : "block",
       }}
-      className={
-        props.classes +
-        `overflow-hidden ${props.contrastBorder && "border border-text"} ${
-          props.rounded && "rounded-lg"
-        }`
-      }
+      className={`overflow-hidden ${
+        props.contrastBorder && "border border-text"
+      } ${props.rounded && "rounded-lg"}`}
     >
       <Editor
         theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
         language={props.lang ?? "css"}
-        value={code}
+        value={props.code}
         height={"100%"}
         width={"100%"}
         onChange={handleChange}
@@ -100,7 +92,7 @@ export const Monaco = (props: Props) => {
         <div className="absolute right-0 top-0 opacity-20 hover:opacity-100">
           <PrettierButton
             instance={editorRef.current}
-            code={code}
+            code={props.code}
             lang={props.lang ?? "css"}
           />
         </div>
