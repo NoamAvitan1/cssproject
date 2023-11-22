@@ -1,5 +1,5 @@
 export const dummyCss = `.box {
-    background-color: #000;
+    // background-color: #000;
     font-family: sans-serif;
   }
   .cool-text {
@@ -25,9 +25,9 @@ export const dummyCss = `.box {
       transform: rotate(0deg);
     }
   }
-  `
+  `;
 
-export const dummyHtml = `<div className="box">
+export const dummyHtml = `<div class="box">
   <div class="cool-text">Hello World!</div>
 </div>
-`
+`;
