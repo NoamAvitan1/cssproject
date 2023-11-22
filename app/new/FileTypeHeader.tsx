@@ -32,7 +32,7 @@ export const FileTypeHeader = (props: Props) => {
     >
       <div className={`flex w-fit items-center`}>
         {element.icon}
-        <p className="p-2 text-sm">{element.fileName}</p>
+        <p className="p-2 text-sm max-sm:text-xs">{element.fileName}</p>
       </div>
     </header>
   );

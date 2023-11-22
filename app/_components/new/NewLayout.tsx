@@ -1,43 +1,60 @@
 "use client";
+export const revalidate = 0;
 
-import { useState } from "react";
-import { HTMLView } from "./HTMLView";
+import { CodeBlock } from "@/types/CodeBlock";
+import { useEffect, useState } from "react";
 import { dummyCss, dummyHtml } from "./dummyFiles";
-import { LargeScreenViews } from "./LargeScreenViews";
-import { SmallScreenViews } from "./SmallScreenViews";
-import { HTMLExamplesHeaders } from "./HTMLExamplesHeaders";
+import { HTMLView } from "./HTMLView";
+import { EditorsView } from "./EditorsView";
+import { Monaco } from "../codeEditor/Monaco";
+import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 
-export const NewLayout = () => {
-  const [htmlExamples, setHtmlExamples] = useState([dummyHtml]);
-  const [selectedExample, setSelectedExample] = useState(0);
-  const [cssString, setCssString] = useState(dummyCss);
+type Props = {};
+
+export const NewLayout = (props: Props) => {
+  const [isLg, setIsLg] = useState(() => {
+    if (typeof window == "undefined") return true;
+    else return window.innerWidth >= 768;
+  });
+  const [selectedBlock, setSelectedBlock] = useState(0);
+  const [codeBlocks, setCodeBlocks] = useState<Array<CodeBlock>>([
+    new CodeBlock(dummyCss, "css"),
+    new CodeBlock(dummyHtml, "html"),
+  ]);
+
+  useEffect(() => {
+    // HTMLDebugger(".debug", 100)
+    if (typeof window == "undefined") return;
+    window.addEventListener("resize", () => {
+      setIsLg(window.innerWidth >= 768);
+    });
+  }, []);
 
   return (
-    <div className="grid h-full w-full grow grid-cols-3 space-x-px overflow-x-hidden border-t border-aura bg-aura">
-      <section className="col-span-2 flex flex-col overflow-auto">
-        <LargeScreenViews
-          cssString={cssString}
-          setCssString={setCssString}
-          htmlExamples={htmlExamples}
-          setHtmlExamples={setHtmlExamples}
-          selectedExample={selectedExample}
-          setSelectedExample={setSelectedExample}
-        />
-        <SmallScreenViews
-          cssString={cssString}
-          setCssString={setCssString}
-          htmlExamples={htmlExamples}
-          setHtmlExamples={setHtmlExamples}
-          selectedExample={selectedExample}
-          setSelectedExample={setSelectedExample}
-        />
-        <div className="grow">
-          <HTMLView html={htmlExamples[selectedExample]} css={cssString} />
-        </div>
-      </section>
-      <section className="flex flex-col bg-background">
-        there's a section right here
-      </section>
+    <div className="debug grid h-full w-full grow grid-cols-4">
+      <article className="col-span-4 h-full lg:col-span-3">
+        <section className="h-full w-full border-4 border-blue-500">
+          <div className="flex h-[60%] resize-y overflow-auto">
+            <EditorsView
+              codeBlocks={isLg ? [codeBlocks[0]] : codeBlocks}
+              setCodeBlocks={setCodeBlocks}
+              selectedBlock={isLg ? 0 : selectedBlock}
+              setSelectedBlock={setSelectedBlock}
+            />
+            {isLg && (
+              <EditorsView
+                codeBlocks={isLg ? [...codeBlocks].slice(1) : codeBlocks}
+                setCodeBlocks={setCodeBlocks}
+                selectedBlock={selectedBlock}
+                setSelectedBlock={setSelectedBlock}
+              />
+            )}
+          </div>
+          <div className="h-[40%]">
+            {/* <HTMLView html={codeBlocks[1].code} css={codeBlocks[0].code} /> */}
+          </div>
+        </section>
+      </article>
     </div>
   );
 };

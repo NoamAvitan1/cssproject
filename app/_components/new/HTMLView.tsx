@@ -13,17 +13,20 @@ export const HTMLView = (props: Props) => {
   useEffect(() => {
     if (!showcaseRef.current) return;
     const el = showcaseRef.current;
-    el.innerHTML = ''
+    el.innerHTML = "";
+    const wrapper = document.createElement("div");
+    wrapper.className = "absolute inset-0 bg-white"
     const htmlEl = useStringToNode(props.html);
     const style = document.createElement("style");
     style.textContent = props.css;
     el.appendChild(style);
-    el.appendChild(htmlEl!);
+    wrapper.appendChild(htmlEl!);
+    el.appendChild(wrapper);
   }, [props.css, props.html]);
 
   return (
-    <div className="h-full overflow-auto bg-white text-black">
-      <div id="showcase" ref={showcaseRef} className="relative"></div>
+    <div className="h-full overflow-auto bg-white">
+      <div ref={showcaseRef} className="relative h-full"></div>
     </div>
   );
 };

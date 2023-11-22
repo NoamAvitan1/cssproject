@@ -62,41 +62,33 @@ export const Monaco = (props: Props) => {
       style={{
         height: props.h ?? "600px",
         width: props.w ?? "600px",
-        position: "relative",
         display: props.hidden ? "none" : "block",
       }}
-      className={`overflow-hidden ${
+      className={`overflow-hidden relative ${
         props.contrastBorder && "border border-text"
       } ${props.rounded && "rounded-lg"}`}
     >
-      <Editor
-        theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
-        language={props.lang ?? "css"}
-        value={props.code}
-        height={"100%"}
-        width={"100%"}
-        onChange={handleChange}
-        onMount={handleEditorDidMount}
-        options={{
-          scrollBeyondLastLine: false,
-          lineNumbers: props.lineNumbers ? "on" : "off",
-          minimap: {
-            enabled: props.minimap ?? false,
-          },
-          padding: {
-            top: props.paddingTop ?? 10,
-          },
-        }}
-      />
-      {isMounted && (
-        <div className="absolute right-0 top-0 opacity-20 hover:opacity-100">
-          <PrettierButton
-            instance={editorRef.current}
-            code={props.code}
-            lang={props.lang ?? "css"}
-          />
-        </div>
-      )}
+      <div className="absolute inset-0">
+        <Editor
+          theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
+          language={props.lang ?? "css"}
+          value={props.code}
+          height={"100%"}
+          width={"100%"}
+          onChange={handleChange}
+          onMount={handleEditorDidMount}
+          options={{
+            scrollBeyondLastLine: false,
+            lineNumbers: props.lineNumbers ? "on" : "off",
+            minimap: {
+              enabled: props.minimap ?? false,
+            },
+            padding: {
+              top: props.paddingTop ?? 10,
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };
