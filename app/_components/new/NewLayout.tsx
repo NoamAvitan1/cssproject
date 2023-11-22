@@ -51,7 +51,7 @@ export const NewLayout = (props: Props) => {
             )}
           </div>
           <div className="h-[40%]">
-            {/* <HTMLView html={codeBlocks[1].code} css={codeBlocks[0].code} /> */}
+            <HTMLView html={codeBlocks[1].code} css={codeBlocks[0].code} />
           </div>
         </section>
       </article>
