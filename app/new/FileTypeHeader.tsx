@@ -27,13 +27,13 @@ export const FileTypeHeader = (props: Props) => {
   const element = typeIcons[props.type as "css" | "html" | "js"];
 
   return (
-    <header
-      className={`gap-2 bg-secondary px-2 font-pixelify [&_*]:whitespace-nowrap`}
+    <div
+      className={`gap-2 bg-secondary px-2 font-pixelify h-8 flex items-center justify-center [&_*]:whitespace-nowrap`}
     >
       <div className={`flex w-fit items-center`}>
         {element.icon}
-        <p className="p-2 text-sm max-sm:text-xs">{element.fileName}</p>
+        {element.fileName && <p className="p-2 text-sm max-sm:text-xs">{element.fileName}</p>}
       </div>
-    </header>
+    </div>
   );
 };

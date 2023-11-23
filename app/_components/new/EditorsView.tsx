@@ -11,10 +11,11 @@ type Props = {
 
 export const EditorsView = (props: Props) => {
   return (
-    <div className="row-span-2 flex h-full w-full flex-col border border-red-700">
+    <div className="row-span-2 flex h-full w-full flex-col">
       <Headers
         codeBlocks={props.codeBlocks}
         setCodeBlocks={props.setCodeBlocks}
+        selectedBlock={props.selectedBlock}
         setSelectedBlock={props.setSelectedBlock}
       />
       <div className="flex grow">
