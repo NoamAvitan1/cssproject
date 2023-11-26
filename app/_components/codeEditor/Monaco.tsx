@@ -70,7 +70,8 @@ export const Monaco = (props: Props) => {
     >
       <div className="absolute inset-0">
         <Editor
-          theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
+          // theme={props.theme ?? theme == "dark" ? "vs-dark" : ""}
+          theme={"vs-dark"}
           language={props.lang ?? "css"}
           value={props.code}
           height={"100%"}

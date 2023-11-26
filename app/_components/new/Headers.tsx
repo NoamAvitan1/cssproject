@@ -19,12 +19,12 @@ export const Headers = (props: Props) => {
   };
 
   return (
-    <header className="flex items-center space-x-px">
+    <header className="flex bg-slate-500 items-center space-x-px border-b border-primary">
       {props.codeBlocks.map((c, i) => (
         <button
-          onClick={() => props.setSelectedBlock(i)}
+          onClick={() => props.codeBlocks.length > 1 && props.setSelectedBlock(i)}
           key={i}
-          className={`relative ${props.selectedBlock == i && "opacity-70"}`}
+          className={`relative ${props.selectedBlock == i && props.codeBlocks.length > 1 && "opacity-70"}`}
         >
           <FileTypeHeader
             type={c.type}
@@ -46,10 +46,12 @@ export const Headers = (props: Props) => {
       <button
         onClick={handleClick}
         title="New example"
-        className={`flex aspect-square h-full items-center justify-center bg-secondary duration-150 hover:text-red-500 ${
-          props.codeBlocks[0].type == "css" &&
-          props.codeBlocks.length == 1 &&
-          "hidden"
+        className={`flex aspect-square h-full items-center justify-center bg-slate-500 duration-150 hover:text-red-500 ${
+          (props.codeBlocks[0].type == "css" &&
+            (props.codeBlocks.length == 1 || props.codeBlocks.length >= 5)) ||
+          (props.codeBlocks[0].type == "html" &&
+            props.codeBlocks.length >= 4 &&
+            "hidden")
         }`}
       >
         <HiOutlinePlus className="" />

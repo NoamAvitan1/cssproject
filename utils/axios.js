@@ -1,7 +1,8 @@
-import { Axios } from "axios";
+import Axios from "axios";
 
-const Api = new Axios({
+const Api = Axios.create({
     baseURL: 'http://localhost:3000/',
+    withCredentials: true
 })
 
 export default Api

@@ -11,7 +11,7 @@ type Props = {
 
 export const EditorsView = (props: Props) => {
   return (
-    <div className="row-span-2 flex h-full w-full flex-col">
+    <div className="row-span-2 flex h-full w-full flex-col space-y-px bg-primary">
       <Headers
         codeBlocks={props.codeBlocks}
         setCodeBlocks={props.setCodeBlocks}

@@ -28,7 +28,7 @@ export const FileTypeHeader = (props: Props) => {
 
   return (
     <div
-      className={`gap-2 bg-secondary px-2 font-pixelify h-8 flex items-center justify-center [&_*]:whitespace-nowrap`}
+      className={`gap-2 bg-slate-400 px-2 font-pixelify h-8 flex items-center justify-center [&_*]:whitespace-nowrap`}
     >
       <div className={`flex w-fit items-center`}>
         {element.icon}
