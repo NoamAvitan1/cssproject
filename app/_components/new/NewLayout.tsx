@@ -1,16 +1,11 @@
 "use client";
-export const revalidate = 0;
-
 import { CodeBlock } from "@/types/CodeBlock";
 import { useEffect, useState } from "react";
 import { dummyCss, dummyHtml } from "./dummyFiles";
 import { HTMLView } from "./HTMLView";
 import { EditorsView } from "./EditorsView";
-import { Monaco } from "../codeEditor/Monaco";
 import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 import Api from "@/utils/axios";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 
 type Props = {};
 
@@ -35,7 +30,7 @@ export const NewLayout = (props: Props) => {
   };
 
   useEffect(() => {
-    // HTMLDebugger(".debug", 100)
+    HTMLDebugger(".debug", 4)
     setIsLg(window.innerWidth >= 768);
     window.addEventListener("resize", () => {
       setIsLg(window.innerWidth >= 768);
@@ -49,10 +44,10 @@ export const NewLayout = (props: Props) => {
   }, [isLg]);
 
   return (
-    <div className="grid h-full w-full grow grid-cols-4 bg-background">
+    <div className="grid w-full h-[95vh] grow grid-cols-4 bg-background">
       <article className="col-span-4 h-full lg:col-span-3">
         <section className="h-full w-full space-y-px">
-          <div className="flex h-[60%] resize-y overflow-auto gap-px border border-secondary bg-background">
+          <div className="flex max-h-[60%] h-[60%] resize-y overflow-auto gap-px border border-secondary bg-background">
             <EditorsView
               codeBlocks={isLg ? [codeBlocks[0]] : codeBlocks}
               setCodeBlocks={setCodeBlocks}
@@ -68,7 +63,7 @@ export const NewLayout = (props: Props) => {
               />
             )}
           </div>
-          <div className="h-[40%]">
+          <div className="grow min-h-[40%] flex flex-col">
             <HTMLView html={codeBlocks[selectedBlock + 1].code} css={codeBlocks[0].code} />
           </div>
         </section>

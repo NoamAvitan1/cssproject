@@ -25,7 +25,7 @@ export const HTMLView = (props: Props) => {
   }, [props.css, props.html]);
 
   return (
-    <div className="h-full overflow-auto bg-white">
+    <div className="h-full overflow-auto bg-white grow">
       <div ref={showcaseRef} className="relative h-full"></div>
     </div>
   );

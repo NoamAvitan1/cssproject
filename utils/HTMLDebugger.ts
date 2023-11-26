@@ -31,5 +31,6 @@ const recursiveBorder = (element: Element, depth: number, currentDepth: number =
 
 export const HTMLDebugger = (selector: string, depth: number) => {
   const papaElement = document.querySelector(selector) as Element
+  if (!papaElement) return
   recursiveBorder(papaElement, depth)
 }

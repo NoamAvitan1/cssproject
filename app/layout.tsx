@@ -22,7 +22,6 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
- 
 
   return (
     <html lang="en">
@@ -34,7 +33,7 @@ export default async function RootLayout({
           <main className="flex min-h-screen flex-col items-center bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
-            <div className="flex w-full ">
+            <div className="flex w-full grow">
               <Menu />
               {children}
             </div>
