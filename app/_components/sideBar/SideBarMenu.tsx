@@ -1,30 +1,33 @@
-'use client'
+"use client";
 import { useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 
 type Props = {
-    items: sideBarItemsProps[]
+  items: sideBarItemsProps[];
 };
 
 interface sideBarItemsProps {
-    id:number;
-    label:string;
-    path:string;
-    icon: React.ReactElement<IconType>;
+  label: string;
+  path: string;
+  icon: React.ReactElement<IconType>;
 }
 
 export const SideBarMenu = (props: Props) => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <div className="w-52">
-    <section className="w-11/12">
-            {props.items.map((item)=>(
-                <ul onClick={()=>router.push(`${item.path}`)} key={item.id} className="flex items-center border-r-2 gap-2 py-2 pl-2 hover:bg-slate-200 cursor-pointer">
-                    <li className="">{item.icon}</li>
-                    <li>{item.label}</li>
-                </ul>
-            ))}
-    </section>
+      <ul className="w-11/12">
+        {props.items.map((item, i) => (
+          <li
+            onClick={() => router.push(`${item.path}`)}
+            key={i}
+            className="flex cursor-pointer items-center gap-2 border-r-2 p-2 hover:bg-slate-200"
+          >
+            <span className="">{item.icon}</span>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

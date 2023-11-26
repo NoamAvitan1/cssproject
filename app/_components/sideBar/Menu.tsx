@@ -14,9 +14,9 @@ export const Menu = (props: Props) => {
     const id = user?.id; 
 
     const sideBarItems  = [
-        {id:1, label: "Home", path: '/' ,icon: <MdHome/>},
-        {id:2, label: "Profile", path: `/profile/${id}` ,icon: <FiUser/>},
-        {id:3, label: "test", path: '/test' ,icon: <MdHome/>},
+        {label: "Home", path: '/' ,icon: <MdHome/>},
+        {label: "Profile", path: `/profile/${id}` ,icon: <FiUser/>},
+        {label: "test", path: '/test' ,icon: <MdHome/>},
     ]
   return (
     <div>
