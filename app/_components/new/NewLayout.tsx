@@ -12,10 +12,7 @@ import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 type Props = {};
 
 export const NewLayout = (props: Props) => {
-  const [isLg, setIsLg] = useState(() => {
-    if (typeof window == "undefined") return true;
-    else return window.innerWidth >= 768;
-  });
+  const [isLg, setIsLg] = useState<boolean>(false);
   const [selectedBlock, setSelectedBlock] = useState(0);
   const [codeBlocks, setCodeBlocks] = useState<Array<CodeBlock>>([
     new CodeBlock(dummyCss, "css"),
@@ -24,16 +21,24 @@ export const NewLayout = (props: Props) => {
 
   useEffect(() => {
     // HTMLDebugger(".debug", 100)
-    if (typeof window == "undefined") return;
+    setIsLg(window.innerWidth >= 768);
     window.addEventListener("resize", () => {
       setIsLg(window.innerWidth >= 768);
     });
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth >= 768 && selectedBlock > codeBlocks.length - 1) {
+      setSelectedBlock(prev => prev - 1)
+    }
+  }, [isLg])
+
+  console.log(codeBlocks);
+
   return (
-    <div className="debug grid h-full w-full grow grid-cols-4">
+    <div className="grid h-full w-full grow grid-cols-4">
       <article className="col-span-4 h-full lg:col-span-3">
-        <section className="h-full w-full border-4 border-blue-500">
+        <section className="h-full w-full">
           <div className="flex h-[60%] resize-y overflow-auto">
             <EditorsView
               codeBlocks={isLg ? [codeBlocks[0]] : codeBlocks}

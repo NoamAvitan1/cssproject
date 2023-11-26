@@ -88,6 +88,7 @@ export const Monaco = (props: Props) => {
             },
           }}
         />
+          <PrettierButton code={props.code} instance={editorRef.current} lang={props.lang} />
       </div>
     </div>
   );
