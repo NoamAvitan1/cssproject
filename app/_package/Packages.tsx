@@ -12,7 +12,7 @@ export default async function Packages(props: Props) {
 
   return (
     <div className='w-10/12 space-y-6'>
-    <h1 className="border-b-2 text-2xl w-full">Popular Packages to Check Out</h1>
+    <h1 className="border-b-2 border-text text-2xl w-full">Popular Packages to Check Out</h1>
     <section className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-10">
       {packages? packages.map((v, i) => (
         <article className="bg-secondary overflow-hidden p-2 rounded-md aspect-square relative" key={i}>

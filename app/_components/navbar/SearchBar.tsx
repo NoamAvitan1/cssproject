@@ -1,12 +1,14 @@
-"use client";
 import { AiOutlineSearch } from "react-icons/ai";
-type Props = {};
+type Props = {
+  flag : boolean;
+  setFlag : React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export const SearchBar: React.FC<Props> = (props) => {
   return (
-    <div className="flex w-full max-w-[600px] items-center justify-center justify-self-center">
-      <div className="flex w-full items-center justify-center overflow-hidden rounded-lg border-2 border-aura bg-background">
-        <figure className="p-2">
+    <div className={`${props.flag ? 'flex' : 'hidden xs:flex'} w-full max-w-[600px] items-center justify-center justify-self-center`}>
+      <div className="flex w-11/12  items-center justify-center overflow-hidden rounded-lg border-2 border-aura bg-background">
+        <figure onClick={()=>props.setFlag(!props.flag)} className="p-2 cursor-pointer">
           <AiOutlineSearch />
         </figure>
         <input

@@ -9,6 +9,6 @@ type Props = {
 
 export const Logo: React.FC<Props> = (props) => {
   return (
-    <Link href={'/'}><Image className='rounded cursor-pointer' src={ImageSite} alt='site logo'/></Link>
+    <Link href={'/'}><Image className='rounded-md cursor-pointer max-w-[2rem]' src={ImageSite} alt='site logo'/></Link>
   )
 };

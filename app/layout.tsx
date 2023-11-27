@@ -5,7 +5,7 @@ import { UserSetter } from "./_components/login/UserSetter";
 import { NavBar } from "./_navbar/Navbar";
 import Script from "next/script";
 import { JotaiProvider } from "./_jotai/JotaiProvider";
-import { Menu } from "./_components/sideBar/Menu";
+import { SideBarMenu } from "./_components/sideBar/SideBarMenu";
 
 export const metadata = {
   title: "CSStore",
@@ -33,8 +33,10 @@ export default async function RootLayout({
           <main className="flex min-h-screen flex-col items-center bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
-            <div className="flex w-full grow">
-              <Menu />
+            <div className="flex w-11/12 grow container">
+              <div className="xs:block hidden">
+                <SideBarMenu />
+              </div>
               {children}
             </div>
           </main>
