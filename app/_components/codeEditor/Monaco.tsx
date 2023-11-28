@@ -26,7 +26,7 @@ type Props = {
   paddingTop?: number;
   contrastBorder?: boolean;
   rounded?: boolean;
-  handleChange?: (code: string) => void;
+  onChange?: (code: string) => void;
 };
 export const Monaco = (props: Props) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -46,7 +46,7 @@ export const Monaco = (props: Props) => {
 
   const handleChange = (value: string | undefined) => {
     if (!value) return;
-    if (props.handleChange) props.handleChange(value);
+    if (props.onChange) props.onChange(value);
   };
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export const Monaco = (props: Props) => {
             },
           }}
         />
-          <PrettierButton code={props.code} instance={editorRef.current} lang={props.lang} />
+          <PrettierButton code={props.code} instance={editorRef.current} lang={props.lang ?? 'css'} />
       </div>
     </div>
   );

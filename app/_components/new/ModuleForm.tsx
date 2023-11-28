@@ -33,7 +33,7 @@ export const ModuleForm = (props: Props) => {
       </div>
       <div className="flex flex-col gap-4">
         <label>Choose access type</label>
-        <div className="grid grid-cols-3 gap-x-2">
+        <div className="grid grid-cols-3 gap-x-2 [&_button]:duration-300">
           <button
             onClick={() => setSelectedAccessType("public")}
             className={`rounded-lg border border-accent p-2 ${
