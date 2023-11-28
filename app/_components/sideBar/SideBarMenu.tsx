@@ -26,7 +26,7 @@ export const SideBarMenu = (props: Props) => {
           <li
             onClick={() => router.push(`${item.path}`)}
             key={i}
-            className="flex cursor-pointer items-center gap-2  p-2 hover:bg-secondary"
+            className="flex cursor-pointer items-center gap-2  p-2 hover:bg-secondary text-xl"
           >
             <span className="">{item.icon}</span>
             <span>{item.label}</span>

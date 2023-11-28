@@ -33,7 +33,7 @@ export default async function RootLayout({
           <main className="flex min-h-screen flex-col items-center bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
-            <div className="flex w-11/12 grow container">
+            <div className="flex w-11/12 grow container gap-2">
               <div className="xs:block hidden">
                 <SideBarMenu />
               </div>

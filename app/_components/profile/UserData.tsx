@@ -27,21 +27,20 @@ export const UserData = (props: Props) => {
   },[])
 
 
-  console.log(user)
+  console.log(user);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row items-start container">
-      <aside className="w-1/4">sadas</aside>
-      <main className="container pt-2 [&_*]:border [&_*]:border-black">
-        <article className="flex flex-row items-start">
-           <img className="w-1/3 rounded" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
-           <section className="grow"></section>
-          <section className="flex items-center gap-1">
-              {/* <span><MdOutlineEdit  className=""/></span> */}
-              <span>Edit</span>
-          </section>
+    <div className="w-full mt-6">
+      {user &&
+      <main className="container border border-secondary">
+        <article className="flex flex-row items-start p-2 relative justify-between">
+           <section className="flex md:flex-row flex-col gap-5 w-full">
+             <img className="md:w-2/3 lg:w-1/4 w-full rounded-md" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                <MdOutlineEdit  className="absolute right-3 z-10 top-4 text-text text-xl cursor-pointer"/>
+           </section>
         </article>
       </main>
+    }
     </div>
   );
 };
