@@ -12,7 +12,7 @@ import { ModuleForm } from "./ModuleForm";
 type Props = {};
 
 export const NewLayout = (props: Props) => {
-  const [isLg, setIsLg] = useState<boolean>(false);
+  const [isXl, setIsXl] = useState<boolean>(false);
   const [selectedBlock, setSelectedBlock] = useState(0);
   const [codeBlocks, setCodeBlocks] = useState<Array<CodeBlock>>([
     new CodeBlock(dummyCss, "css"),
@@ -47,32 +47,40 @@ export const NewLayout = (props: Props) => {
 
   useEffect(() => {
     HTMLDebugger(".debug", 4);
-    setIsLg(window.innerWidth >= 768);
+    setIsXl(window.innerWidth >= 1280);
     window.addEventListener("resize", () => {
-      setIsLg(window.innerWidth >= 768);
+      setIsXl(window.innerWidth >= 1280);
     });
+
+    return () => {
+      window.addEventListener("resize", () => {
+        setIsXl(window.innerWidth >= 1280);
+      });
+    }
   }, []);
 
   useEffect(() => {
-    if (window.innerWidth >= 768 && selectedBlock > codeBlocks.length - 1) {
+    if (window.innerWidth >= 1280 && selectedBlock > codeBlocks.length - 1) {
       setSelectedBlock((prev) => prev - 1);
     }
-  }, [isLg]);
+  }, [isXl]);
 
   return (
-    <div className="box-border grid h-[95vh] w-full grow grid-cols-4 overflow-y-hidden bg-background">
-      <article className="col-span-4 h-full lg:col-span-3">
+    <div className="box-border flex h-[95vh] w-full bg-background">
+      <article className="grow h-full xl:col-span-3 overflow-y-hidden">
         <section className="h-full w-full space-y-px">
           <div className="flex h-[60%] max-h-[60%] resize-y gap-px overflow-auto bg-background">
             <EditorsView
-              codeBlocks={isLg ? [codeBlocks[0]] : codeBlocks}
+              lang={(isXl || selectedBlock == 0) ? 'css' : 'html'}
+              codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
               setCodeBlocks={setCodeBlocks}
-              selectedBlock={isLg ? 0 : selectedBlock}
+              selectedBlock={isXl ? 0 : selectedBlock}
               setSelectedBlock={setSelectedBlock}
             />
-            {isLg && (
+            {isXl && (
               <EditorsView
-                codeBlocks={isLg ? [...codeBlocks].slice(1) : codeBlocks}
+                lang='html'
+                codeBlocks={isXl ? [...codeBlocks].slice(1) : codeBlocks}
                 setCodeBlocks={setCodeBlocks}
                 selectedBlock={selectedBlock}
                 setSelectedBlock={setSelectedBlock}
@@ -81,7 +89,7 @@ export const NewLayout = (props: Props) => {
           </div>
           <div className="flex min-h-[40%] grow flex-col">
             <HTMLView
-              html={codeBlocks[selectedBlock + 1].code}
+              html={codeBlocks[selectedBlock + ((isXl || selectedBlock == 0) ? 1 : 0)].code}
               css={codeBlocks[0].code}
             />
           </div>
@@ -90,7 +98,7 @@ export const NewLayout = (props: Props) => {
       <article
         onClick={(e) => handleWaveClick(e)}
         id="waves"
-        className="hidden w-full grow overflow-clip border-l-[1px] border-l-primary bg-background p-3 lg:block"
+        className="hidden overflow-clip border-l-[1px] border-l-primary bg-background p-3 lg:block border-4"
       >
         <ModuleForm />
       </article>
