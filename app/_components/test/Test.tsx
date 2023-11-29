@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { DragItem } from "./DragItem";
+import { Modal } from "../common/Modal";
 
 //@ts-nocheck
 type Props = {};
@@ -14,16 +15,14 @@ export const Test = (props: Props) => {
     d: [],
   })
 
-  const [isHovered, setIsHovered] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="grow w-full flex flex-col p-4">
-      <div className="z-10 grow w-full flex flex-wrap">
-        <div className={`w-1/2 grow bg-slate-500 col-span-full row-span-full border border-blue-500`}>1</div>
-        <div className={`w-1/2 grow bg-slate-500 col-span-full row-span-full border border-yellow-500`}>2</div>
-        <div className={`w-1/2 grow bg-slate-500 col-span-full row-span-full border border-green-500`}>3</div>
-        <div className={`w-1/2 grow bg-slate-500 col-span-full row-span-full border border-red-500`}>4</div>
-      </div>
+    <div className="">
+      <button onClick={() => setIsOpen(true)}>CLICKME</button>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
+        <div className="w-[300px] h-[300px] bg-blue-500"></div>
+      </Modal>
     </div>
   )
 };

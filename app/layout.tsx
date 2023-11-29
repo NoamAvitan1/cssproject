@@ -1,5 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
+import "./css/VFX.css";
 import { cookies } from "next/headers";
 import { UserSetter } from "./_components/login/UserSetter";
 import { NavBar } from "./_navbar/Navbar";
