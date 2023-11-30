@@ -11,6 +11,9 @@
     --primary: #4e504f;
     --secondary: #cbcdcc;
     --accent: #656766;
+    --success: #4caf50;
+    --error: #f44336;
+    --alert: #ffd600;
   }
   .dark {
     --text: #f0f0f0;
