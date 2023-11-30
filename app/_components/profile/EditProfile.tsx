@@ -5,7 +5,7 @@ import { BaseSyntheticEvent, useState } from "react";
 import { object, string } from "yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
-import TextareaAutosize from 'react-textarea-autosize';
+import Api from "@/utils/axios";
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 type Props = {
   isOpen: boolean;
@@ -18,14 +18,14 @@ export const EditProfile = (props: Props) => {
     useState<yup.ValidationError | null>(null);
 
   const authForm = () => {
-    let obj = {
-      name: string().min(3),
+    return object({
+      user_name: string().min(3),
       emailValidation: string().email(),
       about: string().max(500),
-    }
+    });
   };
 
-  const handleSubmit = (e: BaseSyntheticEvent) => {
+  const handleSubmit = async (e: BaseSyntheticEvent) => {
     const inputs = e.target.elements;
     let formValidation = {
       name: inputs.name.value,
@@ -38,7 +38,6 @@ export const EditProfile = (props: Props) => {
         e.preventDefault();
         setValidationError(error);
       });
-    e.preventDefault();
   };
   return (
     <div>
@@ -47,15 +46,16 @@ export const EditProfile = (props: Props) => {
           <form
             onSubmit={handleSubmit}
             className="text-foreground flex w-full flex-col justify-center gap-1 p-4"
-            method="patch"
+            method="POST"
+            action={'/user/update-user/' + props.user.id}
           >
-            <label className="text-sm text-stone-600" htmlFor="name">
+            <label className="text-sm text-stone-600" htmlFor="user_name">
               Name:
             </label>
             <section className="mb-4">
               <input
                 className="w-full rounded-md border border-black p-2 text-[#060504] focus:border-4"
-                name="name"
+                name="user_name"
                 defaultValue={`${props.user.user_name}`}
               />
             </section>
