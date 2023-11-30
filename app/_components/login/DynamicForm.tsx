@@ -79,9 +79,9 @@ export const DynamicForm: React.FC<Props> = (props) => {
           <label className="text-md" htmlFor="name">
             Name
           </label>
-          <section className="relative mb-6 flex items-center justify-between rounded-md border">
+          <section className="mb-6">
             <input
-              className="w-full p-2 text-[#060504]"
+              className="w-full p-2 text-[#060504] rounded-md"
               name="name"
               placeholder="Mary Popins"
               required
@@ -92,9 +92,9 @@ export const DynamicForm: React.FC<Props> = (props) => {
       <label className="text-md" htmlFor="email">
         Email
       </label>
-      <section className="relative mb-6 flex items-center justify-between rounded-md border">
+      <section className="mb-6">
         <input
-          className="w-full p-2 text-[#060504]"
+          className="w-full p-2 text-[#060504] rounded-md"
           name="email"
           placeholder="you@example.com"
         />
@@ -102,9 +102,9 @@ export const DynamicForm: React.FC<Props> = (props) => {
       <label className="text-md" htmlFor="password">
         Password
       </label>
-      <section className="relative mb-6 flex items-center justify-between rounded-md border">
+      <section className="relative mb-6 flex items-center justifny-betwee">
         <input
-          className="w-full p-2 text-[#060504]"
+          className="w-full p-2 text-[#060504] rounded-md"
           type={showPassword ? "text" : "password"}
           name="password"
           placeholder="••••••••"
@@ -129,9 +129,9 @@ export const DynamicForm: React.FC<Props> = (props) => {
           <label className="text-md" htmlFor="Confirm password">
             Confirm Password
           </label>
-          <section className="relative mb-6 flex items-center justify-between rounded-md border">
+          <section className="relative mb-6 flex items-center justify-between ">
             <input
-              className="w-full p-2 text-[#060504]"
+              className="w-full p-2 text-[#060504] rounded-md"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               name="ConfirmPassword"

@@ -10,6 +10,7 @@ export async function POST(request: Request) {
   const moduleData = await request.json()
   const supabase = createRouteHandlerClient<Database>({ cookies })
   const { data } = await supabase.from('module').insert(moduleData).select()
+  console.log(data)
   return NextResponse.json(data)
 }
 

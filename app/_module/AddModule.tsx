@@ -15,11 +15,11 @@ export const AddModule: React.FC<Props> = (props) => {
     const [user, setUser] = useAtom(userAtom)
     const moduleData = [
       { 
-        title: "test4",
-        description:"test4",
+        title: "test5",
+        description:"test5",
         code: "your_code_value4",
         price: 99.99,
-        profile_id:`${user?.id}`,
+        user_id:`${user?.id}`,
       },
     ];
   
@@ -32,7 +32,7 @@ export const AddModule: React.FC<Props> = (props) => {
     //     console.log(error);
     //   } 
   const handleRoute = async() => {
-    await fetch(`auth/module`,{
+    await fetch(`/module/`,{
       method : "POST",
       body: JSON.stringify(moduleData)
     })

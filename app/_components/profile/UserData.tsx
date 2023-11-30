@@ -5,6 +5,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { Database } from "@/types/supabase";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { EditProfile } from "./EditProfile";
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export const UserData = (props: Props) => {
+  const [isOpen,setIsOpen] = useState<boolean>(false);
   const [user, setUser] = useState<Profile[] | null>(null);
   const supabase = createClientComponentClient();
 
@@ -44,7 +46,8 @@ export const UserData = (props: Props) => {
                 <p className="">{user[0]?.email}</p>
               </section>
               <section>
-                <MdOutlineEdit  className="text-text text-4xl p-2 cursor-pointer bg-secondary rounded-full -mt-1"/>
+                <MdOutlineEdit onClick={()=>setIsOpen(true)} className="text-text text-4xl p-2 cursor-pointer bg-secondary rounded-full -mt-1"/>
+                <EditProfile user = {user[0]} isOpen = {isOpen} setIsOpen = {setIsOpen}/>
               </section>
             </div>
             <div className="flex items-center justify-center h-full">
