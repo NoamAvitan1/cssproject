@@ -26,18 +26,23 @@ export const EditProfile = (props: Props) => {
   };
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
-    const inputs = e.target.elements;
-    let formValidation = {
-      name: inputs.name.value,
-      email: inputs.email.value,
-      about: inputs.about.value,
-    };
-    authForm()
-      .validate(formValidation)
-      .catch((error: yup.ValidationError) => {
-        e.preventDefault();
-        setValidationError(error);
-      });
+    try {
+      const inputs = e.target.elements;
+      let formValidation = {
+        name: inputs.user_name.value,
+        email: inputs.email.value,
+        about: inputs.about.value,
+      };
+      authForm()
+        .validate(formValidation)
+        .catch((error: yup.ValidationError) => {
+          e.preventDefault();
+          setValidationError(error);
+        });
+    } catch (error: any) {
+      e.preventDefault();
+      setValidationError(error.message);
+    }
   };
   return (
     <div>
@@ -47,7 +52,7 @@ export const EditProfile = (props: Props) => {
             onSubmit={handleSubmit}
             className="text-foreground flex w-full flex-col justify-center gap-1 p-4"
             method="POST"
-            action={'/user/update-user/' + props.user.id}
+            action={"/user/update-user/" + props.user.id}
           >
             <label className="text-sm text-stone-600" htmlFor="user_name">
               Name:

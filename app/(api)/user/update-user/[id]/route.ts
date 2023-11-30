@@ -6,13 +6,21 @@ import { Database } from '@/types/supabase'
 
 export const dynamic = 'force-dynamic'
 
-export async function POST(request: Request, route: any) {
-
-  //   const supabase = createRouteHandlerClient<Database>({ cookies })
-  console.log("req: ", route.params.id)
-  //   const { data, error } = await supabase
-//   .from('profile')
-//   .update(req)
-//   .select()  console.log(data)
-  return NextResponse.json('yoyoyo')
+export async function POST(request: Request, route: { params: { id: string }}) {
+  const requestUrl = new URL(request.url)
+  const fd = await request.formData()
+  const payload: any = {}
+  fd.forEach((value, key) => (payload[key] = value));
+  const user_id = route.params.id
+  const supabase = createRouteHandlerClient<Database>({ cookies })
+  const { data, error } = await supabase
+    .from('profile')
+    .update(payload)
+    .eq("id", user_id)
+    .select()
+  console.log("data: ", data, "error: ", error)
+  
+  if (error) return NextResponse.redirect(requestUrl + '?error=Failed ot update user')
+  
+  return NextResponse.redirect(requestUrl.origin + '/profile/' + user_id + '?success=User updated successfully')
 }
