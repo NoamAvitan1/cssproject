@@ -20,7 +20,15 @@ export async function POST(request: Request, route: { params: { id: string }}) {
     .select()
   console.log("data: ", data, "error: ", error)
   
-  if (error) return NextResponse.redirect(requestUrl + '?error=Failed ot update user')
+  if (error) return NextResponse.redirect(requestUrl + '?error=Failed ot update user',
+  {
+    // a 301 status is required to redirect from a POST to a GET route
+    status: 301,
+  })
   
-  return NextResponse.redirect(requestUrl.origin + '/profile/' + user_id + '?success=User updated successfully')
+  return NextResponse.redirect(requestUrl.origin + '/profile/' + user_id + '?success=User updated successfully',
+  {
+    // a 301 status is required to redirect from a POST to a GET route
+    status: 301,
+  })
 }
