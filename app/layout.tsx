@@ -7,6 +7,7 @@ import { NavBar } from "./_navbar/Navbar";
 import Script from "next/script";
 import { JotaiProvider } from "./_jotai/JotaiProvider";
 import { SideBarMenu } from "./_components/sideBar/SideBarMenu";
+import { Teller } from "./_components/teller/Teller";
 
 export const metadata = {
   title: "CSStore",
@@ -30,12 +31,13 @@ export default async function RootLayout({
       <Script src="https://unpkg.com/prettier@3.0.3/plugins/postcss.js" />
       <Script src="https://unpkg.com/prettier@3.0.3/plugins/html.js" />
       <body>
+        <Teller />
         <JotaiProvider>
           <main className="flex min-h-screen flex-col items-center bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
-            <div className="flex w-11/12 grow container gap-2">
-              <div className="xs:block hidden">
+            <div className="container flex w-11/12 grow gap-2">
+              <div className="hidden xs:block">
                 <SideBarMenu />
               </div>
               {children}

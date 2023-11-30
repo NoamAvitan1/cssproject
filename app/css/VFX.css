@@ -18,7 +18,11 @@
 }
 
 .modal-container-vanish {
-  animation: vanish 300ms forwards;
+  animation: bg-vanish 300ms forwards;
+}
+
+.vanish {
+  animation: vanish 1000 forwards ease-out;
 }
 
 @keyframes grow {
@@ -46,8 +50,23 @@
       opacity: 0;} 
   }
 
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes vanish {
   100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bg-vanish {
+  to {
     background-color: transparent;
   }
 }
