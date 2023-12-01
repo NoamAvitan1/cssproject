@@ -21,8 +21,12 @@
   animation: bg-vanish 300ms forwards;
 }
 
+.appear {
+  animation: appear 1000ms forwards ease-out;
+}
+
 .vanish {
-  animation: vanish 1000 forwards ease-out;
+  animation: vanish 1000ms forwards ease-out;
 }
 
 @keyframes grow {
