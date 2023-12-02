@@ -11,9 +11,16 @@ export const ModuleForm = (props: Props) => {
     <form
       action="#"
       onSubmit={(e) => e.preventDefault()}
-      className="container flex flex-col gap-4"
+      className="container flex flex-col gap-4 p-4"
     >
-      <div className="flex flex-col space-y-2">
+      <label htmlFor="title">Name your module:</label>
+      <input
+        type="text"
+        name="title"
+        placeholder="Example: ModuleMania"
+        className="border-b border-text bg-transparent py-2 focus:border-accent focus:outline-none w-full"
+      />
+      {/* <div className="flex flex-col space-y-2">
         <label htmlFor="title">Name your module:</label>
         <input
           type="text"
@@ -76,7 +83,7 @@ export const ModuleForm = (props: Props) => {
         className="container border border-accent py-3 text-success"
       >
         SUBMIT
-      </button>
+      </button> */}
     </form>
   );
 };

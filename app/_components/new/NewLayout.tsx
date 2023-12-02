@@ -98,7 +98,7 @@ export const NewLayout = (props: Props) => {
       <article
         onClick={(e) => handleWaveClick(e)}
         id="waves"
-        className="hidden overflow-clip border-l-[1px] border-l-primary bg-background p-3 lg:block border-4"
+        className="hidden overflow-clip border-l-[1px] border-l-primary bg-background lg:block"
       >
         <ModuleForm />
       </article>
