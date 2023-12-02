@@ -1,3 +1,7 @@
+html {
+  --tale-animation-time: 1000ms
+}
+
 .flipper {
     perspective: 500px;
     backface-visibility: hidden;
@@ -21,12 +25,8 @@
   animation: bg-vanish 300ms forwards;
 }
 
-.appear {
-  animation: appear 1000ms forwards ease-out;
-}
-
 .vanish {
-  animation: vanish 1000ms forwards ease-out;
+  animation: vanish 1000 forwards ease-out;
 }
 
 @keyframes grow {

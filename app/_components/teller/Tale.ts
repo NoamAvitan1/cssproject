@@ -9,7 +9,8 @@ export type TaleType = 'normal' | 'alert' | 'success' | 'error'
 class TaleConfig {
     constructor() {
         this.type = 'normal'
-        this.duration = 3000
+        this.lifeSpan = 3000
+        this.animationDuration = 1000
         this.position = 't'
     }
 
@@ -21,38 +22,40 @@ class TaleConfig {
         this.position = position
     }
 
-    setDuration(duration: number = this.duration) {
-        this.duration = duration
+    setLifeSpan(lifeSpan: number = this.lifeSpan) {
+        this.lifeSpan = lifeSpan
+    }
+
+    setAnimationDuration(animationDuration: number = this.animationDuration) {
+        this.animationDuration = animationDuration
     }
     
     type: TaleType
-    duration: number
+    lifeSpan: number
+    animationDuration: number
     position: TalePosition
 }
 
 export const tellerConfig = new TaleConfig()
 
 export class Tale {
-    constructor(text: string, type: TaleType = tellerConfig.type, duration: number = tellerConfig.duration) {
+    constructor(text: string, type: TaleType = tellerConfig.type, lifeSpan: number = tellerConfig.lifeSpan) {
+        this.id = Date.now()
         this.text = text
         this.type = type
-        this.duration = duration
+        this.lifeSpan = lifeSpan
+        this.hasAppeared = false
         this.isVanishing = false
     }
-    vanish(duration: number, onStart?: Function, onEnd?: Function) {
-        if (onStart) onStart()
-        setTimeout(() => {
-            if (onEnd) onEnd()
-        }, duration);
-    }
-
+    id: number
     text: string
     type: TaleType
-    duration: number
+    lifeSpan: number
+    hasAppeared: boolean
     isVanishing: boolean
 }
 
-export const tell = (text: string, type: TaleType = 'normal', duration: number = 3) => {
-    const tale  = new Tale(text, type, duration)
+export const tell = (text: string, type: TaleType = 'normal', lifeSpan: number = 3) => {
+    const tale  = new Tale(text, type, lifeSpan)
     talesManager.emit('tell', tale)
 }
