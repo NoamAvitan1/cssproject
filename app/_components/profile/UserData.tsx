@@ -36,11 +36,11 @@ export const UserData = (props: Props) => {
     <div className="w-full mt-6">
       {profile &&
       <main className="container border border-secondary">
-        <article className="flex flex-col lg:flex-row p-2 gap-5">
-           <section className="flex md:flex-row flex-col gap-5 xl:w-1/4 lg:w-1/3">
+        <article className="flex flex-col md:flex-row p-2 gap-5">
+           <section className="flex md:flex-row flex-col gap-5 xl:w-1/4 md:w-1/3">
              <img className="rounded-md" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
            </section>
-           <section className="flex flex-col lg:w-2/3 xl:w-3/4 gap-5">
+           <section className="flex flex-col md:w-2/3 xl:w-3/4 gap-5">
             <div className="flex justify-between">
               <section className="flex flex-col gap-3 [&_*]:w-fit [&_*]:border border-primary [&_*]:p-1 [&_*]:rounded-md">
                 <p className="">{profile[0]?.user_name}</p>

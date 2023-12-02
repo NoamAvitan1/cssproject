@@ -30,7 +30,7 @@ export const SideBarMenu = (props: Props) => {
     { label: "test", path: "/test", icon: <MdHome />, guard: () => true },
   ];
   return (
-    <div className="w-52">
+    <aside className="w-52">
       <ul className="w-full xs:mt-5 xs:border-r-2 xs:border-secondary">
         {items.map(
           (item, i) =>
@@ -46,6 +46,6 @@ export const SideBarMenu = (props: Props) => {
             )),
         )}
       </ul>
-    </div>
+    </aside>
   );
 };

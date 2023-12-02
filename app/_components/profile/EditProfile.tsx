@@ -52,7 +52,7 @@ export const EditProfile = (props: Props) => {
             onSubmit={handleSubmit}
             className="text-foreground flex w-full flex-col justify-between h-full gap-1 p-4"
             method="POST"
-            action={"/profile/update-profile/" + props.profile.id}
+            action={"/user/update-user/" + props.profile.id}
           >
             <article>
               <label className="text-sm text-stone-600" htmlFor="user_name">
@@ -80,8 +80,8 @@ export const EditProfile = (props: Props) => {
               </label>
               <section className="mb-4">
                 <textarea
-                  defaultValue={`${props.profile.about === null ? '' : props.profile.about}`}
-                  className="w-full rounded-md border border-black p-2 text-black focus:border-4"
+                  defaultValue={`${props.profile.about ?? ''}`}
+                  className="w-full resize-none rounded-md border border-black p-2 text-black focus:border-4"
                   name="about"
                   id=""
                   rows={5}
