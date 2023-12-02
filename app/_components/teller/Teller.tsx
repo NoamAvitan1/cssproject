@@ -55,10 +55,10 @@ export const Teller = (props: Props) => {
   }, [tales]);
 
   return (
-    <article className="appear container fixed left-1/2 z-50 mt-1 flex max-w-[800px] -translate-x-1/2 flex-col gap-2 overflow-x-hidden">
+    <article className="container fixed left-1/2 z-50 mt-1 flex max-w-[800px] -translate-x-1/2 flex-col gap-2 overflow-x-hidden">
       {tales.map((tale, i) => (
         <div
-          className={`relative w-full ${tale.isVanishing ? "vanish" : ""}`}
+          className={`relative w-full ${tale.isVanishing ? "vanish" : ""} ${!tale.hasAppeared ? "appear" : ""}`}
           key={i}
         >
           <TaleComponent text={tale.text} type={tale.type} />

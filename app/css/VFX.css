@@ -25,8 +25,12 @@ html {
   animation: bg-vanish 300ms forwards;
 }
 
+.appear {
+  animation: appear var(--tale-animation-time) forwards ease-out;
+}
+
 .vanish {
-  animation: vanish 1000 forwards ease-out;
+  animation: vanish var(--tale-animation-time) forwards ease-out;
 }
 
 @keyframes grow {
