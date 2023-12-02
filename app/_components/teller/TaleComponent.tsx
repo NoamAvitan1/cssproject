@@ -24,7 +24,7 @@ export const TaleComponent = ({ text, type }: Props) => {
   };
 
   return (
-    <div className={"w-full flex items-center bg-background justify-between border rounded-md px-4 py-2 text-lg font-bold " + bg[type]}>
+    <div className={"w-full flex whitespace-nowrap items-center bg-background justify-between border rounded-md px-4 h-12 text-lg font-bold " + bg[type]}>
       <p>{text}</p>
       <span>{icon[type]}</span>
     </div>
