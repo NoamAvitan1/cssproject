@@ -37,12 +37,12 @@ export const UserData = (props: Props) => {
       {profile &&
       <main className="container border border-secondary">
         <article className="flex flex-col md:flex-row p-2 gap-5">
-           <section className="flex md:flex-row flex-col gap-5 xl:w-1/4 md:w-1/3">
+           <section className="flex md:flex-row flex-col gap-5 md:w-1/3">
              <img className="rounded-md" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
            </section>
-           <section className="flex flex-col md:w-2/3 xl:w-3/4 gap-5">
+           <section className="flex flex-col md:w-2/3 gap-5">
             <div className="flex justify-between">
-              <section className="flex flex-col gap-3 [&_*]:w-fit [&_*]:border border-primary [&_*]:p-1 [&_*]:rounded-md">
+              <section className="flex flex-col gap-3 [&_*]:w-fit [&_*]:border [&_*]:border-text [&_*]:p-1 [&_*]:rounded-md">
                 <p className="">{profile[0]?.user_name}</p>
                 <p className="">{profile[0]?.email}</p>
               </section>

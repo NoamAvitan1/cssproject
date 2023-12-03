@@ -39,11 +39,11 @@ export const SlideMenu = (props: Props) => {
         ></span>
       </div>
       <div
-        className={`fixed top-[45px] h-full transition-all duration-200 ${
+        className={`fixed top-[45px] h-full transition-all duration-300 ${
           toggle ? "left-0 z-10 bg-background" : "-left-full"
         }`}
       >
-        <SideBarMenu />
+        <SideBarMenu toggle = {toggle} setToggle = {setToggle}/>
       </div>
     </div>
   );

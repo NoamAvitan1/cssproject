@@ -6,7 +6,10 @@ import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useEffect } from "react";
 import { JsxElement } from "typescript";
-type Props = {};
+type Props = {
+  toggle:boolean;
+  setToggle:React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 interface INavItem {
   label: string;
@@ -36,7 +39,7 @@ export const SideBarMenu = (props: Props) => {
           (item, i) =>
             (item.guard() && (
               <li
-                onClick={() => router.push(`${item.path}`)}
+                onClick={() => {router.push(`${item.path}`),props.setToggle(!props.toggle)}}
                 key={i}
                 className="flex cursor-pointer items-center gap-2  p-2 text-xl hover:bg-secondary"
               >
