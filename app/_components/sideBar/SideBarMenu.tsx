@@ -20,13 +20,13 @@ export const SideBarMenu = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
   const id = user?.id;
   const items: Array<INavItem> = [
+    { label: "Home", path: "/", icon: <MdHome />, guard: () => true },
     {
       label: "Profile",
       path: `/profile/${id}`,
       icon: <FiUser />,
       guard: () => (user ? true : false),
     },
-    { label: "Home", path: "/", icon: <MdHome />, guard: () => true },
     { label: "test", path: "/test", icon: <MdHome />, guard: () => true },
   ];
   return (
