@@ -57,6 +57,7 @@ const VFX = ({ hovered }: { hovered: boolean }) => {
     <>
       {screws.map((s, i) => (
         <span
+        key={i}
           className={
             `absolute flex h-3 w-3 items-center justify-center overflow-hidden rounded-full bg-accent ` +
             s
