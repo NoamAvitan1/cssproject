@@ -95,13 +95,13 @@ export const NewLayout = (props: Props) => {
           </div>
         </section>
       </article>
-      <article
+      {/* <article
         onClick={(e) => handleWaveClick(e)}
         id="waves"
         className="hidden overflow-clip border-l-[1px] border-l-primary bg-background lg:block"
       >
         <ModuleForm />
-      </article>
+      </article> */}
     </div>
   );
 };

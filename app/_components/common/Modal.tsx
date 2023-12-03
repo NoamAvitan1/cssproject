@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -13,7 +13,9 @@ type Props = {
 export const Modal = (props: Props) => {
   const [isClosing, setIsClosing] = useState(false);
 
-  const onClose = () => {
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  const closeModal = () => {
     if (props.onClose) props.onClose();
     setIsClosing(true);
     setTimeout(() => {
@@ -26,10 +28,18 @@ export const Modal = (props: Props) => {
     if (props.onOpen) props.onOpen();
   }, []);
 
+  useEffect(() => {
+    if (!modalRef.current) return
+    const closeButton = modalRef.current.querySelector("#close-button") as HTMLButtonElement
+    if (!closeButton) return
+    closeButton.onclick = closeModal
+  }, [props.children])
+
   return (
     props.isOpen && (
       <div
-        onClick={onClose}
+      ref={modalRef}
+        onClick={closeModal}
         className={`${
           isClosing && "modal-container-vanish backdrop-blur-none"
         } fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm`}
