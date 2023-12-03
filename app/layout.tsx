@@ -2,12 +2,12 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import "./css/VFX.css";
 import { cookies } from "next/headers";
-import { UserSetter } from "./_components/login/UserSetter";
 import { NavBar } from "./_navbar/Navbar";
 import Script from "next/script";
 import { JotaiProvider } from "./_jotai/JotaiProvider";
 import { SideBarMenu } from "./_components/sideBar/SideBarMenu";
 import { Teller } from "./_components/teller/Teller";
+import { UserSetter } from "./_components/login/UserSetter";
 
 export const metadata = {
   title: "CSStore",

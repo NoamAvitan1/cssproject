@@ -1,42 +1,45 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Tale, talesManager, tellerConfig } from "./Tale";
+import { Tale, talesManager, tell, tellerConfig } from "./Tale";
 import { TaleComponent } from "./TaleComponent";
+import { useSearchParams } from "next/navigation";
 
 type Props = {};
 
 export const Teller = (props: Props) => {
   const [tales, setTales] = useState<Array<Tale>>([]);
 
+  const params = useSearchParams();
+
   useEffect(() => {
     const removeTale = (tale: Tale) => {
       setTimeout(() => {
         setTales((prev) => {
-          const newTales = prev.filter((t) => tale.id != t.id)
-          return newTales
-        })
-      }, tellerConfig.animationDuration)
-    }
+          const newTales = prev.filter((t) => tale.id != t.id);
+          return newTales;
+        });
+      }, tellerConfig.animationDuration);
+    };
 
     const vanishTale = (tale: Tale) => {
       setTimeout(() => {
         setTales((prev) => {
           const newTales = prev.map((t) => {
             if (tale.id == t.id) {
-              t.isVanishing = true
+              t.isVanishing = true;
             }
-            return t
+            return t;
           });
-          return newTales
+          return newTales;
         });
-        removeTale(tale)
+        removeTale(tale);
       }, tellerConfig.lifeSpan);
-    }
+    };
 
     const handleTell = (tale: Tale) => {
       setTales((prev) => [...prev, tale]);
-      vanishTale(tale)
-      
+      vanishTale(tale);
+
       const index = tales.length;
     };
 
@@ -58,7 +61,9 @@ export const Teller = (props: Props) => {
     <article className="container fixed left-1/2 z-50 mt-1 flex max-w-[800px] -translate-x-1/2 flex-col gap-2 overflow-x-hidden">
       {tales.map((tale, i) => (
         <div
-          className={`relative w-full ${tale.isVanishing ? "vanish" : ""} ${!tale.hasAppeared ? "appear" : ""}`}
+          className={`relative w-full ${tale.isVanishing ? "vanish" : ""} ${
+            !tale.hasAppeared ? "appear" : ""
+          }`}
           key={i}
         >
           <TaleComponent text={tale.text} type={tale.type} />

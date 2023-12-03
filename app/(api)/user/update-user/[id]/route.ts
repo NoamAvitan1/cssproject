@@ -7,6 +7,7 @@ import { Database } from '@/types/supabase'
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request, route: { params: { id: string }}) {
+  console.log('entered')
   const requestUrl = new URL(request.url)
   const fd = await request.formData()
   const payload: any = {}

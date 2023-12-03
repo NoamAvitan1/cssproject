@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Logo } from "../_components/common/Logo";
-import { ThemeChangeButton } from "../_components/common/ThemeChangeButton";
+import { ThemeChangeButton } from "../_components/layout/ThemeChangeButton";
 import { NotificationsButton } from "../_components/navbar/NotificationsButton";
 import { ProfileButton } from "../_components/navbar/ProfileButton";
 import { SearchBar } from "../_components/navbar/SearchBar";
