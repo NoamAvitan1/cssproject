@@ -19,6 +19,7 @@ export const Test = (props: Props) => {
       <button onClick={() => setIsOpen(true)}>CLICKME</button>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
         <div className="w-[500px] h-[800px] bg-blue-500"></div>
+        <button id="close-button">CLOSE</button>
       </Modal>
     </div>
   )
