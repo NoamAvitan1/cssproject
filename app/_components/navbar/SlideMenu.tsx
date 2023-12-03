@@ -43,7 +43,7 @@ export const SlideMenu = (props: Props) => {
           toggle ? "left-0 z-10 bg-background" : "-left-full"
         }`}
       >
-        <SideBarMenu toggle = {toggle} setToggle = {setToggle}/>
+        <SideBarMenu toggle={toggle} setToggle={setToggle}/>
       </div>
     </div>
   );

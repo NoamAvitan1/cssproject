@@ -4,8 +4,8 @@ import { Modal } from "../common/Modal";
 import { BaseSyntheticEvent, useState } from "react";
 import { object, string } from "yup";
 import * as yup from "yup";
-import YupPassword from "yup-password";
-import Api from "@/utils/axios";
+import { AiOutlineClose } from "react-icons/ai";
+
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 type Props = {
   isOpen: boolean;
@@ -47,10 +47,11 @@ export const EditProfile = (props: Props) => {
   return (
     <div>
       <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
-        <div className="h-[550px] w-[600px] rounded-md bg-white">
+        <div className="h-[550px] w-[600px] rounded-md bg-white relative">
+          <AiOutlineClose id="close-button" className="absolute cursor-pointer text-black right-1 top-2 text-2xl"/>
           <form
             onSubmit={handleSubmit}
-            className="text-foreground flex w-full flex-col justify-between h-full gap-1 p-4"
+            className="text-foreground mt-2 flex w-full flex-col justify-between h-full gap-1 p-4"
             method="POST"
             action={"/user/update-user/" + props.profile.id}
           >

@@ -7,8 +7,8 @@ import { userAtom } from "@/app/_jotai/userAtoms";
 import { useEffect } from "react";
 import { JsxElement } from "typescript";
 type Props = {
-  toggle:boolean;
-  setToggle:React.Dispatch<React.SetStateAction<boolean>>;
+  toggle?:boolean;
+  setToggle?:React.Dispatch<React.SetStateAction<boolean>> | undefined;
 };
 
 interface INavItem {
@@ -26,12 +26,16 @@ export const SideBarMenu = (props: Props) => {
     { label: "Home", path: "/", icon: <MdHome />, guard: () => true },
     {
       label: "Profile",
-      path: `/profile/${id}`,
+      path: `/profile/id/${id}`,
       icon: <FiUser />,
       guard: () => (user ? true : false),
     },
     { label: "test", path: "/test", icon: <MdHome />, guard: () => true },
   ];
+  const handleClick = (path:string) => {
+    router.push(`${path}`);
+  if (props.setToggle) props.setToggle(!props.toggle)
+  }
   return (
     <aside className="w-52">
       <ul className="w-full xs:mt-5 xs:border-r-2 xs:border-secondary">
@@ -39,7 +43,7 @@ export const SideBarMenu = (props: Props) => {
           (item, i) =>
             (item.guard() && (
               <li
-                onClick={() => {router.push(`${item.path}`),props.setToggle(!props.toggle)}}
+                onClick={() =>handleClick(item.path)}
                 key={i}
                 className="flex cursor-pointer items-center gap-2  p-2 text-xl hover:bg-secondary"
               >

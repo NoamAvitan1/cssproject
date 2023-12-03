@@ -16,7 +16,7 @@ export const ProfileButton: React.FC<Props> = (props) => {
   const router = useRouter();
   return (
     <button>
-      <FiUser onClick={()=>router.push(`/profile/${user?.id}`)}/>
+      <FiUser onClick={()=>router.push(`/profile/id/${user?.id}`)}/>
     </button>
   );
 };
