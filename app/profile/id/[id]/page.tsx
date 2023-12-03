@@ -6,8 +6,8 @@ import { Recover } from "@/app/_components/profile/Recover";
 export default function Profile(){
     const params = useParams();
     return (
-        <><UserData params = {params.id as string} />
+        <div className="w-full flex flex-col"><UserData params = {params.id as string} />
         <Recover/>
-        </>
+        </div>
     )
 }

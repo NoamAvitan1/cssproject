@@ -30,7 +30,6 @@ export const UserData = (props: Props) => {
   },[])
 
 
-  console.log(profile);
 
   return (
     <div className="w-full mt-6">
@@ -54,7 +53,7 @@ export const UserData = (props: Props) => {
             </div>
             <div className="flex items-center justify-center h-full">
               <div className="w-full bg-secondary rounded-md p-2 xl:text-[17px] text-sm">
-                {profile[0]?.about === "" ? <p>Go edit your profile and write about yourself...</p> : <p>{profile[0]?.about}</p>}
+                {profile[0]?.about === "" ? <p>Go edit your profile and write about yourself...</p> : <p className="h-full break-normal">{profile[0]?.about}</p>}
               </div>
             </div>
            </section>
