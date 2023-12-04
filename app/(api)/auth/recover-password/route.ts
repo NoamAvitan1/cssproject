@@ -8,10 +8,7 @@ export async function POST(request: Request) {
   const data = await request.json();
   const requestUrl = new URL(request.url)
   const user_id = requestUrl.searchParams.get('id');
-  console.log(user_id);
-  console.log(requestUrl);
   const supabase = createRouteHandlerClient({ cookies })
-
  try {
   await supabase.auth.resetPasswordForEmail(data.email);
 

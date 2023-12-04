@@ -1,13 +1,114 @@
+"use client";
+import { userAtom } from "@/app/_jotai/userAtoms";
+import { useAtom } from "jotai";
+import { BaseSyntheticEvent, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { object, string } from "yup";
+import * as yup from "yup";
+import YupPassword from "yup-password";
 
-type Props = {
+type Props = {};
 
-};
+export default function page(props: Props) {
+  const [user,setUser] = useAtom(userAtom);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [validationError, setValidationError] =
+    useState<yup.ValidationError | null>(null);
 
-export default function page (props: Props){
-
+  const authSchema = () => {
+    return object({
+      password: string().min(8).password().required(),
+    });
+  };
+  const handleSubmit = (e: BaseSyntheticEvent) => {
+    try {
+      const inputs = e.target.elements;
+      let confirmPassword = inputs.confirmPassword?.value;
+      let formValidation = {
+        password: inputs.password?.value,
+      };
+      if (formValidation.password !== confirmPassword) {
+        e.preventDefault();
+        console.log(confirmPassword);
+        throw new Error("Passwords do not match");
+      }
+      authSchema()
+        .validate(formValidation)
+        .catch((error: yup.ValidationError) => {
+          e.preventDefault();
+          setValidationError(error);
+        });
+    } catch (error:any) {
+      setValidationError(error);
+    }
+  };
   return (
-    <div>
-        hello
+    <div className="flex h-full w-full justify-center">
+      <form
+        onSubmit={handleSubmit}
+        action={"/auth/update-auth-user/" + user?.id}
+        method="POST"
+        className="mt-8 flex h-[350px] w-[320px] flex-col items-center gap-2 border border-secondary p-2"
+      >
+        <h1 className="grow text-lg">Welcome to update your password</h1>
+        <div className="flex w-full flex-col gap-2">
+          <label className="text-md" htmlFor="password">
+            Password
+          </label>
+          <section className="justifny-between relative mb-6 flex w-full items-center">
+            <input
+              className="w-full rounded-md p-2 text-[#060504] "
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="••••••••"
+              required
+              autoComplete="new-password"
+            />
+            <span className="absolute right-2.5 cursor-pointer">
+              {showPassword ? (
+                <AiOutlineEye
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}{" "}
+            </span>
+          </section>
+        </div>
+        <div className="flex w-full flex-col gap-2">
+          <label className="text-md" htmlFor="Confirm password">
+            Confirm Password:
+          </label>
+          <section className="relative mb-6 flex w-full items-center justify-between ">
+            <input
+              className="w-full rounded-md p-2 text-[#060504]"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              name="confirmPassword"
+              required
+              autoComplete="new-password"
+            />
+            <span className="absolute right-2.5 cursor-pointer">
+              {showPassword ? (
+                <AiOutlineEye
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className="text-slate-900"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}{" "}
+            </span>
+          </section>
+        </div>
+        <button className="w-full bg-secondary p-2">Save</button>
+      </form>
     </div>
   );
-};
+}

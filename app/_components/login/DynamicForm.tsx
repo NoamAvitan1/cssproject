@@ -102,7 +102,7 @@ export const DynamicForm: React.FC<Props> = (props) => {
       <label className="text-md" htmlFor="password">
         Password
       </label>
-      <section className="relative mb-6 flex items-center justifny-betwee">
+      <section className="relative mb-6 flex items-center justifny-between">
         <input
           className="w-full p-2 text-[#060504] rounded-md"
           type={showPassword ? "text" : "password"}
