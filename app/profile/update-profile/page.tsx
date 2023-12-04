@@ -46,7 +46,7 @@ export default function page(props: Props) {
     <div className="flex h-full w-full justify-center">
       <form
         onSubmit={handleSubmit}
-        action={"/auth/update-auth-user/" + user?.id}
+        action={"/auth/update-password/" + user?.id}
         method="POST"
         className="mt-8 flex h-[350px] w-[320px] flex-col items-center gap-2 border border-secondary p-2"
       >
