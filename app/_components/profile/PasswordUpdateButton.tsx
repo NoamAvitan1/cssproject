@@ -2,14 +2,14 @@
 
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 type Props = {
 
 };
 
-export const Recover = (props: Props) => {
+export const PasswordUpdateButton = (props: Props) => {
     const [user,setUser] = useAtom(userAtom);
     const update = async() => {
         try {
@@ -22,13 +22,16 @@ export const Recover = (props: Props) => {
                 
             }
         }
-        const params = useSearchParams();
+        const params = useParams();
         useEffect(()=> {
             console.log(params);
         },[])
-  return (
-    <div>
-        <button onClick={update}>prsss here</button>
-    </div>
-  );
+  return ( params.id === user?.id && (
+        <button className="w-full border border-error shadow text-lg hover:font-bold p-2 hover:bg-error duration-300 hover:text-black hover:border-black" onClick={update}>Change password</button>
+  ));
 };
+
+
+
+// npx supabase gen types typescript --project-id ielhefdzhfesqnlbxztn --schema public > types/supabase.ts
+

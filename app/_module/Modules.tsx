@@ -6,7 +6,6 @@ type Props = {};
 export default async function Modules(props: Props) {
     const supabase = createServerComponentClient({ cookies });
         const { data: modules, error } = await supabase.from("module").select("*");
-
     return (
         <div className='w-10/12 space-y-6'>
             <h1 className="border-b-2 border-text text-[19px] xs:text-[17px] md:text-2xl w-full">Popular Modules to Check Out</h1>

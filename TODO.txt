@@ -1,7 +1,4 @@
 profile
- - reduce size of EDIT icon in the profile according to breakpoints
- - add recent modules section
- - add sensitive information area (paypal email, login email, password etc)
  - add checks to update only changed values 
 
 modal

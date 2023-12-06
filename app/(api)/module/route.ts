@@ -8,9 +8,10 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   const moduleData = await request.json()
+  console.log(moduleData)
   const supabase = createRouteHandlerClient<Database>({ cookies })
-  const { data } = await supabase.from('module').insert(moduleData).select()
-  console.log(data)
+  const { data,error } = await supabase.from('module').insert(moduleData).select()
+  console.log(error)
   return NextResponse.json(data)
 }
 

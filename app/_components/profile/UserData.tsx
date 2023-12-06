@@ -6,6 +6,7 @@ import { Database } from "@/types/supabase";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditProfile } from "./EditProfile";
+import { tell } from "../teller/Tale";
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 export const UserData = (props: Props) => {
   const [user,setUser] = useAtom(userAtom);
   const [isOpen,setIsOpen] = useState<boolean>(false);
-  const [profile, setProfile] = useState<Profile[] | null>(null);
+  const [profile, setProfile] = useState<Profile| null>(null);
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -24,9 +25,14 @@ export const UserData = (props: Props) => {
         .from("profile")
         .select("*")
         .eq("id", props.params);
-        setProfile(data)
+        if(error){
+            if(typeof window !== undefined)
+            tell("Couldn't find profile",'error')
+            return;
+        }
+        setProfile(data && data[0] ? data[0] : null);
     };  
-    update();
+        update();
   },[])
 
 
@@ -42,26 +48,24 @@ export const UserData = (props: Props) => {
            <section className="flex flex-col md:w-2/3 gap-5">
             <div className="flex justify-between">
               <section className="flex flex-col gap-3 [&_*]:w-fit [&_*]:border [&_*]:border-text [&_*]:p-1 [&_*]:rounded-md">
-                <p className="">{profile[0]?.user_name}</p>
-                <p className="">{profile[0]?.email}</p>
+                <p className="">{profile?.user_name}</p>
+                <p className="">{profile?.email}</p>
               </section>
-              {user?.id === profile[0]?.id &&
+              {user?.id === profile?.id &&
               <section>
                 <MdOutlineEdit onClick={()=>setIsOpen(true)} className="text-text text-4xl p-2 cursor-pointer bg-secondary rounded-full -mt-1"/>
-                <EditProfile profile = {profile[0]} isOpen = {isOpen} setIsOpen = {setIsOpen}/>
+                <EditProfile profile = {profile} isOpen = {isOpen} setIsOpen = {setIsOpen}/>
               </section>}
             </div>
             <div className="flex items-center justify-center h-full">
               <div className="w-full bg-secondary rounded-md p-2 xl:text-[17px] text-sm">
-                {profile[0]?.about === "" ? <p>Go edit your profile and write about yourself...</p> : <p className="h-full break-normal">{profile[0]?.about}</p>}
+                {profile?.about === "" ? <p>Go edit your profile and write about yourself...</p> : <p className="h-full break-normal">{profile?.about}</p>}
               </div>
             </div>
            </section>
         </article>
       </main>
     }
-    </div>
-  );
+  </div>
+);
 };
-
-

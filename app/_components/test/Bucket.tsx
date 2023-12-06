@@ -16,7 +16,7 @@ export const Bucket = (props: Props) => {
       .from("profile pic")
       .upload(`${user?.id}/${user?.id}`, avatarFile, {
         cacheControl: "3600",
-        upsert: true,
+        upsert: true, 
       });
   };
 

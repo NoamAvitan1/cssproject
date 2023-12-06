@@ -50,14 +50,14 @@ export default function page(props: Props) {
         method="POST"
         className="mt-8 flex h-[350px] w-[320px] flex-col items-center gap-2 border border-secondary p-2"
       >
-        <h1 className="grow text-lg">Welcome to update your password</h1>
+        <h1 className="grow text-lg">Update your password down below</h1>
         <div className="flex w-full flex-col gap-2">
           <label className="text-md" htmlFor="password">
             Password
           </label>
           <section className="justifny-between relative mb-6 flex w-full items-center">
             <input
-              className="w-full rounded-md p-2 text-[#060504] "
+              className="w-full rounded-md p-2 border border-black focus:outline-none text-[#060504] "
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="••••••••"
@@ -85,7 +85,7 @@ export default function page(props: Props) {
           </label>
           <section className="relative mb-6 flex w-full items-center justify-between ">
             <input
-              className="w-full rounded-md p-2 text-[#060504]"
+              className="w-full rounded-md border border-black focus:outline-none p-2 text-[#060504]"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               name="confirmPassword"

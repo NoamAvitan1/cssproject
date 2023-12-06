@@ -21,7 +21,6 @@ export const EditProfile = (props: Props) => {
   const authForm = () => {
     return object({
       user_name: string().min(3).required(),
-      email: string().email().required(),
       about: string().max(500),
     });
   };
@@ -31,7 +30,6 @@ export const EditProfile = (props: Props) => {
       const inputs = e.target.elements;
       let formValidation = {
         user_name: inputs.user_name.value,
-        email: inputs.email.value,
         about: inputs.about.value,
       };
       authForm()
@@ -69,16 +67,6 @@ export const EditProfile = (props: Props) => {
                 className="w-full rounded-md border border-black p-2 text-[#060504] focus:border-4"
                 name="user_name"
                 defaultValue={`${props.profile.user_name}`}
-              />
-            </section>
-            <label className="text-sm text-stone-600" htmlFor="email">
-              Email:
-            </label>
-            <section className="mb-4">
-              <input
-                className="w-full rounded-md border border-black p-2 text-[#060504] focus:border-4"
-                name="email"
-                defaultValue={`${props.profile.email}`}
               />
             </section>
             <label className="text-sm text-stone-600" htmlFor="about">
