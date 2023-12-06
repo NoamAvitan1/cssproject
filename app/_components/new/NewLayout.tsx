@@ -8,6 +8,7 @@ import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 import Api from "@/utils/axios";
 import { Wave } from "./Wave";
 import { ModuleForm } from "./ModuleForm";
+import { ModuleHeader } from "./ModuleHeader";
 
 type Props = {};
 
@@ -67,9 +68,9 @@ export const NewLayout = (props: Props) => {
 
   return (
     <div className="box-border flex h-[95vh] w-full bg-background">
-      <article className="grow h-full xl:col-span-3 overflow-y-hidden">
-        <section className="h-full w-full space-y-px">
-          <div className="flex h-[60%] max-h-[60%] resize-y gap-px overflow-auto bg-background">
+      <article className="grow h-full xl:col-span-3 space-y-px">
+        <ModuleHeader />
+          <div className="flex h-[70%] gap-px overflow-auto bg-background">
             <EditorsView
               lang={(isXl || selectedBlock == 0) ? 'css' : 'html'}
               codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
@@ -87,20 +88,12 @@ export const NewLayout = (props: Props) => {
               />
             )}
           </div>
-          <div className="flex min-h-[40%] grow flex-col">
+          <div className="flex grow flex-col">
             <HTMLView
               html={codeBlocks[selectedBlock + ((isXl || selectedBlock == 0) ? 1 : 0)].code}
               css={codeBlocks[0].code}
             />
           </div>
-        </section>
-      </article>
-      <article
-        onClick={(e) => handleWaveClick(e)}
-        id="waves"
-        className="hidden overflow-clip border-l-[1px] border-l-primary bg-background lg:block w-72"
-      >
-        <ModuleForm />
       </article>
     </div>
   );

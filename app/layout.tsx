@@ -33,7 +33,7 @@ export default async function RootLayout({
       <body>
         <Teller />
         <JotaiProvider>
-          <main className="flex min-h-screen flex-col items-center bg-background text-text">
+          <main className="flex min-h-screen flex-col items-center bg-background text-text overflow-y-auto">
             <NavBar />
             <UserSetter user={user} />
             <div className="w-full flex lg:w-11/12 2xl:10/12 grow gap-2">

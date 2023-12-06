@@ -15,15 +15,16 @@ export const HTMLView = (props: Props) => {
     setHovered(true);
     setTimeout(() => {
       setHovered(false);
-    }, 200)
-  }
+    }, 200);
+  };
 
   useEffect(() => {
     if (!showcaseRef.current) return;
     const el = showcaseRef.current;
     el.innerHTML = "";
     const wrapper = document.createElement("div");
-    wrapper.className = "absolute inset-0 bg-white";
+    wrapper.className =
+      "absolute left-0 right-0 top-0 border-t-4 border-double border-white";
     const htmlEl = useStringToNode(props.html);
     const style = document.createElement("style");
     style.textContent = props.css;
@@ -36,10 +37,11 @@ export const HTMLView = (props: Props) => {
     <article
       onPointerOver={handleHover}
       onPointerLeave={handleHover}
-      className="relative flex grow flex-col overflow-auto bg-secondary p-6"
+      className="relative flex grow flex-col"
+      // className="relative flex grow flex-col overflow-auto bg-secondary p-6"
     >
-      <VFX hovered={hovered} />
-      <div className="grow overflow-auto rounded bg-white">
+      {/* <VFX hovered={hovered} /> */}
+      <div className="grow">
         <div ref={showcaseRef} className="relative h-full"></div>
       </div>
     </article>
@@ -57,7 +59,7 @@ const VFX = ({ hovered }: { hovered: boolean }) => {
     <>
       {screws.map((s, i) => (
         <span
-        key={i}
+          key={i}
           className={
             `absolute flex h-3 w-3 items-center justify-center overflow-hidden rounded-full bg-accent ` +
             s
@@ -66,11 +68,11 @@ const VFX = ({ hovered }: { hovered: boolean }) => {
           <span className="h-3 w-1 bg-secondary"></span>
         </span>
       ))}
-      <span className="absolute top-[6px] left-1/2 -translate-x-1/2 w-12 h-3 rounded-full bg-accent"></span>
+      <span className="absolute left-1/2 top-[6px] h-3 w-12 -translate-x-1/2 rounded-full bg-accent"></span>
       <div className="absolute inset-0 m-6 overflow-hidden rounded">
         <div className={`h-full ${hovered && "reflection"}`}>
           <div
-            className={`h-[120%] w-8 relative -left-16 -translate-y-[10%] rotate-12 bg-black bg-opacity-10`}
+            className={`relative -left-16 h-[120%] w-8 -translate-y-[10%] rotate-12 bg-black bg-opacity-10`}
           ></div>
         </div>
       </div>

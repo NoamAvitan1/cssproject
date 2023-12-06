@@ -5,7 +5,6 @@ export const dummyCss = `.box {
 }
 .cool-text {
   width: 90%;
-  color: black;
   font-size: 50px;
   text-align: center;
   animation: cool-text 1s infinite;
