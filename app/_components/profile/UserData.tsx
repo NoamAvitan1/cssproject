@@ -9,6 +9,7 @@ import { EditProfile } from "./EditProfile";
 import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
 
+
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
 type Props = {
@@ -19,7 +20,7 @@ export const UserData = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [imageExists, setImageExists] = useState(true); // Default to true, assuming the image exists initially
+  const [imageExists, setImageExists] = useState(true); 
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
