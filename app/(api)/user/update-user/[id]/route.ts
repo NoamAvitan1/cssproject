@@ -18,7 +18,7 @@ export async function POST(request: Request, route: { params: { id: string }}) {
     .update(payload)
     .eq("id", user_id)
     .select()
-  console.log("data: ", data, "error: ", error)
+  // console.log("data: ", data, "error: ", error)
   
   if (error) return NextResponse.redirect(requestUrl + '?error=Failed ot update user',
   {

@@ -29,7 +29,7 @@ export default function page(props: Props) {
       };
       if (formValidation.password !== confirmPassword) {
         e.preventDefault();
-        console.log(confirmPassword);
+        // console.log(confirmPassword);
         throw new Error("Passwords do not match");
       }
       authSchema()

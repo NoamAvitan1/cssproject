@@ -52,7 +52,7 @@ export const Headers = (props: Props) => {
       <button
         onClick={handleClick}
         title="New example"
-        className={`flex aspect-square h-full items-center justify-center bg-accent duration-150 hover:text-red-500 ${
+        className={`flex aspect-square h-full items-center justify-center duration-150 hover:text-red-500 ${
           (props.codeBlocks[0].type === "css" &&
             (props.codeBlocks.length === 1 || props.codeBlocks.length >= 5)) ||
           (props.codeBlocks[0].type === "html" && props.codeBlocks.length >= 4)

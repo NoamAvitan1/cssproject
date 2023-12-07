@@ -24,7 +24,7 @@ export const PasswordUpdateButton = (props: Props) => {
         }
         const params = useParams();
         useEffect(()=> {
-            console.log(params);
+            // console.log(params);
         },[])
   return ( params.id === user?.id && (
         <button className="w-full border border-error shadow text-lg hover:font-bold p-2 hover:bg-error duration-300 hover:text-black hover:border-black" onClick={update}>Change password</button>

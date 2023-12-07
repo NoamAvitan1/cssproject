@@ -24,7 +24,7 @@ export const HTMLView = (props: Props) => {
     el.innerHTML = "";
     const wrapper = document.createElement("div");
     wrapper.className =
-      "absolute left-0 right-0 top-0 border-t-4 border-double border-white";
+      "w-full";
     const htmlEl = useStringToNode(props.html);
     const style = document.createElement("style");
     style.textContent = props.css;
@@ -37,7 +37,7 @@ export const HTMLView = (props: Props) => {
     <article
       onPointerOver={handleHover}
       onPointerLeave={handleHover}
-      className="relative flex grow flex-col"
+      className="relative flex grow flex-col border-t-2 border-t-secondary"
       // className="relative flex grow flex-col overflow-auto bg-secondary p-6"
     >
       {/* <VFX hovered={hovered} /> */}

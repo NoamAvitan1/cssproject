@@ -8,7 +8,7 @@ import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 import Api from "@/utils/axios";
 import { Wave } from "./Wave";
 import { ModuleForm } from "./ModuleForm";
-import { ModuleHeader } from "./ModuleHeader";
+import { ModuleSettings } from "./ModuleSettings";
 
 type Props = {};
 
@@ -67,10 +67,9 @@ export const NewLayout = (props: Props) => {
   }, [isXl]);
 
   return (
-    <div className="box-border flex h-[95vh] w-full bg-background">
-      <article className="grow h-full xl:col-span-3 space-y-px">
-        <ModuleHeader />
-          <div className="flex h-[70%] gap-px overflow-auto bg-background">
+    <div className="box-border flex h-[95vh] w-full bg-background pt-1">
+      <article className="grow h-full outline outline-secondary">
+          <div className="flex h-[70%] gap-1 border-b border-b-secondary overflow-auto bg-secondary">
             <EditorsView
               lang={(isXl || selectedBlock == 0) ? 'css' : 'html'}
               codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
@@ -80,13 +79,14 @@ export const NewLayout = (props: Props) => {
             />
             {isXl && (
               <EditorsView
-                lang='html'
-                codeBlocks={isXl ? [...codeBlocks].slice(1) : codeBlocks}
-                setCodeBlocks={setCodeBlocks}
-                selectedBlock={selectedBlock}
-                setSelectedBlock={setSelectedBlock}
+              lang='html'
+              codeBlocks={isXl ? [...codeBlocks].slice(1) : codeBlocks}
+              setCodeBlocks={setCodeBlocks}
+              selectedBlock={selectedBlock}
+              setSelectedBlock={setSelectedBlock}
               />
-            )}
+              )}
+              <ModuleSettings isOpen={true} />
           </div>
           <div className="flex grow flex-col">
             <HTMLView
