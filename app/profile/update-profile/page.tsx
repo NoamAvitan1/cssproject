@@ -1,4 +1,5 @@
 "use client";
+import { tell } from "@/app/_components/teller/Tale";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
 import { BaseSyntheticEvent, useState } from "react";
@@ -37,9 +38,11 @@ export default function page(props: Props) {
         .catch((error: yup.ValidationError) => {
           e.preventDefault();
           setValidationError(error);
+          tell(error.message,'error');
         });
     } catch (error:any) {
       setValidationError(error);
+      tell(error.message,'error');
     }
   };
   return (

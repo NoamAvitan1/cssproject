@@ -36,14 +36,14 @@ export const EditProfile = (props: Props) => {
         .validate(formValidation)
         .catch((error: yup.ValidationError) => {
           e.preventDefault();
-          alert(error.message);
+          tell(error.message,'error');
           setValidationError(error);
         });
     } catch (error: any) {
       e.preventDefault();
       setValidationError(error.message);
-      alert(error.message)
-    }
+      tell(error.message,'error')   
+     }
   };
   return (
     <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>

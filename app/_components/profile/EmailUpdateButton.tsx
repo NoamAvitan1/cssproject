@@ -4,7 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { object, string } from "yup";
 import * as yup from "yup";
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useRef, useState } from "react";
+import { tell } from "../teller/Tale";
 type Props = {
   isOpen: boolean;
   setIsOpen: Function;
@@ -31,14 +32,21 @@ export const EmailUpdateButton = (props: Props) => {
         e.preventDefault();
         throw new Error("Emails do not match");
       }
+      if(formValidation.email === user?.email){
+        e.preventDefault();
+        throw new Error("Email already in use");
+      }
       authSchema()
         .validate(formValidation)
         .catch((error: yup.ValidationError) => {
           e.preventDefault();
           setValidationError(error);
+          tell(error.message,'error')
         });
-    } catch (error:any) {
+    } 
+    catch (error:any) {
       setValidationError(error);
+      tell(error.message,'error');
     }
   };
   return (
@@ -49,18 +57,19 @@ export const EmailUpdateButton = (props: Props) => {
           className="absolute right-1 top-2 cursor-pointer text-xl text-black"
         />
         <form
+          onSubmit={handleSubmit}
           className="flex h-full w-full flex-col p-2 "
           action={"/auth/update-email/" + user?.id}
           method="POST"
         >
-          <label htmlFor="email">email:</label>
+          <label className="text-black" htmlFor="email">Email:</label>
           <input
             name="email"
             placeholder="marypopins@email.com"
             className="mb-4 w-full rounded-md border border-black p-2 text-[#060504] "
             type="text"
           />
-          <label htmlFor="confirmEmail">Confirm email:</label>
+          <label className="text-black" htmlFor="confirmEmail">Confirm email:</label>
           <input
             name="confirmEmail"
             placeholder="marypopins@email.com"

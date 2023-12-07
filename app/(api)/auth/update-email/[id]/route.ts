@@ -22,7 +22,7 @@ export async function POST(request: Request, route: { params: { id: string }}) {
     status: 301,
   })
   
-  return NextResponse.redirect(requestUrl.origin + '/profile/id/' + user_id + '?success=User updated successfully',
+  return NextResponse.redirect(requestUrl.origin + '/profile/id/' + user_id + '?success=Check your email for continue',
   {
     // a 301 status is required to redirect from a POST to a GET route
     status: 301,
