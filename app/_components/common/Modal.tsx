@@ -42,7 +42,7 @@ export const Modal = (props: Props) => {
         onClick={closeModal}
         className={`${
           isClosing && "modal-container-vanish backdrop-blur-none"
-        } fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm`}
+        } fixed inset-0 z-40 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm`}
       >
         <article
           onClick={(e) => e.stopPropagation()}
