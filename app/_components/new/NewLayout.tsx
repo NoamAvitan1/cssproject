@@ -57,7 +57,7 @@ export const NewLayout = (props: Props) => {
       window.addEventListener("resize", () => {
         setIsXl(window.innerWidth >= 1280);
       });
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -67,33 +67,36 @@ export const NewLayout = (props: Props) => {
   }, [isXl]);
 
   return (
-    <div className="box-border flex h-[95vh] w-full bg-background pt-1">
-      <article className="grow h-full outline outline-secondary">
-          <div className="flex h-[70%] gap-1 border-b border-b-secondary overflow-auto bg-secondary">
+    <div className="flex h-[95vh] w-full border-4 border-secondary bg-background">
+      <article className="h-full grow">
+        <div className="flex h-[70%] gap-1 overflow-auto border-b border-b-secondary bg-secondary">
+          <EditorsView
+            lang={isXl || selectedBlock == 0 ? "css" : "html"}
+            codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
+            setCodeBlocks={setCodeBlocks}
+            selectedBlock={isXl ? 0 : selectedBlock}
+            setSelectedBlock={setSelectedBlock}
+          />
+          {isXl && (
             <EditorsView
-              lang={(isXl || selectedBlock == 0) ? 'css' : 'html'}
-              codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
-              setCodeBlocks={setCodeBlocks}
-              selectedBlock={isXl ? 0 : selectedBlock}
-              setSelectedBlock={setSelectedBlock}
-            />
-            {isXl && (
-              <EditorsView
-              lang='html'
+              lang="html"
               codeBlocks={isXl ? [...codeBlocks].slice(1) : codeBlocks}
               setCodeBlocks={setCodeBlocks}
               selectedBlock={selectedBlock}
               setSelectedBlock={setSelectedBlock}
-              />
-              )}
-              <ModuleSettings isOpen={true} />
-          </div>
-          <div className="flex grow flex-col">
-            <HTMLView
-              html={codeBlocks[selectedBlock + ((isXl || selectedBlock == 0) ? 1 : 0)].code}
-              css={codeBlocks[0].code}
             />
-          </div>
+          )}
+          <ModuleSettings isOpen={true} />
+        </div>
+        <div className="flex grow flex-col">
+          <HTMLView
+            html={
+              codeBlocks[selectedBlock + (isXl || selectedBlock == 0 ? 1 : 0)]
+                .code
+            }
+            css={codeBlocks[0].code}
+          />
+        </div>
       </article>
     </div>
   );

@@ -8,7 +8,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditProfile } from "./EditProfile";
 import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
-
+import axios from "axios";
 
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 
@@ -20,7 +20,7 @@ export const UserData = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [imageExists, setImageExists] = useState(true); 
+  const [imageExists, setImageExists] = useState(true); // Default to true, assuming the image exists initially
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
@@ -40,22 +40,15 @@ export const UserData = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    const img = new Image();
-    const imgUrl = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`;
-    
-    if (img.complete) {
-      setImageUrl(imgUrl);
-      if (imageUrl !== null && profile?.id) return;
-    } else {
-      img.onload = () => {
-        setImageUrl(imgUrl);
-      };
+    if (!profile?.id) return
+    const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`;
+    const checkImg = async (url: string) => {
+      axios.get(url)
+      .then(() => setImageUrl(url))
+      .catch(() => !imageUrl && setImageUrl(null));
     }
-    img.onerror = () => {
-      setImageUrl(null);
-    };
 
-    img.src = imgUrl;
+    checkImg(url);
   }, [profile]);
 
   console.log(imageUrl);
