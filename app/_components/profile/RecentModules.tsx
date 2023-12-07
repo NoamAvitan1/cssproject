@@ -19,7 +19,7 @@ export const RecentModules = (props: Props) => {
       .eq("user_id", params.id)
       .range(0, 2);
       setModules(data)
-      console.log(data);
+      // console.log(data);
   };
 
   useEffect(() => {

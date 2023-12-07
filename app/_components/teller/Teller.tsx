@@ -37,7 +37,7 @@ export const Teller = (props: Props) => {
     };
 
     const handleTell = (tale: Tale) => {
-      if (!tales.find(t => t.text == tale.text)) setTales((prev) => [...prev, tale]);
+      setTales((prev) => [...prev, tale]);
       vanishTale(tale);
 
       const index = tales.length;

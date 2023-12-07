@@ -22,10 +22,10 @@ export const EditorsView = (props: Props) => {
       return newCodeBlocks
     })    
   };
-  console.log(props.codeBlocks)
+  // console.log(props.codeBlocks)
 
   return (
-    <div className="row-span-2 flex h-full w-full flex-col space-y-px bg-primary">
+    <div className="row-span-2 flex h-full w-full flex-col space-y-1 bg-secondary">
       <Headers
         codeBlocks={props.codeBlocks}
         setCodeBlocks={props.setCodeBlocks}
