@@ -21,7 +21,7 @@ export const EditProfile = (props: Props) => {
   const authForm = () => {
     return object({
       user_name: string().min(3).required(),
-      about: string().max(500),
+      about: string().max(200),
     });
   };
 

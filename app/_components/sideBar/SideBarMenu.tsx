@@ -37,15 +37,15 @@ export const SideBarMenu = (props: Props) => {
   if (props.setToggle) props.setToggle(!props.toggle)
   }
   return (
-    <aside className="w-52">
-      <ul className="w-full xs:mt-5 xs:border-r-2 xs:border-secondary">
+    <aside className="">
+      <ul className="w-full xs:mt-5">
         {items.map(
           (item, i) =>
             (item.guard() && (
               <li
                 onClick={() =>handleClick(item.path)}
                 key={i}
-                className="flex cursor-pointer items-center gap-2  p-2 text-xl hover:bg-secondary"
+                className="flex cursor-pointer items-center gap-2 p-2 pr-10 text-xl hover:bg-secondary"
               >
                 <span className="">{item.icon}</span>
                 <span>{item.label}</span>
