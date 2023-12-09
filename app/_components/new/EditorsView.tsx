@@ -37,6 +37,7 @@ export const EditorsView = (props: Props) => {
           lang={props.lang}
           w="100%"
           h="100%"
+          limit={props.codeBlocks[props.selectedBlock].type === "css" ? 3000 : 500}
           code={props.codeBlocks[props.selectedBlock].code}
           onChange={(code) => handleChange(code)}
         />

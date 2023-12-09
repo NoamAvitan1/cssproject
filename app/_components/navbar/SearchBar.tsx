@@ -5,7 +5,7 @@ type Props = {
   setFlag : React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const SearchBar: React.FC<Props> = (props) => {
+export const SearchBar = (props: Props) => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 550) {
@@ -19,7 +19,7 @@ export const SearchBar: React.FC<Props> = (props) => {
     };
   }, []);
   return (
-    <div className={`${props.flag ? 'flex' : 'hidden xs:flex'} w-full max-w-[600px] items-center justify-center justify-self-center`}>
+    <div className={`${props.flag ? 'flex' : 'hidden xs:flex'} col-span-2 xl:col-span-3 w-full max-w-[800px] items-center justify-center justify-self-center`}>
       <div className="flex w-11/12  items-center justify-center overflow-hidden rounded-lg border-2 border-aura bg-background">
         <figure onClick={()=>props.setFlag(!props.flag)} className="p-2 cursor-pointer">
           <AiOutlineSearch />
