@@ -39,12 +39,15 @@ export const UserData = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (!profile?.id || !user) return
-    const url = useCheckUserImg(user)
-    setImageUrl(url)
-  }, [profile]);
+    if (!profile?.id || !user || imageUrl) return
+    const setUrl = async () => {
+      const url = await useCheckUserImg(user)
+      console.log(url)
+      setImageUrl(url)
+    }
 
-  console.log(imageUrl);
+    setUrl()
+  }, [profile]);
 
   return (
     <div className="mt-6 w-full">

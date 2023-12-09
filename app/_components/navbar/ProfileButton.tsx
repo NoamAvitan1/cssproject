@@ -1,8 +1,10 @@
 "use client";
+import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 
 type Props = {
@@ -11,28 +13,35 @@ type Props = {
 
 export const ProfileButton = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imgUrl, setImgUrl] = useState<string | undefined>(undefined);
 
   const router = useRouter();
 
-  const handleClick = () => {
-    props.setIsVeilOpen((prev: boolean) => !prev)
-    setIsModalOpen(prev => !prev)
-  }
-  {console.log(user?.user_metadata)}
+  useEffect(() => {
+    if (!user) return;
+    const url = useCheckUserImg(user);
+    setImgUrl(url ?? undefined);
+  }, [user]);
 
   return (
-    <>
-      <button
-        className="relative z-10"
-        onClick={handleClick}
-      >
-        <FiUser onClick={() => router.push(`/profile/id/${user?.id}`)} />
+    <div
+      className="relative"
+      onPointerEnter={() => setIsModalOpen(true)}
+      onPointerLeave={() => setIsModalOpen(false)}
+    >
+      <button className="">
+        <FiUser />
       </button>
-      {isModalOpen && <div className="absolute grid col-span-2 border-text top-full">
-        <img src={user?.user_metadata.picture} alt="profile pic" />
-        <h1>{user?.user_metadata.name}</h1>
-      </div>}
-    </>
+      {isModalOpen && (
+        <div className="absolute right-0 top-full w-[200px] rounded-b border-text bg-secondary p-2 shadow-xl">
+          <img src={imgUrl} className="aspect-square w-full" />
+          <h1 className="text-sm">Logged as: {user?.user_metadata.name}</h1>
+          <Link className="text-sm text-blue-300 underline" href={`/profile/id/${user?.id}`}>
+            go to profile page
+          </Link>
+        </div>
+      )}
+    </div>
   );
 };

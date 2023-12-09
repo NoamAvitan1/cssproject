@@ -5,21 +5,21 @@ import { NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
-  const requestUrl = new URL(request.url)
-  const formData = await request.formData()
-  const name = String(formData.get('name'))
-  const email = String(formData.get('email'))
-  const password = String(formData.get('password'))
+  const data = await request.json()
+  const email = data.email
+  const password = data.password
   const supabase = createRouteHandlerClient({ cookies })
 
+  const requestUrl = new URL(request.url)
+  
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${requestUrl.origin}/auth/callback`,
       data: {
-        email: email,
-        user_name: name,
+        email: data.email,
+        user_name: data.name,
         role: 'some role',
         profile_pic: null,
         ways_of_contact: 'some-contact@example.com',
@@ -27,21 +27,11 @@ export async function POST(request: Request) {
     },
   })
 
+  const res = NextResponse
+
   if (error) {
-    return NextResponse.redirect(
-      `${requestUrl.origin}/login?error=Could not authenticate user`,
-      {
-        // a 301 status is required to redirect from a POST to a GET route
-        status: 301,
-      }
-    )
+    return res.json({error: error.message})    
   }
 
-  return NextResponse.redirect(
-    `${requestUrl.origin}/login?message=Check email to continue sign in process`,
-    {
-      // a 301 status is required to redirect from a POST to a GET route
-      status: 301,
-    }
-  )
+  return NextResponse.json({message: "Please check your email address"})
 }
