@@ -5,16 +5,21 @@ import { object, string } from "yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import Messages from "./messages";
+import Api from "@/utils/axios";
+import { tell } from "../teller/Tale";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
-export const DynamicForm: React.FC<Props> = (props) => {
+export const DynamicForm = (props: Props) => {
   YupPassword(yup);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
   const [validationError, setValidationError] =
     useState<yup.ValidationError | null>(null);
+
+  const router = useRouter()
 
   const authSchema = () => {
     let passwordValidation = string().min(8).required();
@@ -41,6 +46,7 @@ export const DynamicForm: React.FC<Props> = (props) => {
   };
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
+    e.preventDefault()
     try {
       const inputs = e.target.elements;
       let forValidation = {
@@ -53,14 +59,21 @@ export const DynamicForm: React.FC<Props> = (props) => {
         type === "sign-up" &&
         forValidation.confirmPassword !== forValidation.password
       ) {
-        e.preventDefault();
         throw new Error("Passwords do not match");
       }
       authSchema()
         .validate(forValidation)
+        .then(async () => {
+          const { data } = await Api.post(`auth/${type}`, forValidation);
+          if (data?.error) {
+            tell(data.error, 'error')
+            return
+          }
+          tell(data.message)
+        })
         .catch((error: yup.ValidationError) => {
-          e.preventDefault();
           setValidationError(error);
+          return
         });
     } catch (error: any) {
       setValidationError(error);

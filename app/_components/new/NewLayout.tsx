@@ -86,7 +86,7 @@ export const NewLayout = (props: Props) => {
               setSelectedBlock={setSelectedBlock}
             />
           )}
-          <ModuleSettings isOpen={true} />
+          <ModuleSettings isOpen={true} codeBlocs={codeBlocks} />
         </div>
         <div className="flex grow flex-col">
           <HTMLView

@@ -12,8 +12,11 @@ type Props = {};
 
 export const NavBar: React.FC<Props> = (props) => {
   const [flag, setFlag] = useState<boolean>(false);
+  const [isVeilOpen, setIsVeilOpen] = useState(false);
+
   return (
-    <div className="relative flex h-[5vh] min-h-[45px] w-full items-center justify-between bg-secondary px-4 shadow">
+    <div className="relative md:grid flex grid-cols-4 xl:grid-cols-5 h-[5vh] min-h-[45px] w-full items-center justify-between bg-secondary px-4 shadow">
+      {isVeilOpen && <div onClick={() => setIsVeilOpen(false)} className='fixed inset-0'></div>}
       <div className="flex items-center gap-5">
         <div className="block xs:hidden">
           <SlideMenu />
@@ -30,7 +33,7 @@ export const NavBar: React.FC<Props> = (props) => {
         />
         <ThemeChangeButton />
         <NotificationsButton />
-        <ProfileButton />
+        <ProfileButton setIsVeilOpen={setIsVeilOpen} />
       </div>
     </div>
   );

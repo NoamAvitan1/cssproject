@@ -8,12 +8,10 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditProfile } from "./EditProfile";
 import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
-import axios from "axios";
-
-type Profile = Database["public"]["Tables"]["profile"]["Row"];
+import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
+import { useParams } from "next/navigation";
 
 type Props = {
-  params: string;
 };
 
 export const UserData = (props: Props) => {
@@ -23,12 +21,23 @@ export const UserData = (props: Props) => {
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
+  type Profile = Database["public"]["Tables"]["profile"]["Row"];
+
+  let { id: idParam } = useParams();
+
   useEffect(() => {
+    if (profile?.id) return
+
+    if (!idParam) {
+      if (user?.id) idParam = user.id
+      else return
+    }
+
     const update = async () => {
       let { data, error } = await supabase
         .from("profile")
         .select("*")
-        .eq("id", props.params);
+        .eq("id", idParam);
       if (error) {
         if (typeof window !== undefined) tell("Couldn't find profile", "error");
         return;
@@ -36,22 +45,21 @@ export const UserData = (props: Props) => {
       setProfile(data && data[0] ? data[0] : null);
     };
     update();
-  }, []);
-
-  const checkImg = async (url: string) => {
-    axios.get(url)
-    .then(() => setImageUrl(url))
-    .catch(() => !imageUrl && setImageUrl(null));
-  }
+  }, [idParam, user]);
 
   useEffect(() => {
-    if (!profile?.id) return
-    const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`;
-    
-    checkImg(url);
+    if (!profile?.id || !user || imageUrl) return
+    const setUrl = async () => {
+      const url = await useCheckUserImg(user)
+      console.log(url)
+      setImageUrl(url)
+    }
+
+    setUrl()
   }, [profile]);
 
-  
+  console.log(imageUrl);
+
   return (
     <div className="mt-6 w-full">
       {profile && (

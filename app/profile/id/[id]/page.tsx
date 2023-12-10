@@ -7,11 +7,11 @@ import { EmailUpdateButton } from "@/app/_components/profile/EmailUpdateButton";
 import { ChangeSensetiveFields } from "@/app/_components/profile/ChangeSensetiveFields";
 
 export default function Profile(){
-    const params = useParams();
+
     return (
         <article className="w-full flex justify-center">
         <div className="flex flex-col items-center w-11/12 gap-8">
-            <UserData params = {params.id as string} />
+            <UserData />
             <RecentModules/>
             <ChangeSensetiveFields/>
         </div>
