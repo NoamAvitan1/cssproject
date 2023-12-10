@@ -4,3 +4,5 @@ profile
 side nav
  - add a route to sign in
  - add a guard to sign in so it doesn't show up after logging in
+ - remove test
+ - add new (plus sign)
