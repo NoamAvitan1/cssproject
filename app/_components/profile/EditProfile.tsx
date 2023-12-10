@@ -47,7 +47,7 @@ export const EditProfile = (props: Props) => {
   };
   return (
     <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
-      <div className="relative h-[550px] w-[600px] rounded-md bg-white">
+      <div className="relative h-[60vh] w-[60vh] rounded-md bg-white">
         <AiOutlineClose
           id="close-button"
           className="absolute right-1 top-2 cursor-pointer text-2xl text-black"

@@ -23,6 +23,6 @@ export const Bucket = (props: Props) => {
   return (
       <div>
       <input onChange={onClick} type="file" />
-    </div>
+      </div>
   );
 };

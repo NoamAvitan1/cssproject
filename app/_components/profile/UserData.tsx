@@ -20,7 +20,6 @@ export const UserData = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [imageExists, setImageExists] = useState(true); // Default to true, assuming the image exists initially
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
@@ -39,20 +38,20 @@ export const UserData = (props: Props) => {
     update();
   }, []);
 
+  const checkImg = async (url: string) => {
+    axios.get(url)
+    .then(() => setImageUrl(url))
+    .catch(() => !imageUrl && setImageUrl(null));
+  }
+
   useEffect(() => {
     if (!profile?.id) return
     const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`;
-    const checkImg = async (url: string) => {
-      axios.get(url)
-      .then(() => setImageUrl(url))
-      .catch(() => !imageUrl && setImageUrl(null));
-    }
-
+    
     checkImg(url);
   }, [profile]);
 
-  console.log(imageUrl);
-
+  
   return (
     <div className="mt-6 w-full">
       {profile && (
@@ -93,10 +92,10 @@ export const UserData = (props: Props) => {
               </div>
               <div className="flex h-full items-center justify-center">
                 <div className="w-full rounded-md bg-secondary p-2 text-sm xl:text-[17px]">
-                  {profile?.about === "" ? (
-                    <p>Go edit your profile and write about yourself...</p>
-                  ) : (
+                  {profile?.about ? (
                     <p className="h-full break-normal">{profile?.about}</p>
+                    ) : (
+                      <p>Go edit your profile and write about yourself...</p>
                   )}
                 </div>
               </div>

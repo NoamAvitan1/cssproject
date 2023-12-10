@@ -25,7 +25,7 @@ export const RecentModules = (props: Props) => {
   useEffect(() => {
     updateModules();
   }, []);
-  return ( modules && <div className="w-full">
+  return ( modules?.length ? <div className="w-full">
     <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">Recent Modules by {modules?.[0]?.user_id?.user_name}</h1>
     <section className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10 mt-4">
        {modules ? modules.map((v, i) => (
@@ -39,5 +39,5 @@ export const RecentModules = (props: Props) => {
                 </article>
               )) : null}
     </section>
-  </div>);
+  </div> : null);
 };
