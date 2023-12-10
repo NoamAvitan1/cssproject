@@ -7,16 +7,19 @@ import YupPassword from "yup-password";
 import Messages from "./messages";
 import Api from "@/utils/axios";
 import { tell } from "../teller/Tale";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
-export const DynamicForm: React.FC<Props> = (props) => {
+export const DynamicForm = (props: Props) => {
   YupPassword(yup);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
   const [validationError, setValidationError] =
     useState<yup.ValidationError | null>(null);
+
+  const router = useRouter()
 
   const authSchema = () => {
     let passwordValidation = string().min(8).required();
@@ -67,7 +70,6 @@ export const DynamicForm: React.FC<Props> = (props) => {
             return
           }
           tell(data.message)
-          console.log(data)
         })
         .catch((error: yup.ValidationError) => {
           setValidationError(error);

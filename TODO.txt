@@ -1,10 +1,6 @@
 profile
  - add checks to update only changed values 
 
-modal
- - enable closing outside of the modal
-
-new
- - design and implement the form
- - fix breakpoints
-
+side nav
+ - add a route to sign in
+ - add a guard to sign in so it doesn't show up after logging in

@@ -9,11 +9,9 @@ import { EditProfile } from "./EditProfile";
 import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
 import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
-
-type Profile = Database["public"]["Tables"]["profile"]["Row"];
+import { useParams } from "next/navigation";
 
 type Props = {
-  params: string;
 };
 
 export const UserData = (props: Props) => {
@@ -23,12 +21,24 @@ export const UserData = (props: Props) => {
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
+  type Profile = Database["public"]["Tables"]["profile"]["Row"];
+
+  let { id: idParam } = useParams();
+
   useEffect(() => {
+    if (profile?.id) return
+
+    if (user?.id) {
+      idParam = user.id;
+    }
+
+    if (!idParam) return
+
     const update = async () => {
       let { data, error } = await supabase
         .from("profile")
         .select("*")
-        .eq("id", props.params);
+        .eq("id", idParam);
       if (error) {
         if (typeof window !== undefined) tell("Couldn't find profile", "error");
         return;
@@ -36,7 +46,7 @@ export const UserData = (props: Props) => {
       setProfile(data && data[0] ? data[0] : null);
     };
     update();
-  }, []);
+  }, [idParam, user]);
 
   useEffect(() => {
     if (!profile?.id || !user || imageUrl) return
