@@ -28,11 +28,10 @@ export const UserData = (props: Props) => {
   useEffect(() => {
     if (profile?.id) return
 
-    if (user?.id) {
-      idParam = user.id;
+    if (!idParam) {
+      if (user?.id) idParam = user.id
+      else return
     }
-
-    if (!idParam) return
 
     const update = async () => {
       let { data, error } = await supabase
