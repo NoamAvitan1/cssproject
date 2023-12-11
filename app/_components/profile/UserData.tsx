@@ -73,7 +73,7 @@ export const UserData = (props: Props) => {
         <main className="container border border-secondary">
           <article className="flex flex-col gap-5 p-2 md:flex-row">
             <section className="h-full md:w-1/3 relative">
-            <EditPic profile={profile}/>
+            <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl}/>
               {imageUrl ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"
