@@ -11,7 +11,7 @@ export const SensitiveInfo = (props: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
   const { id } = useParams();
-  console.log(id);
+
   return (
     user?.id === id && (
       <section className="flex h-52 w-full flex-col items-center gap-4 border-4 border-double border-error p-4">
