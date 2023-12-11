@@ -25,14 +25,18 @@ export const FileTypeHeader = (props: Props) => {
   };
 
   const element = typeIcons[props.type as "css" | "html" | "js"];
-
+console.log(props.type)
   return (
     <div
-      className={`gap-2 bg-background shadow px-2 font-pixelify h-8 flex items-center justify-center [&_*]:whitespace-nowrap`}
+      className={`flex h-8 items-center justify-center bg-background px-2 font-pixelify shadow [&_*]:whitespace-nowrap`}
     >
       <div className={`flex w-fit items-center`}>
         {element.icon}
-        {element.fileName && <p className="p-2 text-sm max-sm:text-xs">{element.fileName}</p>}
+        {element.fileName && (
+          <p className="py-2 px-1 text-sm max-lg:hidden max-sm:text-xs">
+            {element.fileName}
+          </p>
+        )}
       </div>
     </div>
   );
