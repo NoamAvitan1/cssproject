@@ -1,5 +1,5 @@
 "use client";
-import { userAtom } from "@/app/_jotai/userAtoms";
+import { profileAtom, userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
 import { MdOutlineEdit } from "react-icons/md";
 import { Database } from "@/types/supabase";
@@ -10,23 +10,28 @@ import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
 import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
 import { useParams } from "next/navigation";
+import { Profile } from "@/types/Profile";
 
 type Props = {
 };
 
 export const UserData = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
+  const [userProfile, setUserProfile] = useAtom(profileAtom);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [imageUrl, setImageUrl] = useState<null | string>(null);
   const supabase = createClientComponentClient();
 
-  type Profile = Database["public"]["Tables"]["profile"]["Row"];
-
   let { id: idParam } = useParams();
 
   useEffect(() => {
     if (profile?.id) return
+
+    if (userProfile && (!idParam || user?.id == idParam)) {
+      setProfile(userProfile)
+      return
+    }
 
     if (!idParam) {
       if (user?.id) idParam = user.id
@@ -43,6 +48,9 @@ export const UserData = (props: Props) => {
         return;
       }
       setProfile(data && data[0] ? data[0] : null);
+      if (!idParam || user?.id == idParam) {
+        setUserProfile(data && data[0] ? data[0] : null)
+      }
     };
     update();
   }, [idParam, user]);
@@ -51,7 +59,6 @@ export const UserData = (props: Props) => {
     if (!profile?.id || !user || imageUrl) return
     const setUrl = async () => {
       const url = await useCheckUserImg(user)
-      console.log(url)
       setImageUrl(url)
     }
 

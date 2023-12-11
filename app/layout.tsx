@@ -8,6 +8,7 @@ import { JotaiProvider } from "./_jotai/JotaiProvider";
 import { SideBarMenu } from "./_components/sideBar/SideBarMenu";
 import { Teller } from "./_components/teller/Teller";
 import { UserSetter } from "./_components/login/UserSetter";
+import Footer from "./footer/Footer";
 
 export const metadata = {
   title: "CSStore",
@@ -25,6 +26,8 @@ export default async function RootLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log("server");
+
   return (
     <html lang="en">
       <Script src="https://unpkg.com/prettier@3.0.3/standalone.js" />
@@ -33,14 +36,15 @@ export default async function RootLayout({
       <body>
         <Teller />
         <JotaiProvider>
-          <main className="flex min-h-screen flex-col items-center bg-background text-text overflow-y-auto">
+          <main className="flex min-h-screen flex-col items-center overflow-y-auto bg-background text-text">
             <NavBar />
             <UserSetter user={user} />
-            <div className="w-full flex lg:w-11/12 2xl:10/12 grow">
+            <div className="2xl:10/12 flex w-full grow lg:w-11/12">
               <div className="hidden xs:block">
                 <SideBarMenu />
               </div>
               {children}
+              {/* <Footer /> */}
             </div>
           </main>
         </JotaiProvider>

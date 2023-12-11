@@ -11,13 +11,13 @@ type Props = {
   modules: Module;
 };
 
-export const MenuModule = (props: Props) => {
+export const Module = (props: Props) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   return (
     <div className="">
       <button
-        className="absolute right-2 top-4 z-20 text-text"
+        className="absolute right-2 top-4 z-10 text-text"
         onClick={() => setToggle(!toggle)}
       >
         {toggle ? <AiOutlineClose /> : <GiHamburgerMenu />}

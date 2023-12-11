@@ -2,7 +2,6 @@ import { User } from "@supabase/supabase-js";
 import { useCheckImg } from "./useCheckImg";
 
 export const useCheckUserImg = async (user: User): Promise<string | null> => {
-  console.log(user);
   let url:
     | string
     | null = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${user?.id}/${user?.id}`;

@@ -1,6 +1,3 @@
-profile
- - add checks to update only changed values 
-
 side nav
  - add a route to sign in
  - add a guard to sign in so it doesn't show up after logging in
