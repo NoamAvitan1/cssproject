@@ -6,6 +6,6 @@ export const moduleObject = object({
     price: number().required(),
     description: string().max(200).required(),
     css: string().min(5).required(),
-    html: array().of(string()).min(1).max(4),
+    html: array().of(string().min(5)).min(1).max(4),
     user_id: string().required()
   });

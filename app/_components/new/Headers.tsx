@@ -1,8 +1,8 @@
 import { FileTypeHeader } from "@/app/new/FileTypeHeader";
 import { CodeBlock } from "@/types/CodeBlock";
 import { HiOutlinePlus } from "react-icons/hi2";
-import { DiHtml5 } from "react-icons/di";
-import { FaRegSquarePlus } from "react-icons/fa6";
+import { useState } from "react";
+import { HeaderOptions } from "./HeaderOptions";
 
 type Props = {
   codeBlocks: Array<CodeBlock>;
@@ -12,6 +12,37 @@ type Props = {
 };
 
 export const Headers = (props: Props) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  const handleCopy = async (i: number) => {
+    const text = props.codeBlocks[i].code;
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Text copied to clipboard!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = (i: number) => {
+    if (i == 0) return;
+    const index = props.codeBlocks[0].type == "css" ? i : i + 1;
+    props.setCodeBlocks((prev: CodeBlock[]) => {
+      const newBlocks = prev.filter((c, i) => i != index);
+      return newBlocks;
+    });
+  };
+
+  const handleRename = (name: string, i: number) => {
+    const index = props.codeBlocks[0].type == "css" ? i : i + 1;
+    props.setCodeBlocks((prev: CodeBlock[]) => {
+      const newBlocks = prev.map((c, i) =>
+        i == index ? { ...c, name: name } : c,
+      );
+      return newBlocks;
+    });
+  };
+
   const handleClick = () => {
     props.setCodeBlocks((prev: Array<CodeBlock>) =>
       prev.length >= 5 ? prev : [...prev, new CodeBlock("", "html")],
@@ -22,31 +53,34 @@ export const Headers = (props: Props) => {
     <header className="flex items-center space-x-px bg-secondary">
       {props.codeBlocks.map((c, i) => (
         <button
+          onPointerEnter={() => setHovered(i)}
+          onPointerLeave={() => setHovered(hovered == i ? null : hovered)}
           onClick={() =>
             props.codeBlocks.length > 1 && props.setSelectedBlock(i)
           }
           key={i}
-          className={`relative ${
-            props.selectedBlock == i &&
-            props.codeBlocks.length > 1 &&
-            "opacity-70"
-          }`}
+          className="relative"
         >
-          <FileTypeHeader
-            type={c.type}
-            customName={
-              props.codeBlocks.length > 1 && props.codeBlocks[i].type != "css"
-                ? ""
-                : undefined
-            }
-          />
           <div
-            className={`absolute inset-0 flex items-center justify-center bg-background bg-opacity-80 opacity-0 duration-150 ${
-              i != props.selectedBlock && "hover:opacity-100"
+            className={`${
+              props.selectedBlock == i &&
+              props.codeBlocks.length > 1 &&
+              "opacity-70"
             }`}
           >
-            {i + 1}
+            <FileTypeHeader
+              type={c.type}
+              customName={c.type == "css" ? "index" : "demo"}
+            />
           </div>
+          {hovered == i && (
+            <HeaderOptions
+              index={i}
+              handleCopy={() => handleCopy(i)}
+              // handleRename={(name: string) => handleRename(name, i)}
+              handleDelete={() => handleDelete(i)}
+            />
+          )}
         </button>
       ))}
       <button
