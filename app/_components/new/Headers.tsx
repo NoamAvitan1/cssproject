@@ -28,7 +28,7 @@ export const Headers = (props: Props) => {
     if (i == 0) return;
     const index = props.codeBlocks[0].type == "css" ? i : i + 1;
     props.setCodeBlocks((prev: CodeBlock[]) => {
-      const newBlocks = prev.filter((c, i) => i != index);
+      const newBlocks = prev.filter((c, ci) => ci != index);
       return newBlocks;
     });
   };
