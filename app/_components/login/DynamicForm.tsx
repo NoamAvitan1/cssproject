@@ -8,12 +8,15 @@ import Messages from "./messages";
 import Api from "@/utils/axios";
 import { tell } from "../teller/Tale";
 import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { userAtom } from "@/app/_jotai/userAtoms";
 
 type Props = {};
 
 export const DynamicForm = (props: Props) => {
   YupPassword(yup);
 
+  const [user,setUser] = useAtom(userAtom);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [type, setType] = useState<"sign-in" | "sign-up">("sign-in");
   const [validationError, setValidationError] =
@@ -27,9 +30,6 @@ export const DynamicForm = (props: Props) => {
       email: string().email().required(),
     };
 
-    // if (type === "sign-up") {
-    //   passwordValidation = passwordValidation.password() as typeof passwordValidation;
-    // }
 
     return object(
       type === "sign-up"
@@ -69,6 +69,8 @@ export const DynamicForm = (props: Props) => {
             tell(data.error, 'error')
             return
           }
+          setUser(data.user);
+          router.push('/');
           tell(data.message)
         })
         .catch((error: yup.ValidationError) => {

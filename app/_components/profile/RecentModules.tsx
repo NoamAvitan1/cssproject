@@ -4,13 +4,15 @@ import { use, useEffect, useMemo, useState } from "react";
 import { Database } from "@/types/supabase";
 import { Module } from "@/app/_module/Module";
 
-type Module = Database["public"]["Tables"]["module"]["Row"];
-type Props = {};
+type ModuleType = Database["public"]["Tables"]["module"]["Row"];
+type Props = {
+  user_name:string | null | undefined;
+};
 
 export const RecentModules = (props: Props) => {
   const params = useParams();
   const supabase = createClientComponentClient();
-  const [modules, setModules] = useState<any[] | null>(null);
+  const [modules, setModules] = useState<ModuleType[] | null>(null);
 
   const updateModules = async () => {
     let { data, error } = await supabase
@@ -26,27 +28,25 @@ export const RecentModules = (props: Props) => {
     updateModules();
   }, []);
   return (
-    modules && (
+    modules?.length ? (
       <div className="w-full">
         <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
-          Recent Modules by {modules?.[0]?.user_id?.user_name}
+          Recent Modules by {props.user_name}
         </h1>
         <section className="mt-4 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {modules
-            ? modules.map((v, i) => (
+          {modules?.map((module, i) => (
                 <article
                   className="relative aspect-square overflow-hidden rounded-md bg-secondary p-2"
                   key={i}
                 >
                   <header className="flex w-full items-center justify-between">
-                    <p className="text-xl">{v.title}</p>
-                    <Module modules={v} />
+                    <p className="text-xl">{module.title}</p>
+                    <Module modules={module} />
                   </header>
                 </article>
-              ))
-            : null}
+              ))}
         </section>
       </div>
-    )
+    ) : null
   );
 };

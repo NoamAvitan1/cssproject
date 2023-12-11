@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   const moduleData = await request.json()
-  // console.log(moduleData)
+  //console.log(moduleData)
   const supabase = createRouteHandlerClient<Database>({ cookies })
   try {
     await moduleObject.validate(moduleData)

@@ -9,7 +9,6 @@ export default function Profile() {
     <article className="flex w-full justify-center">
       <div className="flex w-11/12 flex-col items-center gap-8 py-8">
         <UserData />
-        <RecentModules />
         <SensitiveInfo />
         <SignOutBtn />
       </div>

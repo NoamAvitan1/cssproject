@@ -15,11 +15,12 @@ export async function POST(request: Request) {
     email,
     password,
   })
-  console.log(data, error)
-
+  
   if (error) {
     return NextResponse.json({error: error.message})    
   }
 
-  return NextResponse.json({message: "Please check your email address"})
+  const { user } = data;
+
+  return NextResponse.json({message: "You are now logged in",user})
 }

@@ -35,6 +35,8 @@ export const ProfileButton = (props: Props) => {
     })()
   }, [user]);
 
+  console.log(user);
+
   return (
     <div
       className="relative"
@@ -47,7 +49,7 @@ export const ProfileButton = (props: Props) => {
       {isModalOpen && (
         <div className="absolute right-0 z-20 border-b top-full w-[200px] rounded-b border-slate-500 bg-secondary p-2 shadow-xl">
           <img src={imgUrl} className="aspect-square w-full" />
-          <h1 className="text-sm">Logged as: {user?.user_metadata.name}</h1>
+          <h1 className="text-sm">Logged as: {user?.user_metadata.user_name}</h1>
           <Link className="text-sm text-blue-300 underline" href={`/profile/id/${user?.id}`}>
             go to profile page
           </Link>

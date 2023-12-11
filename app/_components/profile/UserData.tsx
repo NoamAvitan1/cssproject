@@ -11,6 +11,8 @@ import { FiUser } from "react-icons/fi";
 import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
 import { useParams } from "next/navigation";
 import { Profile } from "@/types/Profile";
+import { RecentModules } from "./RecentModules";
+import { EditPic } from "./EditPic";
 
 type Props = {
 };
@@ -65,14 +67,13 @@ export const UserData = (props: Props) => {
     setUrl()
   }, [profile]);
 
-  console.log(imageUrl);
-
   return (
     <div className="mt-6 w-full">
       {profile && (
         <main className="container border border-secondary">
           <article className="flex flex-col gap-5 p-2 md:flex-row">
-            <section className="h-full md:w-1/3">
+            <section className="h-full md:w-1/3 relative">
+            <EditPic profile={profile}/>
               {imageUrl ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"
@@ -118,6 +119,9 @@ export const UserData = (props: Props) => {
           </article>
         </main>
       )}
+      <div>
+        <RecentModules user_name={profile?.user_name}/>
+      </div>
     </div>
   );
 };
