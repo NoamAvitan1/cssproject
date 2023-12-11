@@ -32,7 +32,7 @@ export const NewLayout = (props: Props) => {
   //   }
   // };
 
-  const handleWaveClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  // const handleWaveClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     // const container = document.querySelector("#waves")
     // if (!container) return
     // const {x: offsetLeft, y: offsetTop} = container.getBoundingClientRect()
@@ -44,7 +44,8 @@ export const NewLayout = (props: Props) => {
     // setTimeout(() => {
     //   container.removeChild(wave.element)
     // }, 1800)
-  };
+  // };
+  console.log(selectedBlock, codeBlocks)
 
   useEffect(() => {
     HTMLDebugger(".debug", 4);
