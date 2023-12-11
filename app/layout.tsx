@@ -26,8 +26,6 @@ export default async function RootLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("server");
-
   return (
     <html lang="en">
       <Script src="https://unpkg.com/prettier@3.0.3/standalone.js" />

@@ -10,7 +10,6 @@ export async function POST(request: Request, route: { params: { id: string }}) {
   const requestUrl = new URL(request.url)
   const fd = await request.formData()
   const email = String(fd.get('email'));
-  console.log(email)
   const user_id = route.params.id
   const supabase = createRouteHandlerClient<Database>({ cookies })
   const { data, error } = await supabase.auth.updateUser({  

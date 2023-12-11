@@ -25,7 +25,7 @@ export const FileTypeHeader = (props: Props) => {
   };
 
   const element = typeIcons[props.type as "css" | "html" | "js"];
-console.log(props.type)
+
   return (
     <div
       className={`flex h-8 items-center justify-center bg-background px-2 font-pixelify shadow [&_*]:whitespace-nowrap`}

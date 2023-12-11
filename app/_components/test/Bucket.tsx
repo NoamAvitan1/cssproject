@@ -27,7 +27,6 @@ export const Bucket = (props: Props) => {
         upsert: true, 
       });
       props.setImageUrl(blobUrl);
-      console.log(blobUrl);
       props.setIsOpen(false);
       tell("Picture changed seccesfully",'success')
   };

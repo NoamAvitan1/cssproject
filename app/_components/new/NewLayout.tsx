@@ -20,17 +20,17 @@ export const NewLayout = (props: Props) => {
     new CodeBlock(dummyHtml, "html"),
   ]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const [css, ...examples] = codeBlocks;
-    const payload = { css, examples };
-    try {
-      const res = await Api.post("new/upload-module", payload);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const [css, ...examples] = codeBlocks;
+  //   const payload = { css, examples };
+  //   try {
+  //     const res = await Api.post("new/upload-module", payload);
+  //     // console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleWaveClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     // const container = document.querySelector("#waves")

@@ -12,7 +12,7 @@ export const DragItem = ({ elements }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleDrop = (e: any) => {
-    console.log(e);
+    // console.log(e);
     setIsHovered(false)
   };
 
