@@ -65,8 +65,6 @@ export const UserData = (props: Props) => {
     setUrl()
   }, [profile]);
 
-  console.log(imageUrl);
-
   return (
     <div className="mt-6 w-full">
       {profile && (
