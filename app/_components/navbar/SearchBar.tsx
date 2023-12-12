@@ -1,5 +1,6 @@
 import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 type Profile = Database['public']['Tables']['profile']['Row']
@@ -14,7 +15,7 @@ export const SearchBar = (props: Props) => {
   const supabase = createClientComponentClient();
   const [profiles, setProfiles] = useState<Profile[]>([])
   const [modules, setModules] = useState<Module[]>([])
-
+  const router = useRouter();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 550) {
@@ -28,7 +29,7 @@ export const SearchBar = (props: Props) => {
     };
   }, []);
 
-  const handleChange = async (e: any) => {
+  const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
     if (!e?.target?.value) return;
     const query = e.target.value;
 
@@ -47,7 +48,16 @@ export const SearchBar = (props: Props) => {
         if(!moduleData.error) setModules(moduleData.data);
     }
   }
-  console.log(modules);
+
+  const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
+    if(!input) return;
+    let query = input.value;
+    if(e.key === 'Enter' && query !== ''){
+      router.push(`/search?s=${query}&mp=0&up=0`);
+      input.value = '';
+    }
+  }
   return (
     <div
       className={`${
@@ -63,6 +73,7 @@ export const SearchBar = (props: Props) => {
         </figure>
         <input
           onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
           className="w-full rounded-r-md border-l border-l-aura bg-transparent p-1 focus:outline-none "
           type="text"
           placeholder="search"
