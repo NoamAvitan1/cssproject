@@ -19,10 +19,6 @@ export const ProfileButton = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState<string | undefined>(undefined);
 
-  const supabase = createClientComponentClient()
-
-  const router = useRouter();
-
   const handleClick = async () => {
     await useSignOut(() => setUser(null));
   }
@@ -34,9 +30,7 @@ export const ProfileButton = (props: Props) => {
       setImgUrl(url ?? undefined);
     })()
   }, [user]);
-
-  console.log(user);
-
+  
   return (
     <div
       className="relative"
@@ -46,7 +40,7 @@ export const ProfileButton = (props: Props) => {
       <button className="">
         <FiUser />
       </button>
-      {isModalOpen && (
+      {isModalOpen && user && (
         <div className="absolute right-0 z-20 border-b top-full w-[200px] rounded-b border-slate-500 bg-secondary p-2 shadow-xl">
           <img src={imgUrl} className="aspect-square w-full" />
           <h1 className="text-sm">Logged as: {user?.user_metadata.user_name}</h1>

@@ -8,7 +8,7 @@ import { useState } from "react";
 type Module = Database["public"]["Tables"]["module"]["Row"];
 
 type Props = {
-  modules: Module;
+  module: Module;
 };
 
 export const Module = (props: Props) => {
@@ -27,11 +27,8 @@ export const Module = (props: Props) => {
           !toggle && "translate-x-full"
         }`}
       >
-        <p className="p-2 mt-6">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit corporis
-          fugiat commodi fuga consequatur! Animi, iusto reprehenderit et odit
-          placeat in ab repudiandae doloribus recusandae minus dolorum, esse
-          quas provident?
+        <p className="p-2 mt-6 text-white">
+          {props.module?.description}
         </p>
       </div>
     </div>

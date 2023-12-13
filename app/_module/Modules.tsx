@@ -20,7 +20,7 @@ export default async function Modules(props: Props) {
               >
                 <header className="flex w-full items-center justify-between">
                   <p className="text-xl">{module.title}</p>
-                  <Module modules={module} />
+                  <Module module={module} />
                 </header>
               </article>
             ))

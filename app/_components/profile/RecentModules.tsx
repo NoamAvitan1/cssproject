@@ -3,6 +3,8 @@ import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useMemo, useState } from "react";
 import { Database } from "@/types/supabase";
 import { Module } from "@/app/_module/Module";
+import { GoArrowRight } from "react-icons/go";
+
 
 type ModuleType = Database["public"]["Tables"]["module"]["Row"];
 type Props = {
@@ -42,13 +44,17 @@ export const RecentModules = (props: Props) => {
                 >
                   <header className="flex w-full items-center justify-between">
                     <p className="text-xl">{module.title}</p>
-                    <Module modules={module} />
+                    <Module module={module} />
                   </header>
                 </article>
               ))}
         </section>
-        {modules?.length >= 3 ? <div className="flex justify-center">
-          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="text-xl border-b-2">show all modules</button>
+        {modules?.length >= 3 ? <div className="flex justify-end">
+          <section></section>
+          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center border-b-2 gap-2">
+          <span className="text-2xl">show all modules</span>
+          <GoArrowRight className="text-xl mt-1"/>
+          </button>
         </div> : null}
       </div>
     ) : null
