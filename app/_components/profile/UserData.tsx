@@ -2,7 +2,6 @@
 import { profileAtom, userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
 import { MdOutlineEdit } from "react-icons/md";
-import { Database } from "@/types/supabase";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditProfile } from "./EditProfile";
@@ -13,6 +12,7 @@ import { useParams } from "next/navigation";
 import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
+import { useCheckImg } from "@/app/_hooks/useCheckImg";
 
 
 type Props = {
@@ -61,20 +61,21 @@ export const UserData = (props: Props) => {
   useEffect(() => {
     if (!profile?.id || !user || imageUrl) return
     const setUrl = async () => {
-      const url = await useCheckUserImg(user)
-      setImageUrl(url)
+      const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`
+      const bool = await useCheckImg(url) 
+      setImageUrl(bool? url : null)
     }
 
     setUrl()
   }, [profile]);
 
   return (
-    <div className="mt-6 w-full">
+    <div className="w-full">
       {profile && (
         <main className="container border border-secondary">
           <article className="flex flex-col gap-5 p-2 md:flex-row">
             <section className="h-full md:w-1/3 relative">
-            <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl}/>
+            {user?.id === profile?.id && <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl}/>}
               {imageUrl ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"

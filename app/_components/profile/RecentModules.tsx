@@ -1,5 +1,5 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useMemo, useState } from "react";
 import { Database } from "@/types/supabase";
 import { Module } from "@/app/_module/Module";
@@ -10,6 +10,7 @@ type Props = {
 };
 
 export const RecentModules = (props: Props) => {
+  const router = useRouter();
   const params = useParams();
   const supabase = createClientComponentClient();
   const [modules, setModules] = useState<ModuleType[] | null>(null);
@@ -29,7 +30,7 @@ export const RecentModules = (props: Props) => {
   }, []);
   return (
     modules?.length ? (
-      <div className="w-full">
+      <div className="w-full flex flex-col gap-3 mt-4">
         <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
           Recent Modules by {props.user_name}
         </h1>
@@ -46,6 +47,9 @@ export const RecentModules = (props: Props) => {
                 </article>
               ))}
         </section>
+        {modules?.length >= 3 ? <div className="flex justify-center">
+          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="text-xl border-b-2">show all modules</button>
+        </div> : null}
       </div>
     ) : null
   );

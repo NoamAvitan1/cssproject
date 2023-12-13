@@ -15,7 +15,7 @@ export const EditPic = (props: Props) => {
   return (
     <>
       <button
-        className="absolute right-2 top-2 text-xl"
+        className="absolute right-1 top-1 text-xl bg-secondary rounded-full p-2"
         onClick={() => setIsOpen(true)}
       >
         <MdOutlineEdit className="" />
