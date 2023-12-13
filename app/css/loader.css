@@ -1,0 +1,159 @@
+#loader-letters>span {
+    position: relative;
+  }
+  
+  /* #loader-letters>span:nth-child(1){
+  }
+  
+  #loader-letters>span:nth-child(2){
+  }
+  
+  #loader-letters>span:nth-child(3){
+  } */
+  
+  #humming-bird {
+    animation: humming-bird 4s infinite ease-in-out forwards;
+  }
+  
+  #loader-letters>span::after {
+    position: absolute;
+    inset: 0;
+    font-size: 17rem;
+    color: rgb(74, 174, 255);
+    top: -1.5rem;
+    left: -1rem;
+  }
+  
+  #loader-letters>span:nth-child(1)::after {
+    content: "C";
+  }
+  
+  #loader-letters>span:nth-child(2)::after {
+    content: "S";
+  }
+  
+  #loader-letters>span:nth-child(3)::after {
+    content: "S";
+  }
+
+  #clouds>* {
+    position: absolute;
+    right: 100%;
+    animation: cloud 35s infinite linear;
+  }
+
+  #flamingo {
+    animation: flamingo 8s infinite ease-in-out;
+  }
+
+  @keyframes cloud {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(580px);
+    }
+  }
+
+  @keyframes humming-bird {
+    0% {
+      transform: rotate(0deg) translateY(0);
+    }
+    20% {
+      transform: rotate(0deg) translateY(-20px);
+    }
+    40% {
+      transform: rotate(4deg) translate(-20px, -25px);
+    }
+    60% {
+      transform: rotate(6deg) translate(-30px, -15px);
+    }
+    80% {
+      transform: rotate(4deg) translate(-20px, -5px);
+    }
+    100% {
+      transform: rotate(0deg) translateY(0);
+    }
+}
+
+@keyframes rattle {
+    0%, 100% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+}
+
+@keyframes spin {
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes flamingo {
+  0% {
+    transform: translateX(0) rotateY(0);
+  }
+  40%{
+    transform: translateX(40px) rotateY(0);
+  }
+  50% {
+    transform: translateX(50px) rotateY(180deg);
+  }
+  90%{
+    transform: translateX(10px) rotateY(180deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(0);
+  }
+}
+
+.a-delay-100 {
+  animation-delay: 100ms;
+}
+.a-delay-200 {
+  animation-delay: 200ms;
+}
+.a-delay-300 {
+  animation-delay: 300ms;
+}
+.a-delay-400 {
+  animation-delay: 400ms;
+}
+.a-delay-5000 {
+  animation-delay: -7s !important;
+}
+.a-delay-10000 {
+  animation-delay: -18s !important;
+}
+.rattle-1 {
+  animation: rattle 1s infinite ease-in-out;
+}
+.rattle-1-2 {
+  animation: rattle 1.2s infinite ease-in-out;
+}
+.rattle-1-4 {
+  animation: rattle 1.4s infinite ease-in-out;
+}
+.rattle-1-6 {
+  animation: rattle 1.6s infinite ease-in-out;
+}
+.rattle-1-8 {
+  animation: rattle 1.8s infinite ease-in-out;
+}
+.rattle-2 {
+  animation: rattle 2s infinite ease-in-out;
+}
+.spin-1 {
+  animation: spin 1s linear infinite;
+}
+.spin-2 {
+  animation: spin 2s linear infinite;
+}
+.spin-3 {
+  animation: spin 3s linear infinite;
+}
+.spin-8 {
+  animation: spin 8s linear infinite;
+}
