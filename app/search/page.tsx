@@ -11,8 +11,6 @@ type Props = {
 export default function page(props: Props){
   const [type,setType] = useState<'users' | 'modules'>('users');
   
-  useEffect(() => {
-  },[])
   return (
     <div className="w-full h-full mt-7">
       <section className="flex justify-center gap-4">

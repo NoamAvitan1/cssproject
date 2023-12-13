@@ -1,6 +1,6 @@
 import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Module{
@@ -10,22 +10,33 @@ interface Module{
 type Props = {};
 
 export const ModulesSearch = (props: Props) => {
-  const searchParams = useSearchParams();
-  const search = searchParams.get("s");
-  const supabase = createClientComponentClient();
-  const [modules, setModules] = useState<Module[] | null>(null);
-  useEffect(() => {
-    const getModules = async () => {
-      if (search === null) return;
-      const { data, error } = await supabase
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const query = searchParams.get("s");
+    const page = Number(searchParams.get("mp") || 0);
+     const supabase = createClientComponentClient();
+    const [modules, setModules] = useState<Module[]>([]);
+    useEffect(() => {
+      if (query === null) return;
+        const getModules = async () => {
+        const { data, error } = await supabase
         .from("module")
         .select('title,description')
-        .textSearch("title_description", search)
+        .textSearch("title_description",'yo')
         .range(0, 9);
-      setModules(data);
+        if (!data) return;
+        setModules((prev) => [...prev, ...data]);
+        console.log(data)
+      };
+      getModules();
+    }, []);
+
+    const updateQueryParam = (key: string, value: string) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.set(key, value);
+      router.replace(`?${currentParams.toString()}`, { scroll: false });
     };
-    getModules();
-  }, [search]);
+
   return (
     <div>
       {modules?.length ? (
@@ -37,6 +48,9 @@ export const ModulesSearch = (props: Props) => {
       ) : (
         <p>modules do not found</p>
       )}
+       <button onClick={() => updateQueryParam("mp", `${page + 1}`)}>
+        Click me
+      </button>
     </div>
   );
-};
+ };

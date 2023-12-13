@@ -44,8 +44,8 @@ export const SearchBar = (props: Props) => {
       .textSearch('title_description', "`" + query + "`").limit(6),
     ])
     if(!profileData.error && !moduleData.error){
-        if(!profileData.error) setProfiles(profileData.data);
-        if(!moduleData.error) setModules(moduleData.data);
+        // if(!profileData.error) setProfiles(profileData.data);
+        // if(!moduleData.error) setModules(moduleData.data);
     }
   }
 

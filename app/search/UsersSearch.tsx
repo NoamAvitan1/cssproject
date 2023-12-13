@@ -1,9 +1,7 @@
-import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSetQuery } from "../_hooks/useSetQuery";
 
 interface Profile {
   id: string;
@@ -18,7 +16,6 @@ export const UsersSearch = (props: Props) => {
   const page = Number(searchParams.get("up") || 0);
   const supabase = createClientComponentClient();
   const [profiles, setProfiles] = useState<Profile[]>([]);
-  console.log(page);
   useEffect(() => {
     const getProfile = async () => {
       if (query === null) return;
@@ -26,12 +23,19 @@ export const UsersSearch = (props: Props) => {
         .from("profile")
         .select("user_name,id")
         .textSearch("user_name", query)
-        .range((page * 9), (page*9)+9);
-        if(!data) return;
-      setProfiles((prev)=>[...prev,...data]);
+        .range(page * 9, page * 9 + 9);
+      if (!data) return;
+      setProfiles((prev) => [...prev, ...data]);
     };
     getProfile();
-  }, [query,page]);
+  }, [query, page]);
+
+  const updateQueryParam = (key: string, value: string) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set(key, value);
+    router.replace(`?${currentParams.toString()}`, { scroll: false });
+  };
+
   return (
     <div>
       {profiles?.length ? (
@@ -43,7 +47,9 @@ export const UsersSearch = (props: Props) => {
       ) : (
         <p>users not found</p>
       )}
-      <button onClick={()=>useSetQuery('up',`${page+1}`)}>Click me</button>
+      <button onClick={() => updateQueryParam("up", `${page + 1}`)}>
+        Click me
+      </button>
     </div>
   );
 };

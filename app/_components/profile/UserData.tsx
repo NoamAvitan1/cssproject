@@ -14,6 +14,7 @@ import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
 
+
 type Props = {
 };
 
