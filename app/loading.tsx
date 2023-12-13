@@ -1,16 +1,12 @@
-"use client";
-
-import {
-  GiFlamingo,
-  GiGrass,
-  GiHighGrass,
-  GiHummingbird,
-} from "react-icons/gi";
 import { FaCloud } from "react-icons/fa";
+import { GiFlamingo, GiGrass, GiHighGrass, GiHummingbird } from "react-icons/gi";
 
-type Props = {};
+type Props = {
 
-export const Test = (props: Props) => {
+};
+
+export default function Loading (props: Props) {
+
   return (
     <div className="fixed inset-0 flex w-full flex-col items-center justify-center backdrop-blur scale-75 sm:scale-100 lg:scale-125 xl:scale-150">
       <div id="scene" className="relative rounded-l-full rounded-b-full overflow-hidden">
@@ -20,10 +16,10 @@ export const Test = (props: Props) => {
         >
           <span className="relative">
             C
-            <GiHummingbird
+            {/* <GiHummingbird
               id="humming-bird"
               className="absolute top-1/4 z-20 text-4xl text-amber-600"
-            />
+            /> */}
           </span>
           <span>S</span>
           <span>S</span>
