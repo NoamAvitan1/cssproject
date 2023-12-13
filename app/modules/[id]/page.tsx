@@ -1,15 +1,17 @@
 'use client'
 
+import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+type Module = Database['public']['Tables']['module']['Row'];
 type Props = {
 
 };
 
 export const page = (props: Props) => {
-  const [modules, setModules] = useState();
+  const [modules, setModules] = useState<Module[] | null>(null);
   const {id} = useParams();
   const supabase = createClientComponentClient();
   const updateModules = async () => {
@@ -19,7 +21,6 @@ export const page = (props: Props) => {
       .eq("user_id", id)
       .range(0, 2);
     setModules(data);
-    // console.log(data);
   };
 
   useEffect(() => {
