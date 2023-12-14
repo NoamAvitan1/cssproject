@@ -11,7 +11,7 @@ export default async function Modules(props: Props) {
       <h1 className="w-full border-b-2 border-text text-[19px] xs:text-[17px] md:text-2xl">
         Popular Modules to Check Out
       </h1>
-      <section className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {modules
           ? modules.map((module, i) => (
               <article
