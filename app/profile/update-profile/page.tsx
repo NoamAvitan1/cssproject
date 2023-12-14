@@ -2,7 +2,7 @@
 import { tell } from "@/app/_components/teller/Tale";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { object, string } from "yup";
 import * as yup from "yup";
@@ -45,6 +45,7 @@ export default function page(props: Props) {
       tell(error.message,'error');
     }
   };
+
   return (
     <div className="flex h-full w-full justify-center">
       <form
@@ -56,7 +57,7 @@ export default function page(props: Props) {
         <h1 className="grow text-lg">Update your password down below</h1>
         <div className="flex w-full flex-col gap-2">
           <label className="text-md" htmlFor="password">
-            Password
+            Password:
           </label>
           <section className="justifny-between relative mb-6 flex w-full items-center">
             <input

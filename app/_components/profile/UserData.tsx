@@ -50,6 +50,11 @@ export const UserData = (props: Props) => {
         if (typeof window !== undefined) tell("Couldn't find profile", "error");
         return;
       }
+      if(data === null){
+        console.log(data);
+        tell("Couldn't find profile", "error");
+        return;
+      }
       setProfile(data && data[0] ? data[0] : null);
       if (!idParam || user?.id == idParam) {
         setUserProfile(data && data[0] ? data[0] : null)

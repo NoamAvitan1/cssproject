@@ -23,7 +23,7 @@ export const ModulesSearch = (props: Props) => {
     const getModules = async () => {
       const { data, error } = await supabase
         .from("module")
-        .select("title,description")
+        .select("title,description,id")
         .textSearch("title_description", query)
         .range(0, 9);
       if (query == prevQuery) {

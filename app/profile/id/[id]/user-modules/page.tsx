@@ -1,16 +1,14 @@
-'use client'
-import { useParams } from "next/navigation";
+import { UserModules } from "./UserModules";
 
 type Props = {
 
 };
 
 export default function page(props: Props){
-  const params = useParams();
-  console.log(params);
+  
   return (
-    <div>
-
+    <div className="w-full flex flex-col mt-8 items-center space-y-6">
+         <UserModules/>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { MdHome } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
+import { SiAtom } from "react-icons/si";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { tell } from "../teller/Tale";
 
@@ -51,6 +52,12 @@ export const SideBarMenu = (props: Props) => {
       icon: <MdHome />,
       guard: () => true,
     },
+    {
+      label: "Create",
+      onClick: () => navigate("/new"),
+      icon: <SiAtom />,
+      guard: () => true,
+    }
     // {
     //   label: "Sign out",
     //   onClick: () => signOut(),
