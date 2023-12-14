@@ -1,9 +1,9 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams, useRouter } from "next/navigation";
-import { use, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Database } from "@/types/supabase";
-import { Module } from "@/app/_module/Module";
 import { GoArrowRight } from "react-icons/go";
+import { ModulesData } from "@/app/_module/ModulesData";
 
 
 type ModuleType = Database["public"]["Tables"]["module"]["Row"];
@@ -24,7 +24,6 @@ export const RecentModules = (props: Props) => {
       .eq("user_id", params.id)
       .range(0, 2);
     setModules(data);
-    // console.log(data);
   };
 
   useEffect(() => {
@@ -36,22 +35,12 @@ export const RecentModules = (props: Props) => {
         <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
           Recent Modules by {props.user_name}
         </h1>
-        <section className="mt-4 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {modules?.map((module, i) => (
-                <article
-                  className="relative aspect-square overflow-hidden rounded-md bg-secondary p-2"
-                  key={i}
-                >
-                  <header className="flex w-full items-center justify-between">
-                    <p className="text-xl">{module.title}</p>
-                    <Module module={module} />
-                  </header>
-                </article>
-              ))}
-        </section>
+        <div className="">
+        <ModulesData modules={modules}/>
+        </div>
         {modules?.length >= 3 ? <div className="flex justify-end">
           <section></section>
-          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center border-b-2 gap-2">
+          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center border-b-2 border-text gap-2">
           <span className="text-2xl">show all modules</span>
           <GoArrowRight className="text-xl mt-1"/>
           </button>

@@ -51,7 +51,6 @@ export const UserData = (props: Props) => {
         return;
       }
       if(data === null){
-        console.log(data);
         tell("Couldn't find profile", "error");
         return;
       }

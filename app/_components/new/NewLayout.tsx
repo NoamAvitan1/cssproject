@@ -45,7 +45,7 @@ export const NewLayout = (props: Props) => {
     //   container.removeChild(wave.element)
     // }, 1800)
   // };
-  console.log(selectedBlock, codeBlocks)
+  // console.log(selectedBlock, codeBlocks)
 
   useEffect(() => {
     HTMLDebugger(".debug", 4);

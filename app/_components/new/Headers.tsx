@@ -20,7 +20,6 @@ export const Headers = (props: Props) => {
       await navigator.clipboard.writeText(text);
       alert("Text copied to clipboard!");
     } catch (error) {
-      console.error(error);
     }
   };
 

@@ -38,12 +38,10 @@ export const ModuleSettings = (props: Props) => {
           tell("module " + moduleTitle + " successfully added", 'success')
         })
         .catch(error => {
-          console.log(error)
         })
       })
       .catch((error: any) => {
         tell(error.message, "error");
-        console.log(error)
       });
   };
 

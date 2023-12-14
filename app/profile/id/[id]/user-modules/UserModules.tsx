@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Database } from "@/types/supabase";
 import { Module } from "@/app/_module/Module";
+import { ModulesData } from "@/app/_module/ModulesData";
 
 type Modules = Database["public"]["Tables"]["module"]["Row"];
 type Props = {};
@@ -52,22 +53,8 @@ export const UserModules = (props: Props) => {
     }
   }, []);
   return (
-    <div className="w-10/12 flex flex-col gap-4">
-      <section className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {modules
-          ? modules.map((module, i) => (
-              <article
-                className="relative aspect-square overflow-hidden rounded-md bg-secondary p-2"
-                key={i}
-              >
-                <header className="flex w-full items-center justify-between">
-                  <p className="text-xl">{module.title}</p>
-                  <Module module={module} />
-                </header>
-              </article>
-            ))
-          : null}
-      </section>
+    <div className="w-full flex flex-col items-center gap-4">
+      <ModulesData modules={modules}/>
       {array?.length ? <nav className="flex justify-center items-center gap-4">
         {array?.map((v,i) => (
         <button className={`${page === i ?'text-blue-400':''} text-lg`} onClick={()=>navigatePages(i)}>{i}</button>
