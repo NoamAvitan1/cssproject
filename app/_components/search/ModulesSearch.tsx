@@ -2,11 +2,9 @@ import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { SearchModuleComponent } from "./SearchModuleComponent";
+import { SearchModule } from "@/types/Modules";
 
-interface Module {
-  title: string;
-  description: string;
-}
 type Props = {};
 
 export const ModulesSearch = (props: Props) => {
@@ -15,22 +13,23 @@ export const ModulesSearch = (props: Props) => {
   const query = searchParams.get("s");
   const page = Number(searchParams.get("mp") || 0);
   const supabase = createClientComponentClient();
-  const [modules, setModules] = useState<Module[]>([]);
+  const [modules, setModules] = useState<SearchModule[]>([]);
   const [prevQuery, setPrevQuery] = useState<string>("");
 
   useEffect(() => {
-    if (query === null) return;
+    if (query === null || !query) return;
     const getModules = async () => {
       const { data, error } = await supabase
         .from("module")
-        .select("title,description,id")
+        .select("title,description,id,created_at,price,user_id(id,user_name)")
         .textSearch("title_description", query)
         .range(0, 9);
+      const modules = data as unknown as SearchModule[]
       if (query == prevQuery) {
         if (!data) return;
-        setModules((prev) => [...prev, ...data]);
+        setModules((prev) => [...prev, ...modules]);
       } else if (query !== prevQuery) {
-        setModules(data ? data : []);
+        setModules(modules ? modules : []);
       }
       setPrevQuery(query);
     };
@@ -48,7 +47,7 @@ export const ModulesSearch = (props: Props) => {
       {modules?.length ? (
         modules?.map((module, i) => (
           <div key={i}>
-            <p>{module?.title}</p>
+            <SearchModuleComponent module={module} />
           </div>
         ))
       ) : (

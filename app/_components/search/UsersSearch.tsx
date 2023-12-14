@@ -16,22 +16,21 @@ export const UsersSearch = (props: Props) => {
   const page = Number(searchParams.get("up") || 0);
   const supabase = createClientComponentClient();
   const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [prevQuery, setPrevQuery] = useState<string>('');
-  
+  const [prevQuery, setPrevQuery] = useState<string>("");
+
   useEffect(() => {
     const getProfile = async () => {
-      if (query === null) return;
+      if (query === null || !query) return;
       const { data, error } = await supabase
         .from("profile")
         .select("user_name,id")
         .textSearch("user_name", query)
         .range(page * 9, page * 9 + 9);
-      if(query === prevQuery){
-      if (!data) return;
-      setProfiles((prev) => [...prev, ...data]);
-      }
-      else if(query !== prevQuery){
-        setProfiles(data? data:[])
+      if (query === prevQuery) {
+        if (!data) return;
+        setProfiles((prev) => [...prev, ...data]);
+      } else if (query !== prevQuery) {
+        setProfiles(data ? data : []);
       }
       setPrevQuery(query);
     };
