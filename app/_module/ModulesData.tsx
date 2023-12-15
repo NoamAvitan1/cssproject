@@ -7,9 +7,8 @@ modules:Modules[] | null;
 };
 
 export const ModulesData = (props: Props) => {
-
   return (
-     <div className="w-10/12 space-y-6 ">
+     <div className="w-10/12 space-y-6">
       <article className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {props.modules
           ? props.modules.map((module, i) => (

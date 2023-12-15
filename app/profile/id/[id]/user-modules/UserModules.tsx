@@ -53,7 +53,7 @@ export const UserModules = (props: Props) => {
     }
   }, []);
   return (
-    <div className="w-full flex flex-col items-center gap-4">
+    <div className="w-full flex flex-col items-center gap-4 ">
       <ModulesData modules={modules}/>
       {array?.length ? <nav className="flex justify-center items-center gap-4">
         {array?.map((v,i) => (

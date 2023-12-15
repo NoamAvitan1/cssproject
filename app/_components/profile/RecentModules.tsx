@@ -31,18 +31,18 @@ export const RecentModules = (props: Props) => {
   }, []);
   return (
     modules?.length ? (
-      <div className="w-full flex flex-col gap-3 mt-4">
+      <div className="w-full flex flex-col gap-6 mt-4">
         <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
           Recent Modules by {props.user_name}
         </h1>
-        <div className="">
+        <div className="w-full flex justify-center">
         <ModulesData modules={modules}/>
         </div>
         {modules?.length >= 3 ? <div className="flex justify-end">
           <section></section>
-          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center border-b-2 border-text gap-2">
-          <span className="text-2xl">show all modules</span>
-          <GoArrowRight className="text-xl mt-1"/>
+          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center gap-2">
+          <span className="">Go to modules page</span>
+          <GoArrowRight className="mt-1"/>
           </button>
         </div> : null}
       </div>
