@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import { EmailUpdateButton } from "./EmailUpdateButton";
 import { PasswordUpdateButton } from "./PasswordUpdateButton";

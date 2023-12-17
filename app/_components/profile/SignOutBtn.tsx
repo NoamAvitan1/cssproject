@@ -1,3 +1,4 @@
+'use client'
 import { useSignOut } from "@/app/_hooks/useLogOut";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";

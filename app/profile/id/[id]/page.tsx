@@ -1,6 +1,4 @@
-"use client";
 import { UserData } from "../../../_components/profile/UserData";
-import { RecentModules } from "@/app/_components/profile/RecentModules";
 import { SensitiveInfo } from "@/app/_components/profile/SensitiveInfo";
 import { SignOutBtn } from "@/app/_components/profile/SignOutBtn";
 
