@@ -25,7 +25,7 @@ export const UsersSearch = (props: Props) => {
         .from("profile")
         .select("user_name,id")
         .textSearch("user_name", query)
-        .range(page * 9, page * 9 + 9);
+        .range(page * 9, page * 9 + 8);
       if (query === prevQuery) {
         if (!data) return;
         setProfiles((prev) => [...prev, ...data]);
@@ -54,7 +54,7 @@ export const UsersSearch = (props: Props) => {
       ) : (
         <p>users not found</p>
       )}
-      <button onClick={() => updateQueryParam("up", `${page + 1}`)}>
+      <button onClick={() => profiles.length >= 9 && updateQueryParam("up", `${page + 1}`)}>
         Click me
       </button>
     </div>

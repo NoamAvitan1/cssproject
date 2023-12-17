@@ -3,8 +3,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-type Profile = Database['public']['Tables']['profile']['Row']
-type Module = Database['public']['Tables']['module']['Row']
+type Profile = Database["public"]["Tables"]["profile"]["Row"];
+type Module = Database["public"]["Tables"]["module"]["Row"];
 
 type Props = {
   flag: boolean;
@@ -13,10 +13,10 @@ type Props = {
 
 export const SearchBar = (props: Props) => {
   const supabase = createClientComponentClient();
-  const [profiles, setProfiles] = useState<Profile[]>([])
-  const [modules, setModules] = useState<Module[]>([])
-  const [inputQuery, setInputQuery] = useState<string>('')
-  const ref:any = useRef();
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [modules, setModules] = useState<Module[]>([]);
+  const [inputQuery, setInputQuery] = useState<string>("");
+  const ref: any = useRef();
   const router = useRouter();
 
   useEffect(() => {
@@ -32,41 +32,48 @@ export const SearchBar = (props: Props) => {
     };
   }, []);
 
-  const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e?.target?.value) return;
     setInputQuery(e.target.value);
 
     const [profileData, moduleData] = await Promise.all([
       await supabase
-      .from("profile")
-      .select("*")
-      .textSearch("user_name", inputQuery).limit(4),
+        .from("profile")
+        .select("*")
+        .textSearch("user_name", inputQuery)
+        .limit(4),
       await supabase
-      .from("module")
-      .select("*")
-      .textSearch('title_description', "`" + inputQuery + "`").limit(6),
-    ])
-    if(!profileData.error && !moduleData.error){
-         if(!profileData.error) setProfiles(profileData.data);
-         if(!moduleData.error) setModules(moduleData.data);
+        .from("module")
+        .select("*")
+        .textSearch("title_description", "`" + inputQuery + "`")
+        .limit(6),
+    ]);
+    if (!profileData.error && !moduleData.error) {
+      if (!profileData.error) setProfiles(profileData.data);
+      if (!moduleData.error) setModules(moduleData.data);
     }
-  }
+  };
 
-  const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const input = e.target as HTMLInputElement;
-    if(!input) return;
+    if (!input) return;
     let query = input.value;
-    if(e.key === 'Enter' && query !== ''){
+    if (e.key === "Enter" && query !== "") {
       navigate(query);
-      input.value = '';
+      // input.value = '';
     }
-  }
+  };
 
-  const navigate = (query:string) => {
+  const navigate = (query: string) => {
     router.push(`/search?s=${query}&mp=0&up=0`);
-    if(!ref.current.value)return;
-    ref.current.value = "";
-  }
+    if (!ref.current.value) return;
+    // ref.current.value = "";
+  };
+
+  useEffect(() => {
+    ref.current.value = ''
+  }, [])
+
   return (
     <div
       className={`${
@@ -75,12 +82,15 @@ export const SearchBar = (props: Props) => {
     >
       <div className="flex w-11/12  items-center justify-center overflow-hidden rounded-lg border-2 border-aura bg-background">
         <figure
-          onClick={() => {props.setFlag(!props.flag),navigate(inputQuery)}}
+          onClick={() => {
+            props.setFlag(!props.flag), navigate(inputQuery);
+          }}
           className="cursor-pointer p-2"
         >
           <AiOutlineSearch />
         </figure>
-        <input ref={ref}
+        <input
+          ref={ref}
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)}
           className="w-full rounded-r-md border-l border-l-aura bg-transparent p-1 focus:outline-none "
