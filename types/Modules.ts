@@ -11,3 +11,10 @@ export type SearchModule = {
       user_name: string;
     }
   }
+
+export type ModuleSettings = {
+  title: string
+  access_type: 'public' | 'private' | 'paid'
+  price: number
+  description: string
+}

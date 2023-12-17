@@ -5,47 +5,29 @@ import { dummyCss, dummyHtml } from "./dummyFiles";
 import { HTMLView } from "./HTMLView";
 import { EditorsView } from "./EditorsView";
 import { HTMLDebugger } from "../../../utils/HTMLDebugger";
-import Api from "@/utils/axios";
-import { Wave } from "./Wave";
-import { ModuleForm } from "./ModuleForm";
-import { ModuleSettings } from "./ModuleSettings";
+import { ModuleSettings as Settings } from "./ModuleSettings";
+import { ModuleSettings } from "@/types/Modules";
+import { useSearchParams } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/types/supabase";
+import { useAtom } from "jotai";
+import { userAtom } from "@/app/_jotai/userAtoms";
 
 type Props = {};
 
 export const NewLayout = (props: Props) => {
+  const params = useSearchParams();
+  const [user] = useAtom(userAtom);
   const [isXl, setIsXl] = useState<boolean>(false);
   const [selectedBlock, setSelectedBlock] = useState(0);
-  const [codeBlocks, setCodeBlocks] = useState<Array<CodeBlock>>([
-    new CodeBlock(dummyCss, "css"),
-    new CodeBlock(dummyHtml, "html"),
-  ]);
+  const [codeBlocks, setCodeBlocks] = useState<Array<CodeBlock>>(
+    params.has("edit")
+      ? [new CodeBlock("", "css"), new CodeBlock("", "html")]
+      : [new CodeBlock(dummyCss, "css"), new CodeBlock(dummyHtml, "html")],
+  );
+  const [moduleSettings, setModuleSettings] = useState<ModuleSettings | null>();
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const [css, ...examples] = codeBlocks;
-  //   const payload = { css, examples };
-  //   try {
-  //     const res = await Api.post("new/upload-module", payload);
-  //     // console.log(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleWaveClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    // const container = document.querySelector("#waves")
-    // if (!container) return
-    // const {x: offsetLeft, y: offsetTop} = container.getBoundingClientRect()
-    // // console.log(boundries)
-    // const x = e.clientX - offsetLeft - 140
-    // const y = e.clientY - offsetTop - 150
-    // const wave = new Wave(x, y);
-    // container.appendChild(wave.element);
-    // setTimeout(() => {
-    //   container.removeChild(wave.element)
-    // }, 1800)
-  // };
-  // console.log(selectedBlock, codeBlocks)
+  type Module = Database["public"]["Tables"]["module"]["Row"];
 
   useEffect(() => {
     HTMLDebugger(".debug", 4);
@@ -67,6 +49,25 @@ export const NewLayout = (props: Props) => {
     }
   }, [isXl]);
 
+  useEffect(() => {
+    if (!params.has("edit") || !params.get("edit")) return;
+    const supabase = createClientComponentClient();
+    const id = params.get("edit");
+    const getModule = async (id: string) => {
+      const module = (await supabase
+        .from("module")
+        .select("*")
+        .eq("id", id)) as unknown as Module;
+      if (String(module.user_id) != String(user?.id)) return;
+      setModuleSettings({
+        title: module.title,
+        access_type: module.access_type,
+        price: module.price,
+        description: module.description,
+      });
+    };
+  }, [params]);
+
   return (
     <div className="flex h-[95vh] w-full border-4 border-secondary bg-background">
       <article className="h-full grow">
@@ -87,7 +88,11 @@ export const NewLayout = (props: Props) => {
               setSelectedBlock={setSelectedBlock}
             />
           )}
-          <ModuleSettings isOpen={true} codeBlocs={codeBlocks} />
+          <Settings
+            isOpen={true}
+            codeBlocs={codeBlocks}
+            settings={moduleSettings ? moduleSettings : undefined}
+          />
         </div>
         <div className="flex grow flex-col">
           <HTMLView

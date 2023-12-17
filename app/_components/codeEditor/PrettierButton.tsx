@@ -1,37 +1,45 @@
-'use client'
+"use client";
 
 import Image from "next/image";
-import prettierLogo from '../../_assets/prettier.png'
+import prettierLogo from "../../_assets/prettier.png";
+import { prettier } from "../../../utils/prettier";
+import { tell } from "../teller/Tale";
 
 type Props = {
-    instance: any
-    code: string
-    lang: string
+  instance: any;
+  code: string;
+  lang: string;
 };
 
-
 export const PrettierButton = ({ instance, code, lang = "css" }: Props) => {
-    
-  let prettier: any
-  let prettierPlugins: any
-  
-  if (typeof window !== 'undefined') {
-    // @ts-ignore
-    prettier = window.prettier, prettierPlugins = window.prettierPlugins
-  }
-  
+  // let prettier: any
+  // let prettierPlugins: any
+
+  // if (typeof window !== 'undefined') {
+  //   // @ts-ignore
+  //   prettier = window.prettier, prettierPlugins = window.prettierPlugins
+  // }
+
   const handleClick = async () => {
-    const formatted = await prettier.format(code, {
-      parser: lang,
-      plugins: prettierPlugins,
-    });
-    instance.setValue(formatted)
-  }  
+    try {
+      const formatted = await prettier(code, lang);
+      instance.setValue(formatted);
+    } catch (error) {
+      tell("Please make sure your code is properly formatted", "alert");
+      return;
+    }
+  };
 
   return (
-    code && code.length > 3 && <button onClick={handleClick} title="format code with Prettier"
-    className="font-extrabold flex justify-center w-10 h-10 overflow-hidden absolute right-0 items-center bg-gradient-radial text-violet-800 from-sky-500 to-violet-300 opacity-30 hover:opacity-100 duration-300">
+    code &&
+    code.length > 3 && (
+      <button
+        onClick={handleClick}
+        title="format code with Prettier"
+        className="absolute right-0 flex h-10 w-10 items-center justify-center overflow-hidden bg-gradient-radial from-sky-500 to-violet-300 font-extrabold text-violet-800 opacity-30 duration-300 hover:opacity-100"
+      >
         <Image src={prettierLogo} alt="P" />
-    </button>
+      </button>
+    )
   );
 };

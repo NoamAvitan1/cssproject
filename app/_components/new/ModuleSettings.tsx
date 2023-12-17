@@ -1,20 +1,21 @@
-import { ModuleType } from "@/types/Modules";
-import { useState } from "react";
+import { ModuleSettings as Settings, ModuleType } from "@/types/Modules";
+import { useEffect, useState } from "react";
 import { HiCog6Tooth } from "react-icons/hi2";
-import { array, number, object, string } from "yup";
 import { tell } from "../teller/Tale";
 import Api from "@/utils/axios";
 import { CodeBlock } from "@/types/CodeBlock";
 import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { moduleObject } from "@/app/_yup/moduleSchema";
+import { prettier } from "@/utils/prettier";
 type Props = {
-  codeBlocs: CodeBlock[]
+  codeBlocs: CodeBlock[];
   isOpen: boolean;
+  settings?: Settings
 };
 
 export const ModuleSettings = (props: Props) => {
-  const [user] = useAtom(userAtom)
+  const [user] = useAtom(userAtom);
   const [type, setType] = useState<ModuleType>("public");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,25 +26,42 @@ export const ModuleSettings = (props: Props) => {
     values.description = form["description"].value;
     values.title = form["module_title"].value;
     values.price = form["price"].value ? form["price"].value : 0;
-    values.css = props.codeBlocs[0].code
-    values.html = props.codeBlocs.filter(block => (block.type == 'html')).map(block => block.code)
-    values.user_id = user?.id
+    values.css = props.codeBlocs[0].code;
+    values.html = props.codeBlocs
+      .filter((block) => block.type == "html")
+      .map((block) => block.code);
+    values.user_id = user?.id;
+
+    try {
+      await prettier(values.css, "css");
+      await Promise.all(
+        values.html.forEach(async (block: CodeBlock) => {
+          prettier(block.code, "html");
+        }),
+      );
+    } catch (error) {
+      tell("Please make sure your code is properly formatted", "alert");
+      return;
+    }
 
     moduleObject
       .validate(values)
       .then(() => {
-        Api.post('module/add', values)
-        .then(data => {
-          const moduleTitle = data.data[0].title as string 
-          tell("module " + moduleTitle + " successfully added", 'success')
-        })
-        .catch(error => {
-        })
+        Api.post("module/add", values)
+          .then((data) => {
+            const moduleTitle = data.data[0].title as string;
+            tell("module " + moduleTitle + " successfully added", "success");
+          })
+          .catch((error) => {});
       })
       .catch((error: any) => {
         tell(error.message, "error");
       });
   };
+
+  useEffect(() => {
+    if (props.settings?.access_type) setType(props.settings?.access_type);
+  }, [props.settings]);
 
   return (
     <article className="text-md flex h-full flex-col gap-4 border border-secondary bg-secondary font-light [&_input]:border [&_input]:border-primary [&_input]:bg-transparent [&_input]:p-1">
@@ -58,12 +76,18 @@ export const ModuleSettings = (props: Props) => {
         <section className="flex flex-col gap-8 p-2">
           <div className="space-y-1">
             <label htmlFor="module_title">Title</label>
-            <input name="module_title" type="text" className="focus:outline-none" />
+            <input
+              defaultValue={props.settings?.title ?? ""}
+              name="module_title"
+              type="text"
+              className="focus:outline-none"
+            />
           </div>
           <div className="space-y-1">
             <label htmlFor="">Access</label>
             <div className="grid grid-cols-3 gap-1 [&_button]:duration-150">
-              <button type="button"
+              <button
+                type="button"
                 onClick={() => setType("public")}
                 className={`w-full border border-primary py-1 ${
                   type == "public" ? "opacity-50" : ""
@@ -71,7 +95,8 @@ export const ModuleSettings = (props: Props) => {
               >
                 public
               </button>
-              <button type="button"
+              <button
+                type="button"
                 onClick={() => setType("paid")}
                 className={`w-full border border-primary py-1 ${
                   type == "paid" ? "opacity-50" : ""
@@ -79,7 +104,8 @@ export const ModuleSettings = (props: Props) => {
               >
                 paid
               </button>
-              <button type="button"
+              <button
+                type="button"
                 onClick={() => setType("private")}
                 className={`w-full border border-primary py-1 ${
                   type == "private" ? "opacity-50" : ""
@@ -94,6 +120,8 @@ export const ModuleSettings = (props: Props) => {
               Price <span className="text-slate-500">(in US Dollars)</span>
             </label>
             <input
+              defaultValue={props.settings?.price ?? 0}
+              step={0.01}
               type="number"
               name="price"
               min={0}
@@ -103,9 +131,12 @@ export const ModuleSettings = (props: Props) => {
           <div className="space-y-1">
             <label htmlFor="description">Description</label>
             <textarea
+              defaultValue={props.settings?.description ?? ''}
+              placeholder="You can describe your module's theme, purpose, etc."
               name="description"
-              rows={5}
-              className="w-full border border-primary bg-transparent focus:outline-none"
+              rows={7}
+              maxLength={200}
+              className="w-full border border-primary bg-transparent focus:outline-none text-sm px-px"
             />
           </div>
         </section>
