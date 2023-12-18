@@ -41,17 +41,17 @@ export const Bucket = (props: Props) => {
   }
 
   return (
-      <div className="">
-        <div className="">
-          {blobUrl ? <img className="" src={blobUrl} alt="" />
-           : <LuImage className=""/>}
+      <div className="flex flex-col justify-between gap-5 h-full p-2">
+        <div className="w-full border border-black rounded-md h-full flex items-center"> 
+          {blobUrl ? <img className="w-full h-full" src={blobUrl} alt="" />
+           : <LuImage className="w-full text-black text-xl"/>}
         </div>
-        <div className="">
-          <div className="">
-          <input className="" onChange={(e)=>handleChange(e)} type="file" />
-          <button  className="">Choose a file</button>
+        <div className="flex justify-evenly">
+          <div className="relative">
+          <input className="opacity-0 cursor-pointer absolute w-[150px] h-[41px]" onChange={(e)=>handleChange(e)} type="file" />
+          <button  className="bg-secondary w-[150px] p-2 z-10">Choose a file</button>
           </div>
-          <button onClick={() => updateFile()} className="">save</button>
+          <button onClick={() => updateFile()} className="bg-success p-2 w-[150px]">save</button>
         </div>
       </div>
   );
