@@ -33,9 +33,9 @@ export const ModulesSearch = (props: Props) => {
         setModules(modules ? modules : []);
       }
       setPrevQuery(query);
+      setIsLoading(false)
     };
     getModules();
-    setIsLoading(false)
   }, [query, page]);
 
   const updateQueryParam = (key: string, value: string) => {
@@ -56,7 +56,7 @@ export const ModulesSearch = (props: Props) => {
         <p>modules do not found</p>
       )}
       <button onClick={() => modules.length >= 9 && updateQueryParam("mp", `${page + 1}`)}
-      className="px-4 py-2 rounded-full bg-secondary hover:ring hover:ring-aura"
+      className="px-4 py-2 rounded-full bg-secondary hover:ring ring-accent duration-150"
       >
         Load more results
       </button>
