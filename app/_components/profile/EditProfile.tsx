@@ -63,8 +63,8 @@ export const EditProfile = (props: Props) => {
               Name:
             </label>
             <section className="mb-4">
-              <input
-                className="w-full rounded-md border border-black p-2 text-[#060504] focus:border-4"
+              <input style={{boxSizing:'border-box'}}
+                className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-secondary block w-full p-3"
                 name="user_name"
                 defaultValue={`${props.profile.user_name}`}
               />
@@ -75,7 +75,7 @@ export const EditProfile = (props: Props) => {
             <section className="mb-4">
               <textarea
                 defaultValue={`${props.profile.about ?? ""}`}
-                className="w-full resize-none rounded-md border border-black p-2 text-black focus:border-4"
+                className="resize-none bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-secondary block w-full p-3"
                 name="about"
                 id=""
                 rows={5}

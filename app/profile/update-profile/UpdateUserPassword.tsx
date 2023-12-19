@@ -61,7 +61,7 @@ export default function UpdateUserPassword(props: Props) {
           </label>
           <section className="justifny-between relative mb-6 flex w-full items-center">
             <input
-              className="w-full rounded-md p-2 border border-black focus:outline-none text-[#060504] "
+              className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="••••••••"
@@ -89,7 +89,7 @@ export default function UpdateUserPassword(props: Props) {
           </label>
           <section className="relative mb-6 flex w-full items-center justify-between ">
             <input
-              className="w-full rounded-md border border-black focus:outline-none p-2 text-[#060504]"
+              className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               name="confirmPassword"

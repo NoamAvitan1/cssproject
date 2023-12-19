@@ -96,7 +96,7 @@ export const DynamicForm = (props: Props) => {
           </label>
           <section className="mb-6">
             <input
-              className="w-full p-2 text-[#060504] rounded-md"
+              className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
               name="name"
               placeholder="Mary Popins"
               required
@@ -109,7 +109,7 @@ export const DynamicForm = (props: Props) => {
       </label>
       <section className="mb-6">
         <input
-          className="w-full p-2 text-[#060504] rounded-md"
+          className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
           name="email"
           placeholder="you@example.com"
         />
@@ -119,7 +119,7 @@ export const DynamicForm = (props: Props) => {
       </label>
       <section className="relative mb-6 flex items-center justifny-between">
         <input
-          className="w-full p-2 text-[#060504] rounded-md"
+          className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
           type={showPassword ? "text" : "password"}
           name="password"
           placeholder="••••••••"
@@ -146,7 +146,7 @@ export const DynamicForm = (props: Props) => {
           </label>
           <section className="relative mb-6 flex items-center justify-between ">
             <input
-              className="w-full p-2 text-[#060504] rounded-md"
+              className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-md outline-none focus:border-blue-600 w-full p-3"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               name="ConfirmPassword"
