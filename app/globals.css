@@ -32,6 +32,14 @@
     --accent: #989a99;
 }
 
+#main-header {
+   background-image:url('https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/System/bg-1');
+   /* background-position: 0 70%; */
+   /* background-size: contain; */
+   background-repeat:no-repeat;
+   width: 100%;
+  }
+
 .reflection {
   animation: reflect 200ms forwards linear;
   /* left: -100% */

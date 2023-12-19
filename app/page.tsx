@@ -1,6 +1,5 @@
 import ModulesHomePage from "./_module/ModulesHomePage";
 
-
 export default async function Index() {
 
   return (

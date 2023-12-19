@@ -5,7 +5,7 @@ import { SignOutBtn } from "@/app/_components/profile/SignOutBtn";
 export default function Profile() {
   return (
     <article className="flex w-full justify-center">
-      <div className="flex w-11/12 flex-col items-center gap-8 py-8">
+      <div className="flex w-11/12 flex-col items-center gap-6 py-8">
         <UserData />
         <SensitiveInfo />
         <SignOutBtn />

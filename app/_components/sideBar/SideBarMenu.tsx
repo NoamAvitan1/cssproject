@@ -29,7 +29,7 @@ export const SideBarMenu = (props: Props) => {
 
   const items: Array<INavItem> = [
     {
-      label: "Sign up",
+      label: "Sign in",
       onClick: () => navigate("/login"),
       icon: <FiUser />,
       guard: () => (user ? false : true),

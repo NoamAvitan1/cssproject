@@ -48,6 +48,7 @@ export const EmailUpdateButton = (props: Props) => {
       setValidationError(error);
       tell(error.message,'error');
     }
+    tell('Check your mail for continue the process');
   };
   return (
     <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>

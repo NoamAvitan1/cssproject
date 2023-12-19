@@ -8,6 +8,8 @@ export default async function ModulesHomePage(props: Props) {
   const supabase = createServerComponentClient({ cookies });
   const { data: modules, error } = await supabase.from("module").select("*");
   return (
+    <div className="w-10/12">
       <ModulesData modules={modules}/>
+    </div>
   );
 }

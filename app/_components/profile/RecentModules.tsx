@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Database } from "@/types/supabase";
 import { GoArrowRight } from "react-icons/go";
 import { ModulesData } from "@/app/_module/ModulesData";
-
+import { FaHandPointRight } from "react-icons/fa6";
 
 type ModuleType = Database["public"]["Tables"]["module"]["Row"];
 type Props = {
@@ -40,12 +40,21 @@ export const RecentModules = (props: Props) => {
         </div>
         {modules?.length >= 3 ? <div className="flex justify-end">
           <section></section>
-          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center gap-2">
-          <span className="">Go to modules page</span>
+          <button onClick={()=>router.push(`/profile/id/${params.id}/user-modules`)} className="flex items-center gap-2 border-b border-b-blue-500 px-1">
+          <span className="">Show all modules</span>
           <GoArrowRight className="mt-1"/>
           </button>
         </div> : null}
       </div>
-    ) : null
+    ) : <div className="flex justify-center items-center h-[200px] border border-secondary my-6">
+      <div className="flex flex-col items-center gap-1">
+        <h1 className="text-2xl">
+          No recent modules found
+        </h1>
+        <a className="flex items-center gap-2 border-b border-b-blue-500 px-1" href="/new">Create your first module
+        <FaHandPointRight/>
+        </a>
+      </div>
+    </div>
   );
 };

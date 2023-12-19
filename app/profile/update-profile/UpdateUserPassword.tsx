@@ -42,6 +42,7 @@ export default function UpdateUserPassword(props: Props) {
     } catch (error:any) {
       setValidationError(error);
       tell(error.message,'error');
+      e.preventDefault();
     }
   };
 

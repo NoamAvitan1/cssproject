@@ -60,19 +60,19 @@ export const SearchBar = (props: Props) => {
     let query = input.value;
     if (e.key === "Enter" && query !== "") {
       navigate(query);
-      // input.value = '';
+      input.value = '';
     }
   };
 
   const navigate = (query: string) => {
     router.push(`/search?s=${query}&mp=0&up=0`);
     if (!ref.current.value) return;
-    // ref.current.value = "";
+    ref.current.value = "";
   };
 
-  useEffect(() => {
-    ref.current.value = ''
-  }, [])
+  // useEffect(() => {
+  //   ref.current.value = ''
+  // }, [])
 
   return (
     <div

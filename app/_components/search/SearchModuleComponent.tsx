@@ -1,5 +1,6 @@
 import { useCheckImg } from "@/app/_hooks/useCheckImg";
 import { SearchModule } from "@/types/Modules";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiUser } from "react-icons/hi2";
 import { TbCurrencyDollar } from "react-icons/tb";
@@ -10,7 +11,7 @@ type Props = {
 
 export const SearchModuleComponent = ({ module }: Props) => {
   const [pic, setPic] = useState<string | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     const getPick = async () => {
       const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${module.user_id?.id}/${module.user_id?.id}`;
@@ -19,10 +20,13 @@ export const SearchModuleComponent = ({ module }: Props) => {
     };
   }, [module]);
 
+  const handleClick = () => {
+    router.push(`/module/${module?.id}`)
+  }
   return (
-    <div className="flex justify-between rounded border-b border-text bg-secondary p-4">
+    <div onClick={()=>handleClick()} className="flex justify-between rounded border cursor-pointer border-transparent duration-150 hover:shadow hover:shadow-text bg-secondary p-4">
       <div className="space-y-2">
-        <div className="flex place-items-baseline gap-2">
+        <div className="flex place-items-baseline items-center gap-2">
           <h1 className="flex h-6 items-center rounded-full bg-sky-300 px-2 text-slate-700">
             title: {module.title}
           </h1>
@@ -30,6 +34,7 @@ export const SearchModuleComponent = ({ module }: Props) => {
             {module.created_at.substring(0, 10)}
           </span>
           <a
+          onClick={(e)=>e.stopPropagation()}
             className="flex h-6 items-center rounded-full bg-green-300 px-2 text-slate-700"
             href={"/profile/id/" + module.user_id.id}
           >

@@ -54,7 +54,9 @@ export const UserModules = (props: Props) => {
   }, []);
   return (
     <div className="w-full flex flex-col items-center gap-4 ">
+      <div className="w-10/12">
       <ModulesData modules={modules}/>
+      </div>
       {array?.length ? <nav className="flex justify-center items-center gap-4">
         {array?.map((v,i) => (
         <button className={`${page === i ?'text-blue-400':''} text-lg`} onClick={()=>navigatePages(i)}>{i}</button>

@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 export const UserSetter = ({ user: currentUser }: { user: User | null }) => {
   const [user, setUser] = useAtom(userAtom)
-  
+  console.log(user);
   useEffect(() => {
     setUser(currentUser)
   }, [])
