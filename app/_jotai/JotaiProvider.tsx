@@ -2,9 +2,7 @@
 
 import { Provider } from "jotai";
 
-type Props = {
-
-};
+type Props = {};
 
 export const JotaiProvider = ({ children }: { children: React.ReactNode }) => {
 

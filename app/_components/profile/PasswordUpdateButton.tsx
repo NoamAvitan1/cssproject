@@ -3,12 +3,9 @@
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { useAtom } from "jotai";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
 import { tell } from "../teller/Tale";
 
-type Props = {
-
-};
+type Props = {};
 
 export const PasswordUpdateButton = (props: Props) => {
     const [user,setUser] = useAtom(userAtom);

@@ -1,8 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Logo } from "../_components/common/Logo";
 import { ThemeChangeButton } from "../_components/layout/ThemeChangeButton";
-import { NotificationsButton } from "../_components/navbar/NotificationsButton";
 import { ProfileButton } from "../_components/navbar/ProfileButton";
 import { SearchBar } from "../_components/navbar/SearchBar";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -32,7 +31,7 @@ export const NavBar: React.FC<Props> = (props) => {
           } block cursor-pointer xs:hidden`}
         />
         <ThemeChangeButton />
-        <NotificationsButton />
+        {/* <NotificationsButton /> */}
         <ProfileButton setIsVeilOpen={setIsVeilOpen} />
       </div>
     </div>

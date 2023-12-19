@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { UsersSearch } from "./UsersSearch";
 import { ModulesSearch } from "./ModulesSearch";
@@ -9,10 +8,6 @@ type Props = {};
 
 export const Search = (props: Props) => {
   const [type, setType] = useState<"users" | "modules">("modules");
-
-  const router = useRouter();
-
-  const searchParams = useSearchParams();
 
   const handleChange = (type: "users" | "modules") => {
     setType(type);
