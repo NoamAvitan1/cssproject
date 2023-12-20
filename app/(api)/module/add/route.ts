@@ -14,6 +14,9 @@ export async function POST(request: Request) {
   try {
     await moduleObject.validate(moduleData)
     const { data, error } = await supabase.from('module').insert(moduleData).select()
+    if (error) {
+      return NextResponse.json(error)
+    }
     return NextResponse.json(data)
   } catch (error) {
     return NextResponse.json(error)

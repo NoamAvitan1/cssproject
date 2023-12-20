@@ -75,7 +75,7 @@ export const Headers = (props: Props) => {
               customName={c.type == "css" ? "index" : "demo"}
             />
           </div>
-          {hovered == i && (
+          {hovered == i && props.selectedBlock == i && (
             <HeaderOptions
               index={i}
               handleCopy={() => handleCopy(i)}
