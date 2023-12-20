@@ -44,10 +44,14 @@ export const Module = ({ index, module }: Props) => {
       <div className="flex aspect-square flex-col justify-between overflow-hidden rounded-md bg-secondary">
         <div className="p-2">
           <div className="w-full space-y-2">
-            <div className="flex w-full flex-wrap items-center  gap-3 border-b border-violet-500 py-2">
+            <a
+              onClick={(e) => e.stopPropagation()}
+              className="flex w-full flex-wrap items-center  gap-3 border-b border-violet-500 py-2"
+              href={"/module/" + module.id}
+            >
               <SiAtom className="text-xl text-blue-500" />
               <span className="font-bold">{module.title}</span>
-            </div>
+            </a>
             <HiOutlineInformationCircle className="text-2xl text-violet-500" />
             <a
               onClick={(e) => e.stopPropagation()}
@@ -90,7 +94,7 @@ export const Module = ({ index, module }: Props) => {
             <HiMiniArrowDown className="text-lg" />
             {module.downloads}
           </span>
-          <span title="examples" className="flex text-lg gap-1 items-center">
+          <span title="examples" className="flex items-center gap-1 text-lg">
             <HiOutlinePhoto />
             {module.html?.length}
           </span>
