@@ -11,7 +11,7 @@ import { prettier } from "@/utils/prettier";
 type Props = {
   codeBlocs: CodeBlock[];
   isOpen: boolean;
-  settings?: Settings
+  settings?: Settings;
 };
 
 export const ModuleSettings = (props: Props) => {
@@ -35,8 +35,8 @@ export const ModuleSettings = (props: Props) => {
     try {
       await prettier(values.css, "css");
       await Promise.all(
-        values.html.forEach(async (block: CodeBlock) => {
-          prettier(block.code, "html");
+        values.html.map(async (code: string) => {
+          prettier(code, "html");
         }),
       );
     } catch (error) {
@@ -49,10 +49,11 @@ export const ModuleSettings = (props: Props) => {
       .then(() => {
         Api.post("module/add", values)
           .then((data) => {
+            console.log(data)
             const moduleTitle = data.data[0].title as string;
             tell("module " + moduleTitle + " successfully added", "success");
           })
-          .catch((error) => {});
+          .catch((error) => console.log(error));
       })
       .catch((error: any) => {
         tell(error.message, "error");
@@ -131,12 +132,12 @@ export const ModuleSettings = (props: Props) => {
           <div className="space-y-1">
             <label htmlFor="description">Description</label>
             <textarea
-              defaultValue={props.settings?.description ?? ''}
+              defaultValue={props.settings?.description ?? ""}
               placeholder="You can describe your module's theme, purpose, etc."
               name="description"
               rows={7}
               maxLength={200}
-              className="w-full border border-primary bg-transparent focus:outline-none text-sm px-px"
+              className="w-full border border-primary bg-transparent px-px text-sm focus:outline-none"
             />
           </div>
         </section>

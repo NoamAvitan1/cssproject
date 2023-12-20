@@ -6,10 +6,13 @@ type Props = {};
 
 export default async function ModulesHomePage(props: Props) {
   const supabase = createServerComponentClient({ cookies });
-  const { data: modules, error } = await supabase.from("module").select("*,user_id(id,user_name)");
-  return (
+  const { data: modules, error } = await supabase
+    .from("module")
+    .select("*,user_id(id,user_name)");
+  
+    return (
     <div className="w-10/12">
-      <ModulesData modules={modules}/>
+      <ModulesData modules={modules} />
     </div>
   );
 }
