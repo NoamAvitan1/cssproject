@@ -22,7 +22,7 @@ export const SingleModule = (props: Props) => {
         .select("*")
         .eq("id", id);
       SetModule(data && data[0]);
-      if (!data) tell("Module not found");
+      if (!data) tell("Module not found",'alert');
     } catch (error) {
       tell("Error loading module", "error");
     }
@@ -52,8 +52,8 @@ export const SingleModule = (props: Props) => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-full h-full" id="app">
-      {img && img.map((image, i) => <img src={image.src} alt="" />)}
+    <div className="flex h-full w-full items-center justify-center" id="app">
+      {img && img.map((image, i) => <img key={i} src={image.src} alt="" />)}
     </div>
   );
 };
