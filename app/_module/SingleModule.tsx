@@ -27,14 +27,14 @@ export const SingleModule = (props: Props) => {
       tell("Error loading module", "error");
     }
   };
-  console.log("d")
+  console.log("d");
   const getImages = async () => {
-    console.log(module?.html)
+    console.log(module?.html);
     if (!module?.html) return;
     const imageElements = await Promise.all(
-      module.html.map((html) => htmlToImage(html, module.css))
+      module.html.map((html) => htmlToImage(html, module.css)),
     );
-    console.log(imageElements[0].src)
+    console.log(imageElements[0].src);
     setImg(imageElements);
   };
 
@@ -46,15 +46,13 @@ export const SingleModule = (props: Props) => {
     getModule();
   }, []);
 
-
   return (
-    // <div>
-    //   {img.map((imgElement, index) => (
-    //     <div key={index}>
-    //       <img src={imgElement.src} alt={`Image ${index}`} />
-    //     </div>
-    //   ))}
-    // </div>
-    <>adsdsa</>
+    <div>
+      {img.map((imgElement, index) => (
+        <div key={index}>
+          <img src={imgElement.src} alt={`Image ${index}`} />
+        </div>
+      ))}
+    </div>
   );
 };

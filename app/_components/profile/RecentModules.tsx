@@ -20,7 +20,7 @@ export const RecentModules = (props: Props) => {
   const updateModules = async () => {
     let { data, error } = await supabase
       .from("module")
-      .select(`*, user_id(*)`)
+      .select(`*, user_id(id,user_name)`)
       .eq("user_id", params.id)
       .range(0, 2);
     setModules(data);
