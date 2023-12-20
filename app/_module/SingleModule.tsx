@@ -11,7 +11,7 @@ type Props = {};
 
 export const SingleModule = (props: Props) => {
   const [module, SetModule] = useState<Module | null>();
-  const [img, setImg] = useState<HTMLImageElement[]>([]);
+  const [img, setImg] = useState<HTMLImageElement[]>();
   const supabase = createClientComponentClient();
   const { id } = useParams();
   const getModule = async () => {
@@ -27,15 +27,20 @@ export const SingleModule = (props: Props) => {
       tell("Error loading module", "error");
     }
   };
-  console.log("d")
+
   const getImages = async () => {
-    console.log(module?.html)
     if (!module?.html) return;
-    const imageElements = await Promise.all(
-      module.html.map((html) => htmlToImage(html, module.css))
-    );
-    console.log(imageElements[0].src)
-    setImg(imageElements);
+
+    try {
+      const imgElement: HTMLImageElement[] = [];
+      for (let i = 0; i < module?.html.length; i++) {
+        const image = await htmlToImage(module?.html[i], module?.css);
+        imgElement.push(image);
+      }
+      setImg(imgElement);
+    } catch (error) {
+      console.error("Error converting HTML to image:", error);
+    }
   };
 
   useEffect(() => {
@@ -46,15 +51,9 @@ export const SingleModule = (props: Props) => {
     getModule();
   }, []);
 
-
   return (
-    // <div>
-    //   {img.map((imgElement, index) => (
-    //     <div key={index}>
-    //       <img src={imgElement.src} alt={`Image ${index}`} />
-    //     </div>
-    //   ))}
-    // </div>
-    <>adsdsa</>
+    <div className="flex justify-center items-center w-full h-full" id="app">
+      {img && img.map((image, i) => <img src={image.src} alt="" />)}
+    </div>
   );
 };

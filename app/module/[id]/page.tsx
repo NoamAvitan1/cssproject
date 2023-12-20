@@ -7,7 +7,7 @@ type Props = {
 export default function page(props: Props){
 
   return (
-    <div>
+    <div className="w-full h-full">
       <SingleModule/>
     </div>
   );
