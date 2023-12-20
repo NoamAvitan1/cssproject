@@ -11,7 +11,7 @@ type Props = {};
 
 export const SingleModule = (props: Props) => {
   const [module, SetModule] = useState<Module | null>();
-  const [img, setImg] = useState<HTMLImageElement[]>();
+  const [examples, setExamples] = useState<HTMLImageElement[]>();
   const supabase = createClientComponentClient();
   const { id } = useParams();
   const getModule = async () => {
@@ -30,14 +30,13 @@ export const SingleModule = (props: Props) => {
 
   const getImages = async () => {
     if (!module?.html) return;
-
     try {
       const imgElement: HTMLImageElement[] = [];
       for (let i = 0; i < module?.html.length; i++) {
         const image = await htmlToImage(module?.html[i], module?.css);
         imgElement.push(image);
       }
-      setImg(imgElement);
+      setExamples(imgElement);
     } catch (error) {
       console.error("Error converting HTML to image:", error);
     }
@@ -52,8 +51,8 @@ export const SingleModule = (props: Props) => {
   }, []);
 
   return (
-    <div className="flex h-full w-full items-center justify-center" id="app">
-      {img && img.map((image, i) => <img key={i} src={image.src} alt="" />)}
+    <div className="flex h-full w-full items-center justify-center !text-white" id="app">
+      {examples && examples.map((image, i) => <img key={i} src={image.src} alt="" />)}
     </div>
   );
 };

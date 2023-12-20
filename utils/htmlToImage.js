@@ -11,19 +11,19 @@ export const htmlToImage = (html, style) => {
 
     element.appendChild(styleElement);
     app.appendChild(element);
-    const img = new Image();
+      const img = new Image();
 
-    hti.toJpeg(element).then((url) => {
-      const computedStyles = getComputedStyle(element);
-      const w = computedStyles.width;
-      const h = computedStyles.height;
-      img.style.width = w;
-      img.style.height = h;
-      img.src = url;
-      element.remove()
-      resolve(img);
-    }).catch((error) => {
-      reject(error);
-    });
+      hti.toJpeg(element).then((url) => {
+        const computedStyles = getComputedStyle(element);
+        const w = computedStyles.width;
+        const h = computedStyles.height;
+        img.style.width = w;
+        img.style.height = h;
+        img.src = url;
+        element.remove()
+        resolve(img);
+      }).catch((error) => {
+        reject(error);
+      });
   });
 };
