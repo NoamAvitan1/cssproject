@@ -71,7 +71,7 @@ export const Module = ({ index, module }: Props) => {
             <a
               onClick={(e) => e.stopPropagation()}
               className="flex h-6 w-fit items-center rounded-full bg-green-300 px-2 text-slate-700"
-              href={"/profile/id/" + module.user_id.id}
+              href={"/profile/id/" + module.user_id.id }
             >
               {imgUrl && (
                 <img

@@ -3,7 +3,7 @@ import { Module } from "./Module";
 
 type Modules = Database["public"]["Tables"]["module"]["Row"];
 type Props = {
-  modules: Modules[] | null;
+  modules: Modules[] | null | undefined;
 };
 
 export const ModulesData = (props: Props) => {

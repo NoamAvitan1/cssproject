@@ -7,61 +7,77 @@ import { Module } from "@/app/_module/Module";
 import { ModulesData } from "@/app/_module/ModulesData";
 
 type Modules = Database["public"]["Tables"]["module"]["Row"];
-type Props = {};
+type Props = {
+  type: "public" | "paid" | "all";
+};
 
 export const UserModules = (props: Props) => {
   const [page, setPage] = useState<number>(0);
   const [modules, setModules] = useState<Modules[] | null>(null);
   const { id } = useParams();
   const supabase = createClientComponentClient();
-  const [flag, setFlag] = useState<boolean>(true);
-  const [array,setArray] = useState<number[]>();
+  const [array, setArray] = useState<number[]>();
 
   const getLength = async () => {
-    let { count, error } = await supabase
+    const supabaseQury = supabase
       .from("module")
       .select(`*`, { count: "exact", head: true })
       .eq("user_id", id);
+    if (props.type !== "all") {
+      supabaseQury.eq("access_type", props.type);
+    }
+    let { count, error } = await supabaseQury;
     if (count) {
       let pages = Math.ceil(count / 9);
       setArray(new Array(pages).fill(0));
     }
   };
 
-  const updateModules = async () => {
-    let { data, error } = await supabase
-      .from("module")
-      .select(`*, user_id(*)`)
-      .eq("user_id", id)
-      .range((page * 9), (page * 9) + 8);
+  const getModules = async () => {
+    const supabaseQury = supabase
+    .from("module")
+    .select(`*,user_id(id,user_name)`)
+    .eq("user_id", id)
+    .range(page * 9, page * 9 + 8);
+    if (props.type !== "all") {
+      supabaseQury.eq("access_type", props.type);
+    }
+    let { data, error } = await supabaseQury
     setModules(data);
   };
 
-  const navigatePages = (i:number) => {
-    if(page === i)return;
+  const navigatePages = (i: number) => {
+    if (page === i) return;
     setPage(i);
-  }
+  };
 
   useEffect(() => {
-    updateModules();
-  }, [page]);
+    getModules();
+  }, [page,props.type]);
 
   useEffect(() => {
-    if (flag) {
-      setFlag(false);
-      getLength();
-    }
-  }, []);
+    setPage(0);
+    getLength();
+  }, [props.type]);
+
   return (
-    <div className="w-full flex flex-col items-center gap-4 ">
+    <div className="flex w-full flex-col items-center gap-4">
       <div className="w-10/12">
-      <ModulesData modules={modules}/>
+        <ModulesData modules={modules} />
       </div>
-      {array?.length ? <nav className="flex justify-center items-center gap-4">
-        {array?.map((v,i) => (
-        <button className={`${page === i ?'text-blue-400':''} text-lg`} onClick={()=>navigatePages(i)}>{i}</button>
-        ))}
-      </nav> : null}
+      {array?.length ? (
+        <nav className="flex items-center justify-center gap-4">
+          {array?.map((v, i) => (
+            <button
+              key={i}
+              className={`${page === i ? "text-blue-400" : ""} text-lg`}
+              onClick={() => navigatePages(i)}
+            >
+              {i}
+            </button>
+          ))}
+        </nav>
+      ) : null}
     </div>
   );
 };

@@ -5,9 +5,13 @@ finishing touches
  - verify RLS
  - verify schema validations (client side, server side)
 
+payment
+
 modules
  - sorting
  - filter by:
     - public/ paid (default both)
     - number of examples (1, 2, 3, 4)(default all)
-    - number of downloads (more than 100, 500, 1000+)
+
+
+fix image problem
