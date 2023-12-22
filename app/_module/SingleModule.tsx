@@ -5,15 +5,31 @@ import { useEffect, useState } from "react";
 import { tell } from "../_components/teller/Tale";
 import { Database } from "@/types/supabase";
 import { htmlToImage } from "../../utils/htmlToImage";
+import { Modal } from "../_components/common/Modal";
 
 type Module = Database["public"]["Tables"]["module"]["Row"];
+
+interface IModal {
+  isOpen: boolean;
+  index: number | null;
+}
+
 type Props = {};
 
 export const SingleModule = (props: Props) => {
-  const [module, SetModule] = useState<Module | null>();
+  const [module, setModule] = useState<Module | null>();
   const [examples, setExamples] = useState<HTMLImageElement[]>();
+  const [over, setOver] = useState<number | null>(null);
+  const [modal, setModal] = useState<IModal>({ isOpen: false, index: null });
+
   const supabase = createClientComponentClient();
+
   const { id } = useParams();
+
+  const closeModal = (...args: any) => {
+    setModal((prev: IModal) => ({ index: prev.index, isOpen: false }));
+  };
+
   const getModule = async () => {
     if (!id) return;
     try {
@@ -21,14 +37,14 @@ export const SingleModule = (props: Props) => {
         .from("module")
         .select("*")
         .eq("id", id);
-      SetModule(data && data[0]);
-      if (!data) tell("Module not found",'alert');
+      setModule(data && data[0]);
+      if (!data) tell("Module not found", "alert");
     } catch (error) {
       tell("Error loading module", "error");
     }
   };
 
-  const getImages = async () => {
+  const getExamples = async () => {
     if (!module?.html) return;
     try {
       const imgElement: HTMLImageElement[] = [];
@@ -42,17 +58,67 @@ export const SingleModule = (props: Props) => {
     }
   };
 
+  const handleExampleClick = (i: number) => {
+    setModal({ isOpen: true, index: i });
+  };
+
   useEffect(() => {
-    getImages();
+    getExamples();
   }, [module]);
 
   useEffect(() => {
     getModule();
   }, []);
-
+  console.log(modal);
   return (
-    <div className="flex h-full w-full items-center justify-center !text-white" id="app">
-      {examples && examples.map((image, i) => <img key={i} src={image.src} alt="" />)}
-    </div>
+    <article
+      className="flex h-full w-full items-center justify-center"
+      id="app"
+    >
+      <div className="container grid max-w-[1000px] gap-4 p-4 md:grid-cols-2">
+        {examples &&
+          examples.map((example, i) => (
+            <div className="rounded-[0.43rem] bg-gradient-to-b from-violet-500 to-sky-500 p-[1px]">
+              <button
+                key={i}
+                onClick={() => handleExampleClick(i)}
+                onMouseOver={() => setOver(i)}
+                onMouseLeave={() => setOver(null)}
+                className="relative aspect-square w-full overflow-clip rounded-md border bg-background"
+              >
+                <img
+                  src={example.src}
+                  alt=""
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 duration-300 ${
+                    over == i ? "scale-105" : "scale-100"
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+      </div>
+      <Modal isOpen={modal.isOpen} setIsOpen={closeModal}>
+        <img
+          src={
+            examples && typeof modal.index == "number"
+              ? examples[modal.index].src
+              : undefined
+          }
+          alt=""
+        />
+      </Modal>
+    </article>
   );
 };
+
+// const queryBuilder = (queries) => {
+//   let baseQuery = supabase.from().select()
+//   for (const query of queries) {
+//     baseQuery += query
+//   }
+//   baseQuery += limit()
+//   return baseQuery
+// }
+
+// const publicModulesQuery = queryBuilder([`.range()`, `.eq()`])
+// const publicModules = await publicModulesQuery()

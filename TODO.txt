@@ -8,10 +8,7 @@ finishing touches
 payment
 
 modules
- - sorting
  - filter by:
     - public/ paid (default both)
     - number of examples (1, 2, 3, 4)(default all)
-
-
-fix image problem
+    - number of downloads (more than 100, 500, 1000+)
