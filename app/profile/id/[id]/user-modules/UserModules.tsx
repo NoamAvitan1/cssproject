@@ -3,7 +3,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Database } from "@/types/supabase";
-import { Module } from "@/app/_module/Module";
 import { ModulesData } from "@/app/_module/ModulesData";
 
 type Modules = Database["public"]["Tables"]["module"]["Row"];
