@@ -30,6 +30,7 @@ export const ModuleSettings = (props: Props) => {
     values.html = props.codeBlocs
       .filter((block) => block.type == "html")
       .map((block) => block.code);
+    values.examples_count = values.html.length;
     values.user_id = user?.id;
 
     try {
@@ -49,7 +50,7 @@ export const ModuleSettings = (props: Props) => {
       .then(() => {
         Api.post("module/add", values)
           .then((data) => {
-            console.log(data)
+            console.log(data);
             const moduleTitle = data.data[0].title as string;
             tell("module " + moduleTitle + " successfully added", "success");
           })
