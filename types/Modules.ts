@@ -12,6 +12,20 @@ export type SearchModule = {
     }
   }
 
+  export type ModulesType = {
+          created_at: string
+          description: string
+          downloads: number
+          id: string
+          price: number
+          title: string
+          title_description: string | null
+          user_id: {
+            id: string;
+            user_name: string;
+          }
+    }
+
 export type ModuleSettings = {
   title: string
   access_type: 'public' | 'private' | 'paid'

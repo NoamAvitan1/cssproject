@@ -1,9 +1,9 @@
 import { Database } from "@/types/supabase";
 import { Module } from "./Module";
+import { ModulesType } from "@/types/Modules";
 
-type Modules = Database["public"]["Tables"]["module"]["Row"];
 type Props = {
-  modules: Modules[] | null | undefined;
+  modules: ModulesType[] | null | undefined;
 };
 
 export const ModulesData = (props: Props) => {

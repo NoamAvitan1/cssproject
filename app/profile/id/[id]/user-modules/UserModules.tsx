@@ -2,17 +2,16 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Database } from "@/types/supabase";
 import { ModulesData } from "@/app/_module/ModulesData";
+import { ModulesType } from "@/types/Modules";
 
-type Modules = Database["public"]["Tables"]["module"]["Row"];
 type Props = {
   type: "public" | "paid" | "all";
 };
 
 export const UserModules = (props: Props) => {
   const [page, setPage] = useState<number>(0);
-  const [modules, setModules] = useState<Modules[] | null>(null);
+  const [modules, setModules] = useState<ModulesType[] | null>(null);
   const { id } = useParams();
   const supabase = createClientComponentClient();
   const [array, setArray] = useState<number[]>();
@@ -35,14 +34,14 @@ export const UserModules = (props: Props) => {
   const getModules = async () => {
     const supabaseQury = supabase
     .from("module")
-    .select(`*,user_id(id,user_name)`)
+    .select(`created_at,description,downloads,price,title,title_description,user_id(id,user_name)`)
     .eq("user_id", id)
     .range(page * 9, page * 9 + 8);
     if (props.type !== "all") {
       supabaseQury.eq("access_type", props.type);
     }
     let { data, error } = await supabaseQury
-    setModules(data);
+    setModules(data as unknown as ModulesType[]);
   };
 
   const navigatePages = (i: number) => {
