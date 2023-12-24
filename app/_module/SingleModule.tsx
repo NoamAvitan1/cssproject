@@ -27,9 +27,7 @@ export default async function SingleModule(props: Props) {
   for (let i = 0; i < moduleData.html.length; i++) {
     const imageBinary = await htmlToImage(moduleData.html[i], moduleData.css);
     if(!imageBinary || typeof imageBinary === 'number') return;
-    const imageBlob = new Blob([imageBinary],{type: "image/png"});
-    const imageUrl = URL.createObjectURL(imageBlob);
-    images.push(imageUrl);
+    images.push(imageBinary);
   }
 
   return (
@@ -38,7 +36,7 @@ export default async function SingleModule(props: Props) {
       id="app"
     >
       <div className="container grid max-w-[1000px] gap-4 p-4 md:grid-cols-2">
-        <SingleModuleImages/>
+        <SingleModuleImages imageBuffers={JSON.stringify(images)}/>
       </div>
       {/* <Modal isOpen={modal.isOpen} setIsOpen={closeModal}>
         <img
