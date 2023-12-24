@@ -1,17 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { tell } from "../_components/teller/Tale";
-import { Database } from "@/types/supabase";
-import { Modal } from "../_components/common/Modal";
 import { cookies } from "next/headers";
 import { SingleModuleImages } from "./SingleModuleImages";
 const htmlToImage =  require("../../utils/htmlToImage");
-
-type Module = Database["public"]["Tables"]["module"]["Row"];
-
-interface IModal {
-  isOpen: boolean;
-  index: number | null;
-}
 
 type Props = {
   id: string;
@@ -38,28 +28,6 @@ export default async function SingleModule(props: Props) {
       <div className="container grid max-w-[1000px] gap-4 p-4 md:grid-cols-2">
         <SingleModuleImages imageBuffers={JSON.stringify(images)}/>
       </div>
-      {/* <Modal isOpen={modal.isOpen} setIsOpen={closeModal}>
-        <img
-          src={
-            examples && typeof modal.index == "number"
-              ? examples[modal.index].src
-              : undefined
-          }
-          alt=""
-        />
-      </Modal> */}
     </article>
   );
 }
-
-// const queryBuilder = (queries) => {
-//   let baseQuery = supabase.from().select()
-//   for (const query of queries) {
-//     baseQuery += query
-//   }
-//   baseQuery += limit()
-//   return baseQuery
-// }
-
-// const publicModulesQuery = queryBuilder([`.range()`, `.eq()`])
-// const publicModules = await publicModulesQuery()
