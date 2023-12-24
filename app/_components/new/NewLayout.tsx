@@ -69,9 +69,9 @@ export const NewLayout = (props: Props) => {
   }, [params]);
 
   return (
-    <div className="flex h-[95vh] w-full border-4 border-secondary bg-background">
+    <div className="flex h-[95vh] w-full border-t-4 border-secondary bg-background">
       <article className="h-full grow">
-        <div className="flex h-[70%] gap-1 overflow-auto border-b border-b-secondary bg-secondary">
+        <div className="flex h-[70%] border-x-4 border-secondary gap-1 overflow-auto border-b-4 border-b-secondary bg-secondary">
           <EditorsView
             lang={isXl || selectedBlock == 0 ? "css" : "html"}
             codeBlocks={isXl ? [codeBlocks[0]] : codeBlocks}
@@ -94,7 +94,7 @@ export const NewLayout = (props: Props) => {
             settings={moduleSettings ? moduleSettings : undefined}
           />
         </div>
-        <div className="flex grow flex-col">
+        <div className="relative flex flex-col">
           <HTMLView
             html={
               codeBlocks[selectedBlock + (isXl || selectedBlock == 0 ? 1 : 0)]

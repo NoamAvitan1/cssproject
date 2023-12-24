@@ -45,7 +45,9 @@ export const Monaco = (props: Props) => {
   };
 
   const handleChange = (value: string | undefined) => {
-    if (!value) return;
+    if (!value && value !== "") {
+      return
+    };
     if (props.onChange) props.onChange(value);
   };
 

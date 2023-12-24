@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const HTMLView = (props: Props) => {
-  const showcaseRef = useRef<HTMLDivElement | null>(null);
+  const showcaseRef = useRef<any>(null);
   const [hovered, setHovered] = useState(false);
 
   const handleHover = () => {
@@ -20,31 +20,27 @@ export const HTMLView = (props: Props) => {
 
   useEffect(() => {
     if (!showcaseRef.current) return;
-    const el = showcaseRef.current;
-    el.innerHTML = "";
-    const wrapper = document.createElement("div");
-    wrapper.className =
-      "w-full";
-    const htmlEl = useStringToNode(props.html);
-    const style = document.createElement("style");
-    style.textContent = props.css;
-    el.appendChild(style);
-    wrapper.appendChild(htmlEl!);
-    el.appendChild(wrapper);
+    const el = showcaseRef.current as HTMLIFrameElement;
+
+    const iframeDocument = el.contentDocument || el.contentWindow?.document;
+    if (iframeDocument) {
+      iframeDocument.body.innerHTML = `<div><style>${props.css}</style>${props.html}</div>`;
+    }
+    el.contentDocument?.write(
+      `<div><style>${props.css}</style>${props.html}</div>`,
+    );
+    const newHeight = el.contentWindow?.document.body.scrollHeight;
+    if (!newHeight) return
+    el.height = newHeight + 10 + "px";
+    // console.log(iframeDocument?.documentElement.innerHTML);
   }, [props.css, props.html]);
 
   return (
-    <article
-      onPointerOver={handleHover}
-      onPointerLeave={handleHover}
-      className="relative flex grow flex-col border-t-2 border-t-secondary"
-      // className="relative flex grow flex-col overflow-auto bg-secondary p-6"
-    >
-      {/* <VFX hovered={hovered} /> */}
-      <div className="grow">
-        <div ref={showcaseRef} className="relative h-full"></div>
-      </div>
-    </article>
+    <iframe
+      id="showcase"
+      ref={showcaseRef}
+      className="min-w-full border"
+    ></iframe>
   );
 };
 
@@ -79,3 +75,13 @@ const VFX = ({ hovered }: { hovered: boolean }) => {
     </>
   );
 };
+
+// const wrapper = document.createElement("div");
+// wrapper.className =
+//   "w-full";
+// const htmlEl = useStringToNode(props.html);
+// const style = document.createElement("style");
+// style.textContent = props.css;
+// el.appendChild(style);
+// wrapper.appendChild(htmlEl!);
+// el.appendChild(wrapper);
