@@ -116,9 +116,10 @@ export const UserData = (props: Props) => {
                 <div className="w-full rounded-md bg-secondary p-2 text-sm xl:text-[17px]">
                   {profile?.about ? (
                     <p className="h-full break-normal">{profile?.about}</p>
-                    ) : (
-                      <p>Go edit your profile and write about yourself...</p>
-                  )}
+                    ) : user?.id === profile?.id ? 
+                      <p>Go edit your profile and write about yourself...</p> :
+                      <p>{profile?.user_name} has not yet written about himself</p>
+                  }
                 </div>
               </div>
             </section>

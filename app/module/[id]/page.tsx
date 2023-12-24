@@ -1,14 +1,10 @@
-import { SingleModule } from "@/app/_module/SingleModule";
+import  SingleModule  from "@/app/_module/SingleModule";
 
-type Props = {
 
-};
-
-export default function page(props: Props){
-
+export default function page({params}:{params:{id:string}}){
   return (
     <div className="w-full h-full">
-      <SingleModule/>
+      <SingleModule id={params.id}/>
     </div>
   );
 };
