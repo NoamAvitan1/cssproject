@@ -39,7 +39,7 @@ export const HTMLView = (props: Props) => {
     <iframe
       id="showcase"
       ref={showcaseRef}
-      className="min-w-full border"
+      className="min-w-full"
     ></iframe>
   );
 };
