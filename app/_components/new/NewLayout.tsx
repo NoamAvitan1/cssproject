@@ -73,6 +73,9 @@ export const NewLayout = (props: Props) => {
         price: module.price,
         description: module.description,
       });
+      const htmlBlocks = module.html.map((html: string) => new CodeBlock(html, 'html'))
+      const cssBlock = new CodeBlock(module.css, 'css')
+      setCodeBlocks([cssBlock, ...htmlBlocks])
     };
     if(id) getModule(id);
   }, [params]);
