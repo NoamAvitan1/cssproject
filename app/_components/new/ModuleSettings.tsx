@@ -8,6 +8,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { moduleObject } from "@/app/_yup/moduleSchema";
 import { prettier } from "@/utils/prettier";
+import { useSearchParams } from "next/navigation";
 type Props = {
   codeBlocs: CodeBlock[];
   isOpen: boolean;
@@ -17,6 +18,7 @@ type Props = {
 export const ModuleSettings = (props: Props) => {
   const [user] = useAtom(userAtom);
   const [type, setType] = useState<ModuleType>("public");
+  const params = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,11 +50,24 @@ export const ModuleSettings = (props: Props) => {
     moduleObject
       .validate(values)
       .then(() => {
-        Api.post("module/add", values)
+        const url = params.has("edit")
+          ? `module/update/${params.get("edit")}`
+          : "module/add";
+        Api.post(url, values)
           .then((data) => {
             console.log(data);
             const moduleTitle = data.data[0].title as string;
-            tell("module " + moduleTitle + " successfully added", "success");
+            console.log(moduleTitle);
+            tell(
+              "module " +
+                moduleTitle +
+                ` ${
+                  params.has("edit")
+                    ? "successfully updated"
+                    : "successfully added"
+                }`,
+              "success",
+            );
           })
           .catch((error) => console.log(error));
       })

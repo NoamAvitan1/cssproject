@@ -95,6 +95,7 @@ export const Module = ({ index, module }: Props) => {
                 {" " + module.created_at.substring(0, 10)}
               </span>
             </span>
+            <a href={`/new?edit=${module?.id}`}>edit</a>
             <span className="flex h-6 w-fit items-center rounded-full bg-violet-400 px-2 text-slate-700">
               description:{" "}
             </span>

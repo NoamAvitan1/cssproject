@@ -54,11 +54,14 @@ export const NewLayout = (props: Props) => {
     const supabase = createClientComponentClient();
     const id = params.get("edit");
     const getModule = async (id: string) => {
-      const module = (await supabase
+      const { data : moduleData } = (await supabase
         .from("module")
         .select("*")
-        .eq("id", id)) as unknown as Module;
-      if (String(module.user_id) != String(user?.id)) return;
+        .eq("id", id)) as unknown as any;
+        const module = moduleData[0];
+      if (String(module.user_id) !== String(user?.id)) {
+        return;
+      }
       setModuleSettings({
         title: module.title,
         access_type: module.access_type,
@@ -66,6 +69,7 @@ export const NewLayout = (props: Props) => {
         description: module.description,
       });
     };
+    if(id) getModule(id);
   }, [params]);
 
   return (
