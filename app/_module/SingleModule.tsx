@@ -9,9 +9,8 @@ type Props = {
 
 export default async function SingleModule(props: Props) {
   const supabase = createServerComponentClient({ cookies });
-
   const images: Buffer[] = [];
-  
+
   const { data }: any = await supabase.from("module").select("*").eq("id", props.id);
   const moduleData = data[0];
   for (let i = 0; i < moduleData.html.length; i++) {
