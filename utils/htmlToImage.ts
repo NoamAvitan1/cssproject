@@ -6,7 +6,6 @@ module.exports = async (html: string, style: string) => {
   try {
     const imageBuffer = await nhti({
       html: styledHtml,
-      CSSAnimation
     });
     return imageBuffer as Buffer;
   } catch (error) {
