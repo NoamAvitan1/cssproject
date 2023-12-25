@@ -14,12 +14,11 @@ import { ModuleOverlay } from "./ModuleOverlay";
 import { SiAtom } from "react-icons/si";
 import { useCheckImg } from "../_hooks/useCheckImg";
 import { TbCurrencyDollar } from "react-icons/tb";
-
-type Module = Database["public"]["Tables"]["module"]["Row"];
+import { ModulesType } from "@/types/Modules";
 
 type Props = {
   index: number;
-  module: Module;
+  module: ModulesType;
 };
 
 export const Module = ({ index, module }: Props) => {
@@ -112,7 +111,7 @@ export const Module = ({ index, module }: Props) => {
           </span>
           <span title="examples" className="flex items-center gap-1 text-lg">
             <HiOutlinePhoto />
-            {module.html?.length}
+            {/* {module.html?.length} */}
           </span>
         </footer>
       </div>
