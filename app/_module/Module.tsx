@@ -15,13 +15,19 @@ import { SiAtom } from "react-icons/si";
 import { useCheckImg } from "../_hooks/useCheckImg";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { ModulesType } from "@/types/Modules";
+import { userAtom } from "../_jotai/userAtoms";
+import { useAtom } from "jotai";
+import { MdOutlineEdit } from "react-icons/md";
 
 type Props = {
   index: number;
   module: ModulesType;
+  enableEdit?: boolean;
 };
 
-export const Module = ({ index, module }: Props) => {
+export const Module = ({ index, module, enableEdit }: Props) => {
+  const [user] = useAtom(userAtom);
+
   const [toggle, setToggle] = useState<boolean>(false);
   const [imgUrl, setImgUrl] = useState<string | undefined>();
 
@@ -60,17 +66,27 @@ export const Module = ({ index, module }: Props) => {
           </a>
           <div className="flex items-center justify-between pl-2">
             <HiOutlineInformationCircle className="text-2xl text-violet-500" />
-            {module.price == 0 && (
-              <span className="bg-success px-1 pl-2 text-xs text-slate-800">
-                Free
-              </span>
-            )}
+            <div className="relative">
+              {module.price == 0 && (
+                <span className="bg-success px-1 pl-2 text-xs text-slate-800">
+                  Free
+                </span>
+              )}
+              {enableEdit && user?.id == module.user_id.id && (
+                <a
+                  className="absolute right-1 top-[110%] rounded border-2 border-primary bg-accent duration-100 active:scale-95"
+                  href={`/new?edit=${module?.id}`}
+                >
+                  <MdOutlineEdit className="" />
+                </a>
+              )}
+            </div>
           </div>
           <div className="w-full space-y-2 px-2">
             <a
               onClick={(e) => e.stopPropagation()}
               className="flex h-6 w-fit items-center rounded-full bg-green-300 px-2 text-slate-700"
-              href={"/profile/id/" + module.user_id.id }
+              href={"/profile/id/" + module.user_id.id}
             >
               {imgUrl && (
                 <img
@@ -94,7 +110,6 @@ export const Module = ({ index, module }: Props) => {
                 {" " + module.created_at.substring(0, 10)}
               </span>
             </span>
-            <a href={`/new?edit=${module?.id}`}>edit</a>
             <span className="flex h-6 w-fit items-center rounded-full bg-violet-400 px-2 text-slate-700">
               description:{" "}
             </span>

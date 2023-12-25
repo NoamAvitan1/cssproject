@@ -1,8 +1,8 @@
-import { Database } from "@/types/supabase";
 import { Module } from "./Module";
-import { ModulesType } from "@/types/Modules";
+
 type Props = {
   modules: any[] | null;
+  enableEdit?: boolean;
 };
 
 export const ModulesData = (props: Props) => {
@@ -12,7 +12,7 @@ export const ModulesData = (props: Props) => {
         {props.modules
           ? props.modules.map((module, i) => (
               <div key={i}>
-                <Module module={module} index={i} />
+                <Module module={module} index={i} enableEdit={props.enableEdit} />
               </div>
             ))
           : null}
