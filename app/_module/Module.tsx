@@ -111,7 +111,7 @@ export const Module = ({ index, module }: Props) => {
           </span>
           <span title="examples" className="flex items-center gap-1 text-lg">
             <HiOutlinePhoto />
-            {/* {module.html?.length} */}
+            {module.examples_count}
           </span>
         </footer>
       </div>

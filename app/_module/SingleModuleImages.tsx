@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 interface BufferObject {
-  type: 'Buffer';
+  type: "Buffer";
   data: number[];
 }
 
@@ -11,7 +11,8 @@ type Props = {
 };
 
 export const SingleModuleImages = (props: Props) => {
-  const [images, setImages] = useState<string[]>();
+  const [images, setImages] = useState<string[] | null>();
+
   const getImages = (sources: BufferObject[]) => {
     const imageUrls: string[] = [];
     for (let i = 0; i < sources.length; i++) {
@@ -22,10 +23,14 @@ export const SingleModuleImages = (props: Props) => {
     }
     setImages(imageUrls);
   };
+
   useEffect(() => {
     const sources = JSON.parse(props.imageBuffers);
     getImages(sources);
   }, []);
+
+  console.log(images);
+
   return (
     <div>{images && images?.map((img, i) => <img key={i} src={img} />)}</div>
   );
