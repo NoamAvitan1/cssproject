@@ -38,7 +38,7 @@ export const RecentModules = (props: Props) => {
         Recent Modules by {props.user_name}
       </h1>
       <div className="flex w-full justify-center">
-        <ModulesData modules={modules} />
+        <ModulesData modules={modules} enableEdit={true} />
       </div>
       {modules?.length >= 3 ? (
         <div className="flex justify-end">

@@ -7,7 +7,7 @@ import { EditorsView } from "./EditorsView";
 import { HTMLDebugger } from "../../../utils/HTMLDebugger";
 import { ModuleSettings as Settings } from "./ModuleSettings";
 import { ModuleSettings } from "@/types/Modules";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
 import { useAtom } from "jotai";
@@ -16,7 +16,10 @@ import { userAtom } from "@/app/_jotai/userAtoms";
 type Props = {};
 
 export const NewLayout = (props: Props) => {
+  
   const params = useSearchParams();
+  const router = useRouter()
+
   const [user] = useAtom(userAtom);
   const [isXl, setIsXl] = useState<boolean>(false);
   const [selectedBlock, setSelectedBlock] = useState(0);
@@ -57,9 +60,11 @@ export const NewLayout = (props: Props) => {
       const { data : moduleData } = (await supabase
         .from("module")
         .select("*")
-        .eq("id", id)) as unknown as any;
+        .eq("id", id)
+        .eq("user_id", user?.id)) as unknown as any;
         const module = moduleData[0];
-      if (String(module.user_id) !== String(user?.id)) {
+      if (!module || String(module.user_id) !== String(user?.id)) {
+        router.push('/')
         return;
       }
       setModuleSettings({
