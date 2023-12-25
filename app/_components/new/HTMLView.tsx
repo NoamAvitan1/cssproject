@@ -26,14 +26,11 @@ export const HTMLView = (props: Props) => {
     if (iframeDocument) {
       iframeDocument.body.innerHTML = `<div><style>${props.css}</style>${props.html}</div>`;
     }
-    el.contentDocument?.write(
-      `<div><style>${props.css}</style>${props.html}</div>`,
-    );
     const newHeight = el.contentWindow?.document.body.scrollHeight;
     if (!newHeight) return
     el.height = newHeight + 10 + "px";
     // console.log(iframeDocument?.documentElement.innerHTML);
-  }, [props.css, props.html]);
+  }, [props]);
 
   return (
     <iframe

@@ -25,7 +25,9 @@ export const Headers = (props: Props) => {
 
   const handleDelete = (i: number) => {
     if (i == 0) return;
-    if (i >= props.codeBlocks.length) props.setSelectedBlock(i - 1)
+    console.log(i, props.codeBlocks.length - 1)
+    if (i >= props.codeBlocks.length - 1) props.setSelectedBlock(i - 1)
+    // return
     const index = props.codeBlocks[0].type == "css" ? i : i + 1;
     props.setCodeBlocks((prev: CodeBlock[]) => {
       const newBlocks = prev.filter((c, ci) => ci != index);
