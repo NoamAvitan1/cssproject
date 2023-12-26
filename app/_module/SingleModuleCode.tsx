@@ -8,6 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { HiLockClosed } from "react-icons/hi2";
 import { IoLogoCss3, IoLogoHtml5 } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 type Module = Database["public"]["Tables"]["module"]["Row"];
 
@@ -19,6 +20,8 @@ export const SingleModuleCode = ({ module }: Props) => {
   const [user] = useAtom(userAtom);
   const [isPurchased, setIsPurchased] = useState(false);
   const [isOwnModule, setIsOwnModule] = useState(false);
+
+  const router = useRouter();
 
   const supabase = createClientComponentClient();
 
@@ -77,11 +80,12 @@ export const SingleModuleCode = ({ module }: Props) => {
         setIsPurchased(true);
       }
     };
+
+    console.log(module);
+
     if (module.access_type != "paid") setIsPurchased(true);
     else getPurchase();
   }, [module, user]);
-
-  console.log(user?.id);
 
   return (
     <div className="">
@@ -107,16 +111,18 @@ export const SingleModuleCode = ({ module }: Props) => {
         </div>
       ) : (
         <div className="flex justify-center">
-          <a
-            href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${
-              user?.id && user.id
-            }`}
+          <button
+            onClick={() =>
+              router.push(
+                `/payment?module_id=${module?.id}&price=${module?.price}&user_id=${user?.id}`,
+              )
+            }
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
           >
             <p className="flex items-center gap-2">
               Unlock this module <HiLockClosed />
             </p>
-          </a>
+          </button>
         </div>
       )}
       {/* <a href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${module?.user_id.id}`}>buy</a> */}

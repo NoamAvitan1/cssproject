@@ -3,9 +3,6 @@ finishing touches
  - verify RLS
  - verify schema validations (client side, server side)
 
-add route guard
-recent purchases
-
 style homePage
 
 style user search
