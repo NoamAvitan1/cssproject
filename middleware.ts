@@ -17,7 +17,7 @@ export async function middleware(req: NextRequest) {
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
   const { data, error } = await supabase.auth.getSession()
 
-  if (error) {
+  if (error || !data) {
     if (protectedRoutes.find(r => req.destination.includes(r))) 
       return NextResponse.redirect('/')
   }

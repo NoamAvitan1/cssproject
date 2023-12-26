@@ -81,6 +81,8 @@ export const SingleModuleCode = ({ module }: Props) => {
     else getPurchase();
   }, [module, user]);
 
+  console.log(user?.id);
+
   return (
     <div className="">
       {isPurchased || isOwnModule ? (
@@ -106,7 +108,9 @@ export const SingleModuleCode = ({ module }: Props) => {
       ) : (
         <div className="flex justify-center">
           <a
-            href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${user?.id}`}
+            href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${
+              user?.id && user.id
+            }`}
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
           >
             <p className="flex items-center gap-2">
