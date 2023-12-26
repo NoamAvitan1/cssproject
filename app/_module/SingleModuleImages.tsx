@@ -33,7 +33,7 @@ export const SingleModuleImages = (props: Props) => {
   }, []);
 
   return (
-    <div>
+    <section>
       <Modal
         isOpen={openImage != null ? true : false}
         setIsOpen={(bool: boolean) => {
@@ -44,8 +44,9 @@ export const SingleModuleImages = (props: Props) => {
           <img src={openImage != null ? images[openImage] : undefined} />
         )}
       </Modal>
-      <h1 className="w-full border-b border-text text-2xl">Examples</h1>
-      <div className="grid gap-3 p-3 md:grid-cols-2 2xl:grid-cols-4">
+      {/* <h1 className="w-full border-b border-text text-2xl my-3">Examples</h1> */}
+      <div className="w-full rounded-full border bg-text p-px mb-2"></div>
+      <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
         {images &&
           images?.map((img, i) => (
             <button
@@ -60,6 +61,6 @@ export const SingleModuleImages = (props: Props) => {
             </button>
           ))}
       </div>
-    </div>
+    </section>
   );
 };

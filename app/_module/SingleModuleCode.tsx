@@ -80,7 +80,7 @@ export const SingleModuleCode = ({ module }: Props) => {
   }, [module, user]);
 
   return (
-    <div>
+    <div className="">
       {isPurchased ? (
         <div className="flex flex-col gap-2 items-center">
           <button
@@ -101,11 +101,13 @@ export const SingleModuleCode = ({ module }: Props) => {
           </button>
         </div>
       ) : (
-        <button className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95">
-          <p className="flex items-center gap-2">
-            Unlock this module <HiLockClosed />
-          </p>
-        </button>
+        <div className="flex justify-center">
+          <button className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95">
+            <p className="flex items-center gap-2">
+              Unlock this module <HiLockClosed />
+            </p>
+          </button>
+        </div>
       )}
     </div>
   );

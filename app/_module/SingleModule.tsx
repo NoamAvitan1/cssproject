@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { SingleModuleImages } from "./SingleModuleImages";
 import { HiLockClosed } from "react-icons/hi2";
 import { SingleModuleCode } from "./SingleModuleCode";
+import { SingleModuleHeader } from "./SingleModuleHeader";
 const htmlToImage = require("../../utils/htmlToImage");
 
 type Props = {
@@ -25,14 +26,10 @@ export default async function SingleModule(props: Props) {
   }
 
   return (
-    <article
-      className="flex h-full w-full items-center justify-center"
-      id="app"
-    >
-      <section className="">
-        <SingleModuleCode module={moduleData} />
-        <SingleModuleImages imageBuffers={JSON.stringify(images)} />
-      </section>
+    <article className="flex w-full flex-col items-center gap-6 p-3" id="app">
+      <SingleModuleHeader module={moduleData} />
+      <SingleModuleCode module={moduleData} />
+      <SingleModuleImages imageBuffers={JSON.stringify(images)} />
     </article>
   );
 }
