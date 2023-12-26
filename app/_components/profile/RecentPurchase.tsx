@@ -6,17 +6,19 @@ import { GoArrowRight } from "react-icons/go";
 import { ModulesData } from "@/app/_module/ModulesData";
 import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
-import { ModulesType } from "@/types/Modules";
+import { ModulesPurchased, ModulesType } from "@/types/Modules";
 
 type Props = {
 };
+
+
 
 export const RecentPurchase = (props: Props) => {
   const router = useRouter();
   const { id } = useParams();
   const [user, setUser] = useAtom(userAtom);
   const supabase = createClientComponentClient();
-  const [modules, setModules] = useState<any[] | null>(null);
+  const [modules, setModules] = useState<ModulesPurchased[] | null>(null);
 
   const getModules = async () => {
     let { data, error } = await supabase
@@ -41,7 +43,7 @@ export const RecentPurchase = (props: Props) => {
         <div className="flex justify-end">
           <section></section>
           <button
-            onClick={() => router.push(`/profile/id/${id}/user-modules`)}
+            onClick={() => router.push(`/profile/id/${id}/user-modules?modules=purchased-modules`)}
             className="flex items-center gap-2 border-b border-b-blue-500 px-1"
           >
             <span className="">Show all purchased modules</span>

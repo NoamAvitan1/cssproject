@@ -26,7 +26,6 @@ export const RecentModules = (props: Props) => {
       .select('examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)')
       .eq("user_id", id)
       .range(0, 2);
-      console.log(data);
     setModules(data);
   };
 
@@ -45,7 +44,7 @@ export const RecentModules = (props: Props) => {
         <div className="flex justify-end">
           <section></section>
           <button
-            onClick={() => router.push(`/profile/id/${id}/user-modules`)}
+            onClick={() => router.push(`/profile/id/${id}/user-modules?modules=user-modules`)}
             className="flex items-center gap-2 border-b border-b-blue-500 px-1"
           >
             <span className="">Show all modules</span>

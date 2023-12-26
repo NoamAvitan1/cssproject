@@ -72,12 +72,10 @@ export const SingleModuleCode = ({ module }: Props) => {
         setIsPurchased(true);
       }
     };
-
-    console.log(module);
-
     if (module.access_type != "paid") setIsPurchased(true);
     else getPurchase();
   }, [module, user]);
+  console.log(user?.id)
 
   return (
     <div className="">

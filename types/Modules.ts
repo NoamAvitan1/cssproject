@@ -30,6 +30,22 @@ export type ModulesType =
 }
 
 
+export type ModulesPurchased = {
+  module_id: {
+    examples_count: number;
+    access_type: string;
+    created_at: string;
+    description: string;
+    downloads: string;
+    id: string;
+    price: number;
+    title: string;
+    title_description: string;
+    user_id: any[];
+}[];
+}
+
+
 export type ModuleSettings = {
   title: string;
   access_type: "public" | "private" | "paid";
