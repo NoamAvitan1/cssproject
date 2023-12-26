@@ -13,6 +13,7 @@ import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
 import { useCheckImg } from "@/app/_hooks/useCheckImg";
+import { getUserImg } from "@/utils/getUserImg";
 
 
 type Props = {
@@ -62,16 +63,16 @@ export const UserData = (props: Props) => {
     update();
   }, [idParam, user]);
 
-  useEffect(() => {
-    if (!profile?.id || !user || imageUrl) return
-    const setUrl = async () => {
-      const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`
-      const bool = await useCheckImg(url) 
-      setImageUrl(bool? url : null)
-    }
+  // useEffect(() => {
+  //   if (!profile?.id || !user || imageUrl) return
+  //   const setUrl = async () => {
+  //     const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`
+  //     const bool = await useCheckImg(url) 
+  //     setImageUrl(bool? url : null)
+  //   }
 
-    setUrl()
-  }, [profile]);
+  //   setUrl()
+  // }, [profile]);
 
   return (
     <div className="w-full">
@@ -80,10 +81,10 @@ export const UserData = (props: Props) => {
           <article className="flex flex-col gap-5 p-2 md:flex-row">
             <section className="h-full md:w-1/3 relative">
             {user?.id === profile?.id && <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl}/>}
-              {imageUrl ? (
+              {imageUrl && user ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"
-                  src={imageUrl!}
+                  src={imageUrl ?? getUserImg(user)}
                   alt=""
                 />
               ) : (
