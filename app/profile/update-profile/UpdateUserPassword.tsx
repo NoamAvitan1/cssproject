@@ -54,7 +54,7 @@ export default function UpdateUserPassword(props: Props) {
         method="POST"
         className="mt-8 flex h-[350px] w-[320px] flex-col items-center gap-2 border border-secondary p-2"
       >
-        <h1 className="grow text-lg">Update your password down below</h1>
+        <h1 className="grow text-lg">Change your password down below</h1>
         <div className="flex w-full flex-col gap-2">
           <label className="text-md" htmlFor="password">
             Password:

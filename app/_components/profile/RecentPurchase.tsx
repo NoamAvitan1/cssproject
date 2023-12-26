@@ -26,7 +26,6 @@ export const RecentPurchase = (props: Props) => {
       .range(0, 2);
     setModules(data);
   };
-  console.log(modules);
   useEffect(() => {
     getModules();
   }, []);
