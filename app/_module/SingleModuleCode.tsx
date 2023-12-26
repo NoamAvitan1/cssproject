@@ -18,6 +18,7 @@ type Props = {
 export const SingleModuleCode = ({ module }: Props) => {
   const [user] = useAtom(userAtom);
   const [isPurchased, setIsPurchased] = useState(false);
+  const [isOwnModule, setIsOwnModule] = useState(false);
 
   const supabase = createClientComponentClient();
 
@@ -57,6 +58,10 @@ export const SingleModuleCode = ({ module }: Props) => {
 
   useEffect(() => {
     if (!user || !module) return;
+    if (module.user_id === user.id) {
+      setIsOwnModule(true);
+      return;
+    }
     const getPurchase = async () => {
       const { data } = await supabase
         .from("module_purchase")
@@ -81,7 +86,7 @@ export const SingleModuleCode = ({ module }: Props) => {
 
   return (
     <div className="">
-      {isPurchased ? (
+      {isPurchased || isOwnModule ? (
         <div className="flex flex-col items-center gap-2">
           <button
             onClick={() => downloadCSSFile()}
