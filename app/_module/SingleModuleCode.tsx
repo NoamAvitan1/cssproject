@@ -41,19 +41,19 @@ export const SingleModuleCode = ({ module }: Props) => {
   };
 
   const downloadCSSFile = () => {
-    const code = module.css
-    downloadFile(code, 'main', 'css')
-  }
+    const code = module.css;
+    downloadFile(code, "main", "css");
+  };
 
   const downloadHTMLExamplesFile = () => {
-    const HTMLExamples = module.html
-    if (!HTMLExamples) return
-    let code = ''
+    const HTMLExamples = module.html;
+    if (!HTMLExamples) return;
+    let code = "";
     for (let i = 0; i < HTMLExamples.length; i++) {
-      code += `//example ${i + 1}\n${HTMLExamples[i]}\n\n`
+      code += `//example ${i + 1}\n${HTMLExamples[i]}\n\n`;
     }
-    downloadFile(code, 'examples', 'html')
-  }
+    downloadFile(code, "examples", "html");
+  };
 
   useEffect(() => {
     if (!user || !module) return;
@@ -82,7 +82,7 @@ export const SingleModuleCode = ({ module }: Props) => {
   return (
     <div className="">
       {isPurchased ? (
-        <div className="flex flex-col gap-2 items-center">
+        <div className="flex flex-col items-center gap-2">
           <button
             onClick={() => downloadCSSFile()}
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
@@ -96,19 +96,24 @@ export const SingleModuleCode = ({ module }: Props) => {
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
           >
             <p className="flex items-center gap-2">
-              Download examples HTML file <IoLogoHtml5 className="text-red-500" />
+              Download examples HTML file{" "}
+              <IoLogoHtml5 className="text-red-500" />
             </p>
           </button>
         </div>
       ) : (
         <div className="flex justify-center">
-          <button className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95">
+          <a
+            href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${module?.user_id}`}
+            className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
+          >
             <p className="flex items-center gap-2">
               Unlock this module <HiLockClosed />
             </p>
-          </button>
+          </a>
         </div>
       )}
+      {/* <a href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${module?.user_id.id}`}>buy</a> */}
     </div>
   );
 };
