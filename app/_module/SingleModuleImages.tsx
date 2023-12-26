@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { Modal } from "../_components/common/Modal";
+import { HiEye } from "react-icons/hi2";
 
 interface BufferObject {
   type: "Buffer";
@@ -12,6 +14,7 @@ type Props = {
 
 export const SingleModuleImages = (props: Props) => {
   const [images, setImages] = useState<string[] | null>();
+  const [openImage, setOpenImage] = useState<number | null>(null);
 
   const getImages = (sources: BufferObject[]) => {
     const imageUrls: string[] = [];
@@ -29,9 +32,34 @@ export const SingleModuleImages = (props: Props) => {
     getImages(sources);
   }, []);
 
-  console.log(images);
-
   return (
-    <div>{images && images?.map((img, i) => <img key={i} src={img} />)}</div>
+    <div>
+      <Modal
+        isOpen={openImage != null ? true : false}
+        setIsOpen={(bool: boolean) => {
+          setOpenImage(null);
+        }}
+      >
+        {images && (
+          <img src={openImage != null ? images[openImage] : undefined} />
+        )}
+      </Modal>
+      <h1 className="w-full border-b border-text text-2xl">Examples</h1>
+      <div className="grid gap-3 p-3 md:grid-cols-2 2xl:grid-cols-4">
+        {images &&
+          images?.map((img, i) => (
+            <button
+              key={i}
+              onClick={() => setOpenImage(i)}
+              className="relative overflow-clip rounded shadow"
+            >
+              <div className="absolute inset-0 flex items-center justify-center opacity-25 duration-300 hover:opacity-50">
+                <HiEye className="text-5xl" />
+              </div>
+              <img key={i} src={img} />
+            </button>
+          ))}
+      </div>
+    </div>
   );
 };

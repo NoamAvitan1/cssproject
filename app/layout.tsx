@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import "./css/VFX.css";
 import "./css/loader.css";
+import "./css/backgrounds.css";
 import { cookies } from "next/headers";
 import { NavBar } from "./_navbar/Navbar";
 import Script from "next/script";
