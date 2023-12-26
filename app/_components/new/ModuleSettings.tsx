@@ -8,7 +8,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { moduleObject } from "@/app/_yup/moduleSchema";
 import { prettier } from "@/utils/prettier";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 type Props = {
   codeBlocs: CodeBlock[];
   isOpen: boolean;
@@ -19,6 +19,9 @@ type Props = {
 export const ModuleSettings = (props: Props) => {
   const [user] = useAtom(userAtom);
   const [type, setType] = useState<ModuleType>("public");
+  
+  const router = useRouter()
+
   const params = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -70,10 +73,12 @@ export const ModuleSettings = (props: Props) => {
               "success",
             );
             tell("You can edit it later from your profile");
-            if (props.afterSubmit) props.afterSubmit();
-            form["description"].value = "";
-            form["module_title"].value = "";
-            form["price"].value = 0;
+            router.push("module/" + data.data[0].id)
+            // if (props.afterSubmit) props.afterSubmit();
+            // form["description"].value = "";
+            // form["module_title"].value = "";
+            // form["price"].value = 0;
+            router
           })
           .catch((error) => console.log(error));
       })

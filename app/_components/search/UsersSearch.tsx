@@ -7,6 +7,7 @@ import { SearchProfileComponent } from "./SearchProfileComponent";
 interface Profile {
   id: string;
   user_name: string;
+  profile_pic?: string;
 }
 type Props = {};
 
@@ -26,7 +27,7 @@ export const UsersSearch = (props: Props) => {
     const getProfile = async () => {
       const { data, error } = await supabase
         .from("profile")
-        .select("user_name,id")
+        .select("user_name,id,profile_pic")
         .textSearch("user_name", query)
         .range(page * 9, page * 9 + 8);
       if (query === prevQuery) {

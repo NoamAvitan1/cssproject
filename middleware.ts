@@ -6,6 +6,8 @@ import { Database } from './types/supabase'
 
 export async function middleware(req: NextRequest) {
     
+  const protectedRoutes = ['/new', 'profile/update-profile', '/payment']
+
   const res = NextResponse.next()
 
   // Create a Supabase client configured to use cookies
@@ -13,7 +15,12 @@ export async function middleware(req: NextRequest) {
 
   // Refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-  const session = await supabase.auth.getSession()
+  const { data, error } = await supabase.auth.getSession()
+
+  if (error) {
+    if (protectedRoutes.find(r => req.destination.includes(r))) 
+      return NextResponse.redirect('/')
+  }
   
   return res
 }

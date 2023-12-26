@@ -16,19 +16,19 @@ export default async function SingleModule(props: Props) {
 
   const { data: modulesArray }: any = await supabase
     .from("module")
-    .select("*, user_id(*)")
+    .select("*")
     .eq("id", props.id);
-  const moduleData = modulesArray[0];
-  for (let i = 0; i < moduleData.html.length; i++) {
-    const imageBinary = await htmlToImage(moduleData.html[i], moduleData.css);
+  const module = modulesArray[0];
+  for (let i = 0; i < module.html.length; i++) {
+    const imageBinary = await htmlToImage(module.html[i], module.css);
     if (!imageBinary || typeof imageBinary === "number") return;
     images.push(imageBinary);
   }
 
   return (
     <article className="flex w-full flex-col items-center gap-6 p-3" id="app">
-      <SingleModuleHeader module={moduleData} />
-      <SingleModuleCode module={moduleData} />
+      <SingleModuleHeader module={module} />
+      <SingleModuleCode module={module} />
       <SingleModuleImages imageBuffers={JSON.stringify(images)} />
     </article>
   );

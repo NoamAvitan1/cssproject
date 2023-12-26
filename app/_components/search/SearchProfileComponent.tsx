@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 interface Profile {
   id: string;
   user_name: string;
+  profile_pic?: string;
 }
 
 type Props = {
@@ -12,16 +13,7 @@ type Props = {
 };
 
 export const SearchProfileComponent = ({ profile }: Props) => {
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const getPic = async () => {
-      const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`;
-      const bool = await useCheckImg(url);
-      if (bool) setImgUrl(url);
-    };
-    getPic();
-  }, [profile]);
   return (
     <a
       title={`Go to ${profile.user_name}'s profile page`}
@@ -29,10 +21,10 @@ export const SearchProfileComponent = ({ profile }: Props) => {
       className="flex items-center gap-4"
     >
       <div className="flex relative h-[50px] w-[50px] items-center border">
-        {imgUrl ? (
+        {profile.profile_pic ? (
           <img
             className="w-full"
-            src={imgUrl ? imgUrl : undefined}
+            src={profile.profile_pic ? profile.profile_pic : undefined}
             alt=""
           />
         ) : (
