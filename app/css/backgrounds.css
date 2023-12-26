@@ -1,0 +1,7 @@
+.bg-squares {
+    background-color: transparent;
+    opacity: 0.4;
+    background-image:  repeating-linear-gradient(45deg, #9e4747 25%, transparent 25%, transparent 75%, #9e4747 75%, #9e4747), repeating-linear-gradient(45deg, #9e4747 25%, transparent 25%, transparent 75%, #9e4747 75%, #9e4747);
+    background-position: 0 0, 10px 10px;
+    background-size: 20px 20px;
+}

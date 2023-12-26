@@ -13,6 +13,7 @@ type Props = {
   codeBlocs: CodeBlock[];
   isOpen: boolean;
   settings?: Settings;
+  afterSubmit?: () => void;
 };
 
 export const ModuleSettings = (props: Props) => {
@@ -24,14 +25,14 @@ export const ModuleSettings = (props: Props) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     let values: any = {};
-    values.access_type = type;
-    values.description = form["description"].value;
-    values.title = form["module_title"].value;
+    values.access_type = type.trim();
+    values.description = form["description"].value.trim();
+    values.title = form["module_title"].value.trim();
     values.price = form["price"].value ? form["price"].value : 0;
-    values.css = props.codeBlocs[0].code;
+    values.css = props.codeBlocs[0].code.trim();
     values.html = props.codeBlocs
       .filter((block) => block.type == "html")
-      .map((block) => block.code);
+      .map((block) => block.code.trim());
     values.examples_count = values.html.length;
     values.user_id = user?.id;
 
@@ -68,6 +69,11 @@ export const ModuleSettings = (props: Props) => {
                 }`,
               "success",
             );
+            tell("You can edit it later from your profile");
+            if (props.afterSubmit) props.afterSubmit();
+            form["description"].value = "";
+            form["module_title"].value = "";
+            form["price"].value = 0;
           })
           .catch((error) => console.log(error));
       })

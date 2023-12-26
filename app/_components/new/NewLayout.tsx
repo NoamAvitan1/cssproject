@@ -104,6 +104,7 @@ export const NewLayout = (props: Props) => {
             isOpen={true}
             codeBlocs={codeBlocks}
             settings={moduleSettings ? moduleSettings : undefined}
+            afterSubmit={() => {setCodeBlocks([]); setSelectedBlock(0);}}
           />
         </div>
         <div className="relative flex flex-col">
