@@ -21,7 +21,7 @@ import { MdOutlineEdit } from "react-icons/md";
 
 type Props = {
   index: number;
-  module: ModulesType;
+  module: any;
   enableEdit?: boolean;
 };
 

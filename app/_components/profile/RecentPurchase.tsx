@@ -1,45 +1,42 @@
+'use client'
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { Database } from "@/types/supabase";
 import { GoArrowRight } from "react-icons/go";
 import { ModulesData } from "@/app/_module/ModulesData";
-import { FaHandPointRight } from "react-icons/fa6";
 import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { ModulesType } from "@/types/Modules";
 
 type Props = {
-  user_name: string | null | undefined;
 };
 
-export const RecentModules = (props: Props) => {
+export const RecentPurchase = (props: Props) => {
   const router = useRouter();
   const { id } = useParams();
   const [user, setUser] = useAtom(userAtom);
   const supabase = createClientComponentClient();
-  const [modules, setModules] = useState<ModulesType[] | null>(null);
+  const [modules, setModules] = useState<any[] | null>(null);
 
   const getModules = async () => {
     let { data, error } = await supabase
-      .from("module")
-      .select('examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)')
+      .from("module_purchase")
+       .select('module_id(examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(*))')
       .eq("user_id", id)
       .range(0, 2);
-      console.log(data);
     setModules(data);
   };
-
+  console.log(modules);
   useEffect(() => {
     getModules();
   }, []);
-  return modules?.length ? (
+  return modules && (
     <div className="mt-4 flex w-full flex-col gap-6">
       <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
-        Recent Modules by {props.user_name}
+         Modules purchased
       </h1>
       <div className="flex w-full justify-center">
-        <ModulesData modules={modules} enableEdit={true} />
+        <ModulesData modules={modules.map(module => module.module_id)} enableEdit={true} />
       </div>
       {modules?.length >= 3 ? (
         <div className="flex justify-end">
@@ -48,26 +45,11 @@ export const RecentModules = (props: Props) => {
             onClick={() => router.push(`/profile/id/${id}/user-modules`)}
             className="flex items-center gap-2 border-b border-b-blue-500 px-1"
           >
-            <span className="">Show all modules</span>
+            <span className="">Show all purchased modules</span>
             <GoArrowRight className="mt-1" />
           </button>
         </div>
       ) : null}
-    </div>
-  ) : (
-    <div className="my-6 flex h-[200px] items-center justify-center border border-secondary">
-      <div className="flex flex-col items-center gap-1">
-        <h1 className="text-2xl">No recent modules found</h1>
-        {user?.id === id && (
-          <a
-            className="flex items-center gap-2 border-b border-b-blue-500 px-1"
-            href="/new"
-          >
-            Create your first module
-            <FaHandPointRight />
-          </a>
-        )}
-      </div>
     </div>
   );
 };

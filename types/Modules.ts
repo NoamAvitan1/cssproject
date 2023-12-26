@@ -12,21 +12,23 @@ export type SearchModule = {
   };
 };
 
-export type ModulesType = {
-  examples_count:number;
-  access_type: "public" | "private" | "paid";
-  created_at: string;
-  description: string;
-  downloads: number;
-  id: string;
-  price: number;
-  title: string;
-  title_description: string | null;
-  user_id: {
+export type ModulesType = 
+   {
+    examples_count: number;
+    access_type: 'public' | 'private' | 'paid';
+    created_at: string;
+    description: string;
+    downloads: number;
     id: string;
-    user_name: string;
-  };
-};
+    price: number;
+    title: string;
+    title_description: string;
+    user_id: {
+        id: string;
+        user_name: string;
+    }[];
+}
+
 
 export type ModuleSettings = {
   title: string;
