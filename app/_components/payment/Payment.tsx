@@ -65,7 +65,7 @@ export const Payment = (props: Props) => {
             <FaCcMastercard className="text-4xl text-orange-400"/>
             <FaCcVisa className="text-blue-600 text-4xl"/>
         </div>
-      <form action="" onSubmit={(e)=>handleSubmit(e)} className="flex flex-col gap-8 w-[320px] sm:w-[450px]">
+      <form onSubmit={(e)=>handleSubmit(e)} className="flex flex-col gap-8 w-[320px] sm:w-[450px]">
         <section className="flex flex-col gap-2">
           <label htmlFor="">Credit number:</label>
           <input
@@ -105,7 +105,7 @@ export const Payment = (props: Props) => {
           </div>
         </section>
         <section className="flex flex-col gap-2">
-          <label htmlFor="">(CVV)Card security code:</label>
+          <label htmlFor="">(CVV) Card security code:</label>
           <input
             name="cvv"
             required
