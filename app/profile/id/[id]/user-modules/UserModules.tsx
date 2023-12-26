@@ -61,7 +61,7 @@ export const UserModules = (props: Props) => {
   return (
     <div className="flex w-full flex-col items-center gap-4">
       <div className="w-10/12">
-        <ModulesData modules={modules} />
+        <ModulesData enableEdit={true} modules={modules} />
       </div>
       {array?.length ? (
         <nav className="flex items-center justify-center gap-4">

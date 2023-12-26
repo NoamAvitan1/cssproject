@@ -113,6 +113,7 @@ export const Module = ({ index, module, enableEdit }: Props) => {
             <span className="flex h-6 w-fit items-center rounded-full bg-violet-400 px-2 text-slate-700">
               description:{" "}
             </span>
+            <a href={`/payment?module_id=${module?.id}&price=${module?.price}&user_id=${module?.user_id.id}`}>buy</a>
             <p className="pl-2 pt-2 text-sm">- {module.description}</p>
           </div>
         </div>

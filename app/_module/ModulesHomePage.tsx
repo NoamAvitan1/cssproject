@@ -12,7 +12,8 @@ export default async function ModulesHomePage(props: Props) {
   const query = async (type: string = "") => {
     const supabaseQuery = supabase
       .from("module")
-      .select('examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)');
+      .select('examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)')
+      .neq('access_type','private');
     if (type !== "") {
       supabaseQuery.eq("access_type", type).order('downloads', { ascending: false })
     }

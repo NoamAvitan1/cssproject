@@ -1,14 +1,13 @@
-new
- - fix issue when deleting an example
 
 finishing touches
  - verify RLS
  - verify schema validations (client side, server side)
 
-payment
+route guard
+recent purchases
 
-modules
- - filter by:
-    - public/ paid (default both)
-    - number of examples (1, 2, 3, 4)(default all)
-    - number of downloads (more than 100, 500, 1000+)
+style homePage
+
+style user search
+
+fix image problem
