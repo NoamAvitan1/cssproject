@@ -22,14 +22,16 @@ export const RecentModules = (props: Props) => {
 
   const getModules = async () => {
     let supabaseQuery = supabase
-    .from("module")
-    .select('examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)')
-    .eq("user_id", id)
-    .range(0, 2);
-    if(id !== user?.id){
-      supabaseQuery.neq('access_type','private')
+      .from("module")
+      .select(
+        "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)",
+      )
+      .eq("user_id", id)
+      .range(0, 2);
+    if (id !== user?.id) {
+      supabaseQuery.neq("access_type", "private");
     }
-    let { data, error } = await supabaseQuery
+    let { data, error } = await supabaseQuery;
     setModules(data);
   };
 
@@ -63,7 +65,7 @@ export const RecentModules = (props: Props) => {
         <h1 className="text-2xl">No recent modules found</h1>
         {user?.id === id && (
           <button
-          onClick={() => router.push('/new')}
+            onClick={() => router.push("/new")}
             className="flex items-center gap-2 border-b border-b-blue-500 px-1"
           >
             Create your first module

@@ -5,15 +5,12 @@ import { useAtom } from "jotai";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { object, string } from "yup";
-import * as yup from "yup";
 
 type Props = {};
 
 export default function UpdateUserPassword(props: Props) {
   const [user,setUser] = useAtom(userAtom);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [validationError, setValidationError] =
-    useState<yup.ValidationError | null>(null);
 
   const authSchema = () => {
     return object({
@@ -33,13 +30,11 @@ export default function UpdateUserPassword(props: Props) {
       }
       authSchema()
         .validate(formValidation)
-        .catch((error: yup.ValidationError) => {
+        .catch((error: any) => {
           e.preventDefault();
-          setValidationError(error);
           tell(error.message,'error');
         });
     } catch (error:any) {
-      setValidationError(error);
       tell(error.message,'error');
       e.preventDefault();
     }

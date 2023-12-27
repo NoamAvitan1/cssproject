@@ -5,9 +5,8 @@ import { FaCcVisa } from "react-icons/fa6";
 import { FaCcMastercard } from "react-icons/fa6";
 import Api from "@/utils/axios";
 import { tell } from "../teller/Tale";
-import { object, number } from "yup";
-import * as yup from "yup";
 import { useRouter, useSearchParams } from "next/navigation";
+import { paymentSchema } from "@/app/_yup/moduleSchema";
 
 
 type Props = {};
@@ -15,12 +14,7 @@ type Props = {};
 export const Payment = (props: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-    const authSchema = () => {
-        return object({
-          creditNumber: number().required().test('len', 'Credit number should be 16 digits', (val) => val.toString().length === 16),
-          cvv: number().required().test('len', 'Cvv should be 3 digits', (val) => val.toString().length === 3),
-        })
-      };
+
     const handleSubmit = async(e:BaseSyntheticEvent) => {
       e.preventDefault();
       const user_id = searchParams.get('user_id');
@@ -42,7 +36,7 @@ export const Payment = (props: Props) => {
           creditNumber: inputs.creditNumber?.value,
           cvv: inputs.cvv?.value,
         };
-        authSchema().validate(forValidation).then(async()=> {
+        paymentSchema.validate(forValidation).then(async()=> {
           const {data} = await Api.post(`/module/payment`,moduleData)
           if (data?.error) {
             tell(data.error, 'error')
@@ -50,7 +44,7 @@ export const Payment = (props: Props) => {
           }
           tell('Module purchased successfully','success')
           router.push(`/module/${module_id}`)
-        }).catch((error: yup.ValidationError) => {
+        }).catch((error:any) => {
           tell(error.message, 'error')
         })
       } 

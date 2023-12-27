@@ -7,12 +7,10 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { EditProfile } from "./EditProfile";
 import { tell } from "../teller/Tale";
 import { FiUser } from "react-icons/fi";
-import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
 import { useParams } from "next/navigation";
 import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
-import { useCheckImg } from "@/app/_hooks/useCheckImg";
 import { getUserImg } from "@/utils/getUserImg";
 
 

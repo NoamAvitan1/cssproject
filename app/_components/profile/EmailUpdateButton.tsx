@@ -2,10 +2,9 @@ import { useAtom } from "jotai";
 import { Modal } from "../common/Modal";
 import { AiOutlineClose } from "react-icons/ai";
 import { userAtom } from "@/app/_jotai/userAtoms";
-import { object, string } from "yup";
-import * as yup from "yup";
 import { BaseSyntheticEvent, useRef, useState } from "react";
 import { tell } from "../teller/Tale";
+import { emaileSchema } from "@/app/_yup/moduleSchema";
 type Props = {
   isOpen: boolean;
   setIsOpen: Function;
@@ -13,14 +12,7 @@ type Props = {
 
 export const EmailUpdateButton = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
-  const [validationError, setValidationError] =
-    useState<yup.ValidationError | null>(null);
-
-  const authSchema = () => {
-    return object({
-      email: string().email().required(),
-    });
-  };
+ 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     try {
       const inputs = e.target.elements;
@@ -36,16 +28,14 @@ export const EmailUpdateButton = (props: Props) => {
         e.preventDefault();
         throw new Error("Email already in use");
       }
-      authSchema()
+      emaileSchema
         .validate(formValidation)
-        .catch((error: yup.ValidationError) => {
+        .catch((error: any) => {
           e.preventDefault();
-          setValidationError(error);
           tell(error.message,'error')
         });
     } 
     catch (error:any) {
-      setValidationError(error);
       tell(error.message,'error');
     }
     tell('Check your mail for continue the process');

@@ -2,10 +2,9 @@
 import { Database } from "@/types/supabase";
 import { Modal } from "../common/Modal";
 import { BaseSyntheticEvent, useState } from "react";
-import { object, string } from "yup";
-import * as yup from "yup";
 import { AiOutlineClose } from "react-icons/ai";
 import { tell } from "../teller/Tale";
+import { profileSchema } from "@/app/_yup/moduleSchema";
 
 type Profile = Database["public"]["Tables"]["profile"]["Row"];
 type Props = {
@@ -15,15 +14,7 @@ type Props = {
 };
 
 export const EditProfile = (props: Props) => {
-  const [validationError, setValidationError] =
-    useState<yup.ValidationError | null>(null);
 
-  const authForm = () => {
-    return object({
-      user_name: string().min(3).required(),
-      about: string().max(200),
-    });
-  };
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     try {
@@ -32,16 +23,14 @@ export const EditProfile = (props: Props) => {
         user_name: inputs.user_name.value,
         about: inputs.about.value,
       };
-      authForm()
+      profileSchema
         .validate(formValidation)
-        .catch((error: yup.ValidationError) => {
+        .catch((error: any) => {
           e.preventDefault();
           tell(error.message,'error');
-          setValidationError(error);
         });
     } catch (error: any) {
       e.preventDefault();
-      setValidationError(error.message);
       tell(error.message,'error')   
      }
   };
