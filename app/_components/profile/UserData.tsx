@@ -11,7 +11,6 @@ import { useParams } from "next/navigation";
 import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
-import { getUserImg } from "@/utils/getUserImg";
 import { useClient } from "@/app/_hooks/useClient";
 
 type Props = {};
@@ -69,12 +68,12 @@ export const UserData = (props: Props) => {
           <article className="flex flex-col gap-5 p-2 md:flex-row">
             <section className="relative h-full md:w-1/3">
               {user?.id === profile?.id && (
-                <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl} />
+                <EditPic profile={profile} setProfile={setProfile} />
               )}
-              {imageUrl && user ? (
+              {profile?.profile_pic ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"
-                  src={imageUrl ?? getUserImg(user)}
+                  src={profile?.profile_pic}
                   alt=""
                 />
               ) : (

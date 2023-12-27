@@ -7,10 +7,11 @@ import { LuImage } from "react-icons/lu";
 import { tell } from "../teller/Tale";
 
 type Props = {
-  imageUrl:string | null;
-  setImageUrl:Function;
   setIsOpen:Function;
+  onChange:Function;
 };
+
+const BASE_URL = 'https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/'
 
 export const Bucket = (props: Props) => {
     const [user, setUser] = useAtom(userAtom);
@@ -26,8 +27,9 @@ export const Bucket = (props: Props) => {
         cacheControl: "3600",
         upsert: true, 
       });
-      props.setImageUrl(blobUrl);
+      console.log(data);
       props.setIsOpen(false);
+      await props.onChange(BASE_URL + data?.path)
       tell("Picture changed seccesfully",'success')
   };
 

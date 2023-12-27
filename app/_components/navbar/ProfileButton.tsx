@@ -1,5 +1,5 @@
 "use client";
-import { userAtom } from "@/app/_jotai/userAtoms";
+import { profileAtom, userAtom } from "@/app/_jotai/userAtoms";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAtom } from "jotai";
 import Link from "next/link";
@@ -16,21 +16,25 @@ type Props = {
 
 export const ProfileButton = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
+  const [profile, setProfile] = useAtom(profileAtom);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [imgUrl, setImgUrl] = useState<string | undefined>(undefined);
+  const supabase = createClientComponentClient();
 
   const handleClick = async () => {
     await useSignOut(() => setUser(null));
   };
 
-  // useEffect(() => {
-  //   if (!user) return;
-  //   (async () => {
-  //     getUserImg(user);
-  //     const url = await useCheckUserImg(user);
-  //     setImgUrl(url ?? undefined);
-  //   })();
-  // }, [user]);
+  useEffect(() => {
+    if (!user?.id || profile?.id) return;
+    const getProfile = async () => {
+      const { data, error } = await supabase
+        .from("profile")
+        .select("*")
+        .eq("id", user?.id);
+      setProfile(data && data[0] ? data[0] : null);
+    };
+    getProfile();
+  }, [user]);
 
   return (
     <div
@@ -43,9 +47,11 @@ export const ProfileButton = (props: Props) => {
       </button>
       {isModalOpen && user && (
         <div className="absolute right-0 top-full z-20 w-[200px] rounded-b border-b border-slate-500 bg-secondary p-2 shadow-xl">
-          <img src={getUserImg(user)} className="aspect-square w-full" />
-          <h1 className={`text-sm ${!getUserImg(user) && "pt-2"}`}>
-            Logged as: {user?.user_metadata.user_name}
+          {profile?.profile_pic && (
+            <img src={profile?.profile_pic} className="aspect-square w-full" />
+          )}
+          <h1 className={`text-sm ${!profile?.profile_pic && "pt-2"}`}>
+            Logged as: {profile?.user_name}
           </h1>
           <Link
             className="text-sm text-blue-300 underline"
