@@ -24,7 +24,7 @@ export const ModulesSearch = (props: Props) => {
         .select(
           "title,description,id,created_at,price,user_id(id,user_name,profile_pic)",
         );
-      if (!query)
+      if (query)
         supabaseQuery = supabaseQuery.textSearch("title_description", query);
       supabaseQuery = supabaseQuery.range(page * 9, page * 9 + 8);
       

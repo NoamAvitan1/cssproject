@@ -29,7 +29,7 @@ export const UsersSearch = (props: Props) => {
       let supabaseQuery = supabase
       .from("profile")
       .select("user_name,id,profile_pic,module_count,about")
-      if (!query) supabaseQuery.textSearch("user_name", query)
+      if (query) supabaseQuery.textSearch("user_name", query)
       supabaseQuery.range(page * 9, page * 9 + 8);
       const { data, error } = await supabaseQuery
       if (query === prevQuery) {
