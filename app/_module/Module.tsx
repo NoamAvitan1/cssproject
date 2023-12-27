@@ -12,7 +12,6 @@ import { Database } from "@/types/supabase";
 import { useEffect, useState } from "react";
 import { ModuleOverlay } from "./ModuleOverlay";
 import { SiAtom } from "react-icons/si";
-import { useCheckImg } from "../_hooks/useCheckImg";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { ModulesType } from "@/types/Modules";
 import { userAtom } from "../_jotai/userAtoms";
@@ -29,22 +28,10 @@ export const Module = ({ index, module, enableEdit }: Props) => {
   const [user] = useAtom(userAtom);
 
   const [toggle, setToggle] = useState<boolean>(false);
-  const [imgUrl, setImgUrl] = useState<string | undefined>();
 
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
-
-  useEffect(() => {
-    const getImg = async () => {
-      const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${module.user_id?.id}/${module.user_id?.id}`;
-      try {
-        const bool = await useCheckImg(url);
-        setImgUrl(bool ? url : undefined);
-      } catch (error) {}
-    };
-    getImg();
-  }, [module]);
 
   return (
     <section
@@ -88,9 +75,9 @@ export const Module = ({ index, module, enableEdit }: Props) => {
               className="flex h-6 w-fit items-center rounded-full bg-green-300 px-2 text-slate-700"
               href={"/profile/id/" + module.user_id.id}
             >
-              {imgUrl && (
+              {module?.user_id?.profile_pic && (
                 <img
-                  src={imgUrl}
+                  src={module.user_id.profile_pic}
                   className="max-h-[20px] max-w-[20px]"
                   alt=""
                 />
