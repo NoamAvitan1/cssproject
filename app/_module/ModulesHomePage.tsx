@@ -28,12 +28,12 @@ export default async function ModulesHomePage(props: Props) {
   const [free, paid, random] = await Promise.all(promises);
 
   return (
-    <div className="w-10/12 [&_h1]:border-b [&_h1]:border-text [&_h1]:p-2 space-y-6 [&_h1]:text-lg">
-      <h1>Public modules</h1>
+    <div className="w-10/12 space-y-6">
+      <h1 className="border-b border-text p-2 text-lg">Public modules</h1>
       <ModulesData modules={free} />
-      <h1>Paid modules</h1>
+      <h1 className="border-b border-text p-2 text-lg">Paid modules</h1>
       <ModulesData modules={paid} />
-      <h1>Global modules</h1>
+      <h1 className="border-b border-text p-2 text-lg">Global modules</h1>
       <ModulesData modules={random} />
     </div>
   );
