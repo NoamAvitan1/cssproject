@@ -8,6 +8,8 @@ interface Profile {
   id: string;
   user_name: string;
   profile_pic?: string;
+  about: string;
+  module_count: number;
 }
 type Props = {};
 
@@ -23,11 +25,11 @@ export const UsersSearch = (props: Props) => {
 
   useEffect(() => {
     if (query === null || !query) return;
-    setIsLoading(true)
+    setIsLoading(true);
     const getProfile = async () => {
       const { data, error } = await supabase
         .from("profile")
-        .select("user_name,id,profile_pic")
+        .select("user_name,id,profile_pic,module_count,about")
         .textSearch("user_name", query)
         .range(page * 9, page * 9 + 8);
       if (query === prevQuery) {
@@ -37,7 +39,7 @@ export const UsersSearch = (props: Props) => {
         setProfiles(data ? data : []);
       }
       setPrevQuery(query);
-      setIsLoading(false)
+      setIsLoading(false);
     };
     getProfile();
   }, [query, page]);
@@ -51,7 +53,7 @@ export const UsersSearch = (props: Props) => {
   return (
     <div>
       {profiles?.length ? (
-        <ul className="space-y-4 py-4">
+        <ul className="grid grid-cols-2 gap-4 py-4 md:grid-cols-3 xl:grid-cols-4">
           {profiles?.map((profile, i) => (
             <li key={i}>
               <SearchProfileComponent profile={profile} />
@@ -61,8 +63,13 @@ export const UsersSearch = (props: Props) => {
       ) : (
         <p>users not found</p>
       )}
-      <button onClick={() => profiles.length >= 9 && updateQueryParam("up", `${page + 1}`)}>
-        Click me
+      <button
+        onClick={() =>
+          profiles.length >= 9 && updateQueryParam("up", `${page + 1}`)
+        }
+        className="rounded-full bg-secondary px-4 py-2 ring-accent duration-150 hover:ring"
+      >
+        Load more results
       </button>
     </div>
   );

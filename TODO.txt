@@ -4,5 +4,3 @@ finishing touches
  - verify schema validations (client side, server side)
 
 style homePage
-
-style user search
