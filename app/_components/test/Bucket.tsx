@@ -27,7 +27,6 @@ export const Bucket = (props: Props) => {
         cacheControl: "3600",
         upsert: true, 
       });
-      console.log(data);
       props.setIsOpen(false);
       await props.onChange(BASE_URL + data?.path)
       tell("Picture changed seccesfully",'success')

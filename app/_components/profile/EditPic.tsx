@@ -25,10 +25,6 @@ export const EditPic = (props: Props) => {
       .update({ profile_pic: url})
       .eq("id", props.profile?.id)
       .select();
-    if (error) {
-      tell('An error occurred, please try again later', 'error')
-      return
-    }
     props.setProfile({ ...props.profile, profile_pic: url });
     setGlobalUserProfile({ ...props.profile, profile_pic: url });
   };
