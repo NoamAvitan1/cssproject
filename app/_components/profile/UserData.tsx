@@ -62,17 +62,6 @@ export const UserData = (props: Props) => {
 
   const isClient = useClient()
 
-  // useEffect(() => {
-  //   if (!profile?.id || !user || imageUrl) return
-  //   const setUrl = async () => {
-  //     const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`
-  //     const bool = await useCheckImg(url)
-  //     setImageUrl(bool? url : null)
-  //   }
-
-  //   setUrl()
-  // }, [profile]);
-
   return (
     <div className="w-full">
       {profile && (

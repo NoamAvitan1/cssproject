@@ -1,4 +1,3 @@
-import { useCheckImg } from "@/app/_hooks/useCheckImg";
 import { SearchModule } from "@/types/Modules";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,16 +9,7 @@ type Props = {
 };
 
 export const SearchModuleComponent = ({ module }: Props) => {
-  const [pic, setPic] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(() => {
-    const getPic = async () => {
-      const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${module.user_id?.id}/${module.user_id?.id}`;
-      const bool = await useCheckImg(url);
-      if (bool) setPic(url);
-    };
-    getPic()
-  }, [module]);
 
   const handleClick = () => {
     router.push(`/module/${module?.id}`)

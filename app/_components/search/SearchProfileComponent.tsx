@@ -1,4 +1,3 @@
-import { useCheckImg } from "@/app/_hooks/useCheckImg";
 import { FiUser } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
