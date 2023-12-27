@@ -22,7 +22,7 @@ export const EditorsView = (props: Props) => {
       return newCodeBlocks
     })    
   };
-  console.log(props.codeBlocks)
+  // console.log(props.codeBlocks)
 
   return (
     <div className="flex h-full w-full flex-col space-y-1 bg-secondary">
