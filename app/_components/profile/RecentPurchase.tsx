@@ -30,7 +30,7 @@ export const RecentPurchase = (props: Props) => {
   useEffect(() => {
     getModules();
   }, []);
-  return modules && user?.id === id ? (
+  return modules?.length && user?.id === id ? (
     <div className="mt-4 flex w-full flex-col gap-6">
       <h1 className="border-b-2 border-text text-[17px] md:text-2xl ">
         Modules purchased
