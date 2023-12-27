@@ -13,7 +13,6 @@ export async function POST(
 ) {
   const id = route.params.id;
   const moduleData = await request.json();
-  console.log(moduleData);
   const supabase = createRouteHandlerClient<Database>({ cookies });
   try {
     await moduleObject.validate(moduleData);
@@ -23,7 +22,6 @@ export async function POST(
       .update(moduleData)
       .eq("id", id)
       .select();
-    console.log(data);
     if (error) {
       console.log(error);
       return NextResponse.json(error);

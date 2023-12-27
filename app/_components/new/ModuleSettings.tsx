@@ -59,9 +59,7 @@ export const ModuleSettings = (props: Props) => {
           : "module/add";
         Api.post(url, values)
           .then((data) => {
-            console.log(data);
             const moduleTitle = data.data[0].title as string;
-            console.log(moduleTitle);
             tell(
               "module " +
                 moduleTitle +

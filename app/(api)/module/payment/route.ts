@@ -7,7 +7,6 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   const moduleData = await request.json();
-  console.log(moduleData);
   moduleData.price = parseInt(moduleData.price);
   const supabase = createRouteHandlerClient<Database>({ cookies });
   try {
@@ -25,4 +24,3 @@ export async function POST(request: Request) {
     }
 }
 
-// console.log(request.headers.get("referer"))

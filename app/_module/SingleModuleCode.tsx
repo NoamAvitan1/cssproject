@@ -9,6 +9,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { HiLockClosed } from "react-icons/hi2";
 import { IoLogoCss3, IoLogoHtml5 } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { tell } from "../_components/teller/Tale";
 
 type Module = Database["public"]["Tables"]["module"]["Row"];
 
@@ -58,6 +59,16 @@ export const SingleModuleCode = ({ module }: Props) => {
     }
     downloadFile(code, "examples", "html");
   };
+
+  const navigate = () => {
+    if(!user){
+      tell('Sign in for unlock the module','alert')
+      return;
+    }
+    router.push(
+      `/payment?module_id=${module?.id}&price=${module?.price}&user_id=${user?.id}`,
+    )
+  }
 
   useEffect(() => {
     if (!user || !module) return;
@@ -109,11 +120,7 @@ export const SingleModuleCode = ({ module }: Props) => {
       ) : (
         <div className="flex justify-center">
           <button
-            onClick={() =>
-              router.push(
-                `/payment?module_id=${module?.id}&price=${module?.price}&user_id=${user?.id}`,
-              )
-            }
+            onClick={() =>navigate()}
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
           >
             <p className="flex items-center gap-2">

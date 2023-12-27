@@ -29,7 +29,6 @@ export default function UpdateUserPassword(props: Props) {
       };
       if (formValidation.password !== confirmPassword) {
         e.preventDefault();
-        // console.log(confirmPassword);
         throw new Error("Passwords do not match");
       }
       authSchema()

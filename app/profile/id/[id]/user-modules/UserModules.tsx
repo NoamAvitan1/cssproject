@@ -4,12 +4,15 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ModulesData } from "@/app/_module/ModulesData";
 import { ModulesPurchased, ModulesType } from "@/types/Modules";
+import { useAtom } from "jotai";
+import { userAtom } from "@/app/_jotai/userAtoms";
 
 type Props = {
   type?: "public" | "paid" | "all";
 };
 
 export const UserModules = (props: Props) => {
+  const [user,setUser] = useAtom(userAtom);
   const searchParams = useSearchParams();
   const query = searchParams.get("modules");
   const [page, setPage] = useState<number>(0);
@@ -29,7 +32,11 @@ export const UserModules = (props: Props) => {
         )
         .eq("user_id", id);
       if (props.type !== "all") {
-        supabaseQuery.eq("access_type", props.type);
+        supabaseQuery.eq("access_type", props.type).
+        neq("access_type",'private');
+      }
+      if(props.type === "all" && user?.id !== id) {
+        supabaseQuery.neq("access_type", 'private');
       }
     } else {
       supabaseQuery = supabase
@@ -59,6 +66,9 @@ export const UserModules = (props: Props) => {
       if (props.type !== "all") {
         supabaseQuery.eq("access_type", props.type);
       }
+      if(props.type === "all" && user?.id !== id) {
+        supabaseQuery.neq("access_type", 'private');
+      }
     } else {
       supabaseQuery = supabase
         .from("module_purchase")
@@ -69,7 +79,6 @@ export const UserModules = (props: Props) => {
         .range(page * 9, page * 9 + 8);
     }
     let { data, error } = await supabaseQuery;
-    console.log(data);
     setModules(data as ModulesType[] | ModulesPurchased[] | null);
   };
 
