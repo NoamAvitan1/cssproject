@@ -18,7 +18,6 @@ export async function middleware(req: NextRequest) {
   if (protectedRoutes.find((r) => req.url.includes(r))) {
     const { data, error } = await supabase.auth.getSession();
     if (error || !data.session) {
-      console.log('protected')
       return NextResponse.rewrite(new URL("/", req.url));
     }
   }
