@@ -12,10 +12,9 @@ import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
 import { getUserImg } from "@/utils/getUserImg";
+import { useClient } from "@/app/_hooks/useClient";
 
-
-type Props = {
-};
+type Props = {};
 
 export const UserData = (props: Props) => {
   const [user, setUser] = useAtom(userAtom);
@@ -28,16 +27,16 @@ export const UserData = (props: Props) => {
   let { id: idParam } = useParams();
 
   useEffect(() => {
-    if (profile?.id) return
+    if (profile?.id) return;
 
     if (userProfile && (!idParam || user?.id == idParam)) {
-      setProfile(userProfile)
-      return
+      setProfile(userProfile);
+      return;
     }
 
     if (!idParam) {
-      if (user?.id) idParam = user.id
-      else return
+      if (user?.id) idParam = user.id;
+      else return;
     }
 
     const update = async () => {
@@ -49,23 +48,25 @@ export const UserData = (props: Props) => {
         if (typeof window !== undefined) tell("Couldn't find profile", "error");
         return;
       }
-      if(data === null){
+      if (data === null) {
         tell("Couldn't find profile", "error");
         return;
       }
       setProfile(data && data[0] ? data[0] : null);
       if (!idParam || user?.id == idParam) {
-        setUserProfile(data && data[0] ? data[0] : null)
+        setUserProfile(data && data[0] ? data[0] : null);
       }
     };
     update();
   }, [idParam, user]);
 
+  const isClient = useClient()
+
   // useEffect(() => {
   //   if (!profile?.id || !user || imageUrl) return
   //   const setUrl = async () => {
   //     const url = `https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/${profile?.id}/${profile?.id}`
-  //     const bool = await useCheckImg(url) 
+  //     const bool = await useCheckImg(url)
   //     setImageUrl(bool? url : null)
   //   }
 
@@ -77,8 +78,10 @@ export const UserData = (props: Props) => {
       {profile && (
         <main className="container border border-secondary">
           <article className="flex flex-col gap-5 p-2 md:flex-row">
-            <section className="h-full md:w-1/3 relative">
-            {user?.id === profile?.id && <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl}/>}
+            <section className="relative h-full md:w-1/3">
+              {user?.id === profile?.id && (
+                <EditPic imageUrl={imageUrl} setImageUrl={setImageUrl} />
+              )}
               {imageUrl && user ? (
                 <img
                   className="aspect-square h-full w-full rounded-md"
@@ -115,10 +118,13 @@ export const UserData = (props: Props) => {
                 <div className="w-full rounded-md bg-secondary p-2 text-sm xl:text-[17px]">
                   {profile?.about ? (
                     <p className="h-full break-normal">{profile?.about}</p>
-                    ) : user?.id === profile?.id ? 
-                      <p>Go edit your profile and write about yourself...</p> :
-                      <p>{profile?.user_name} has not yet written about himself</p>
-                  }
+                  ) : user?.id === profile?.id ? (
+                    <p>Go edit your profile and write about yourself...</p>
+                  ) : (
+                    <p>
+                      {profile?.user_name} has not yet written about himself
+                    </p>
+                  )}
                 </div>
               </div>
             </section>
@@ -126,7 +132,7 @@ export const UserData = (props: Props) => {
         </main>
       )}
       <div>
-        <RecentModules user_name={profile?.user_name}/>
+        {isClient && <RecentModules user_name={profile?.user_name} />}
       </div>
     </div>
   );
