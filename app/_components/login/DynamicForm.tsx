@@ -70,7 +70,7 @@ export const DynamicForm = (props: Props) => {
             return
           }
           setUser(data.user);
-          router.push('/');
+          if (type == "sign-in") router.push('/');
           tell(data.message)
         })
         .catch((error: yup.ValidationError) => {

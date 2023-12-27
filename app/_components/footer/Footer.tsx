@@ -19,7 +19,7 @@ export default function Footer(props: Props) {
           className="flex flex-col items-center gap-1"
           href="https://www.linkedin.com/in/maoz-schory/"
         >
-          <span className="">Maoz Schori</span>
+          <span className="">Maoz Schory</span>
           <div className="rounded-full bg-blue-500">
             <TiSocialLinkedin className="rounded-full text-white text-lg" />
           </div>
