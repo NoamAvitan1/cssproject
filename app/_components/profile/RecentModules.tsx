@@ -24,7 +24,7 @@ export const RecentModules = (props: Props) => {
     let supabaseQuery = supabase
       .from("module")
       .select(
-        "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)",
+        "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name,profile_pic)",
       )
       .eq("user_id", id)
       .range(0, 2);

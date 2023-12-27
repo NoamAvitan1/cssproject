@@ -59,7 +59,7 @@ export const UserModules = (props: Props) => {
       supabaseQuery = supabase
         .from("module")
         .select(
-          "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name)",
+          "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name,profile_pic)",
         )
         .eq("user_id", id)
         .range(page * 9, page * 9 + 8);
@@ -73,7 +73,7 @@ export const UserModules = (props: Props) => {
       supabaseQuery = supabase
         .from("module_purchase")
         .select(
-          "module_id(examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(*))",
+          "module_id(examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name,profile_pic))",
         )
         .eq("user_id", id)
         .range(page * 9, page * 9 + 8);

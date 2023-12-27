@@ -23,7 +23,7 @@ export const RecentPurchase = (props: Props) => {
   const getModules = async () => {
     let { data, error } = await supabase
       .from("module_purchase")
-       .select('module_id(examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(*))')
+       .select('module_id(examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name,profile_pic))')
       .eq("user_id", id)
       .range(0, 2);
     setModules(data);
