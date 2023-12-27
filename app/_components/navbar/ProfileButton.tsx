@@ -1,5 +1,4 @@
 "use client";
-import { useCheckUserImg } from "@/app/_hooks/useCheckUserImg";
 import { userAtom } from "@/app/_jotai/userAtoms";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAtom } from "jotai";
