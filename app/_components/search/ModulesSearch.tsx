@@ -17,23 +17,28 @@ export const ModulesSearch = (props: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (query === null || !query) return;
-    setIsLoading(true)
+    setIsLoading(true);
     const getModules = async () => {
-      const { data, error } = await supabase
+      let supabaseQuery = supabase
         .from("module")
-        .select("title,description,id,created_at,price,user_id(id,user_name,profile_pic)")
-        .textSearch("title_description", query)
-        .range(page * 9, page * 9 + 8);
-      const modules = data as unknown as SearchModule[]
+        .select(
+          "title,description,id,created_at,price,user_id(id,user_name,profile_pic)",
+        );
+      if (!query)
+        supabaseQuery = supabaseQuery.textSearch("title_description", query);
+      supabaseQuery = supabaseQuery.range(page * 9, page * 9 + 8);
+      
+      const { data, error } = await supabaseQuery;
+
+      const modules = data as unknown as SearchModule[];
       if (query == prevQuery) {
         if (!data) return;
         setModules((prev) => [...prev, ...modules]);
       } else if (query !== prevQuery) {
         setModules(modules ? modules : []);
       }
-      setPrevQuery(query);
-      setIsLoading(false)
+      if (query) setPrevQuery(query);
+      setIsLoading(false);
     };
     getModules();
   }, [query, page]);
@@ -45,7 +50,7 @@ export const ModulesSearch = (props: Props) => {
   };
 
   return (
-    <ul className="px-2 space-y-6 py-6">
+    <ul className="space-y-6 px-2 py-6">
       {modules?.length ? (
         modules?.map((module, i) => (
           <li key={i}>
@@ -55,8 +60,11 @@ export const ModulesSearch = (props: Props) => {
       ) : (
         <p>modules do not found</p>
       )}
-      <button onClick={() => modules.length >= 9 && updateQueryParam("mp", `${page + 1}`)}
-      className="px-4 py-2 rounded-full bg-secondary hover:ring ring-accent duration-150"
+      <button
+        onClick={() =>
+          modules.length >= 9 && updateQueryParam("mp", `${page + 1}`)
+        }
+        className="rounded-full bg-secondary px-4 py-2 ring-accent duration-150 hover:ring"
       >
         Load more results
       </button>

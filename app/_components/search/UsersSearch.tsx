@@ -24,21 +24,21 @@ export const UsersSearch = (props: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (query === null || !query) return;
     setIsLoading(true);
     const getProfile = async () => {
-      const { data, error } = await supabase
-        .from("profile")
-        .select("user_name,id,profile_pic,module_count,about")
-        .textSearch("user_name", query)
-        .range(page * 9, page * 9 + 8);
+      let supabaseQuery = supabase
+      .from("profile")
+      .select("user_name,id,profile_pic,module_count,about")
+      if (!query) supabaseQuery.textSearch("user_name", query)
+      supabaseQuery.range(page * 9, page * 9 + 8);
+      const { data, error } = await supabaseQuery
       if (query === prevQuery) {
         if (!data) return;
         setProfiles((prev) => [...prev, ...data]);
       } else if (query !== prevQuery) {
         setProfiles(data ? data : []);
       }
-      setPrevQuery(query);
+      if (query) setPrevQuery(query);
       setIsLoading(false);
     };
     getProfile();
