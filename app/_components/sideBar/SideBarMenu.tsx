@@ -47,12 +47,6 @@ export const SideBarMenu = (props: Props) => {
       guard: () => (user ? true : false),
     },
     {
-      label: "test",
-      onClick: () => navigate("/test"),
-      icon: <MdHome />,
-      guard: () => true,
-    },
-    {
       label: "Create",
       onClick: () => navigate("/new"),
       icon: <SiAtom />,
