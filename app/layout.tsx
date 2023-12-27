@@ -1,4 +1,3 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import "./css/VFX.css";
 import "./css/loader.css";
@@ -11,6 +10,7 @@ import { SideBarMenu } from "./_components/sideBar/SideBarMenu";
 import { Teller } from "./_components/teller/Teller";
 import { UserSetter } from "./_components/login/UserSetter";
 import Footer from "./_components/footer/Footer";
+import ServerClient from "@/supabase/ServerClient";
 
 export const metadata = {
   title: "CSStore",
@@ -22,11 +22,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerComponentClient({ cookies });
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await ServerClient().auth.getUser();
 
   return (
     <html lang="en">

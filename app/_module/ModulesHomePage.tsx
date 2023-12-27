@@ -1,14 +1,13 @@
 import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { ModulesData } from "./ModulesData";
+import ServerClient from "@/supabase/ServerClient";
 
 type Props = {};
 
 export default async function ModulesHomePage(props: Props) {
-  const supabase = createServerComponentClient({ cookies });
 
   const query = async (type: string = "") => {
-    const supabaseQuery = supabase
+    const supabaseQuery = ServerClient()
       .from("module")
       .select(
         "examples_count,access_type,created_at,description,downloads,id,price,title,title_description,user_id(id,user_name,profile_pic)",
