@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const Api = Axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://css-store.vercel.app/',
     withCredentials: true,
 })
 
