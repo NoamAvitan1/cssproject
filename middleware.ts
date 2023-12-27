@@ -5,7 +5,12 @@ import type { NextRequest } from "next/server";
 import { Database } from "./types/supabase";
 
 export async function middleware(req: NextRequest) {
-  const protectedRoutes = ["/new", "profile/update-profile", "/payment", "/test"];
+  const protectedRoutes = [
+    // "/new",
+    "profile/update-profile",
+    "/payment",
+    "/test",
+  ];
 
   const res = NextResponse.next();
 

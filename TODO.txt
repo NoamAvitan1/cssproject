@@ -1,6 +1,8 @@
 
 finishing touches
  - verify RLS
- - verify schema validations (client side, server side)
+ - verify schema validations (client side, server side) - EditProfile, EmailUpdateButton, Payment, UpdateUserPassword
 
 style homePage
+
+create Footer.tsx

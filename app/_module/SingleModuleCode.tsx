@@ -61,14 +61,14 @@ export const SingleModuleCode = ({ module }: Props) => {
   };
 
   const navigate = () => {
-    if(!user){
-      tell('Sign in for unlock the module','alert')
+    if (!user) {
+      tell("Sign in for unlock the module", "alert");
       return;
     }
     router.push(
       `/payment?module_id=${module?.id}&price=${module?.price}&user_id=${user?.id}`,
-    )
-  }
+    );
+  };
 
   useEffect(() => {
     if (!user || !module) return;
@@ -97,7 +97,7 @@ export const SingleModuleCode = ({ module }: Props) => {
 
   return (
     <div className="">
-      {isPurchased || isOwnModule ? (
+      {isPurchased || isOwnModule || module.access_type == "public" ? (
         <div className="flex flex-col items-center gap-2">
           <button
             onClick={() => downloadCSSFile()}
@@ -120,7 +120,7 @@ export const SingleModuleCode = ({ module }: Props) => {
       ) : (
         <div className="flex justify-center">
           <button
-            onClick={() =>navigate()}
+            onClick={() => navigate()}
             className="rounded-full border-2 border-slate-500 bg-secondary px-4 py-1 duration-100 active:scale-95"
           >
             <p className="flex items-center gap-2">

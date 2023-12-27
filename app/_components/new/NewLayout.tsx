@@ -12,6 +12,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
 import { useAtom } from "jotai";
 import { userAtom } from "@/app/_jotai/userAtoms";
+import { tell } from "../teller/Tale";
 
 type Props = {};
 
@@ -45,6 +46,10 @@ export const NewLayout = (props: Props) => {
       });
     };
   }, []);
+
+  useEffect(() => {
+    if (!user?.id) tell("You must be logged in to upload a module", 'alert', 999)
+  }, [])
 
   useEffect(() => {
     if (window.innerWidth >= 1280 && selectedBlock > codeBlocks.length - 1) {
