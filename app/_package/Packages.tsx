@@ -1,12 +1,11 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import ServerClient from "@/supabase/ServerClient";
 import { cookies } from "next/headers";
 
 type Props = {};
 
 export default async function Packages(props: Props) {
-  const supabase = createServerComponentClient({ cookies });
 
-  const {data:packages} = await supabase.from("package").select(`
+  const {data:packages} = await ServerClient().from("package").select(`
   *,
   module(*)`);
 

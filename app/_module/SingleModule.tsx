@@ -1,9 +1,9 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { SingleModuleImages } from "./SingleModuleImages";
 import { HiLockClosed } from "react-icons/hi2";
 import { SingleModuleCode } from "./SingleModuleCode";
 import { SingleModuleHeader } from "./SingleModuleHeader";
+import ServerClient from "@/supabase/ServerClient";
 const htmlToImage = require("../../utils/htmlToImage");
 
 type Props = {
@@ -11,10 +11,9 @@ type Props = {
 };
 
 export default async function SingleModule(props: Props) {
-  const supabase = createServerComponentClient({ cookies });
   const images: Buffer[] = [];
 
-  const { data: modulesArray }: any = await supabase
+  const { data: modulesArray }: any = await ServerClient()
     .from("module")
     .select("*")
     .eq("id", props.id);
