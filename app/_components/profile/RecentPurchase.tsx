@@ -59,7 +59,7 @@ export const RecentPurchase = (props: Props) => {
       ) : null}
     </div>
   ) : (
-    <div className="my-6 flex h-[200px] items-center justify-center border border-secondary">
+    <div className="mb-6 w-full flex h-[200px] items-center justify-center border border-secondary">
         <h1 className="text-2xl">No purchased modules found</h1>
     </div>
   );
