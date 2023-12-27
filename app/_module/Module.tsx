@@ -36,7 +36,7 @@ export const Module = ({ index, module, enableEdit }: Props) => {
   return (
     <section
       key={index}
-      className="rounded-[0.43rem] bg-gradient-to-b from-violet-500 to-sky-500 p-[1px]"
+      className="max-w-[350px] rounded-[0.43rem] bg-gradient-to-b from-violet-500 to-sky-500 p-[1px] lg:max-w-[400px]"
     >
       <div className="flex aspect-square flex-col justify-between rounded-md bg-secondary">
         <div className="w-full space-y-2">
@@ -78,7 +78,7 @@ export const Module = ({ index, module, enableEdit }: Props) => {
               {module?.user_id?.profile_pic && (
                 <img
                   src={module.user_id.profile_pic}
-                  className="max-h-[20px] max-w-[20px]"
+                  className="mr-[2px] max-h-[20px] max-w-[20px] rounded-full"
                   alt=""
                 />
               )}

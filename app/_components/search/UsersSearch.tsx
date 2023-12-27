@@ -47,7 +47,7 @@ export const UsersSearch = (props: Props) => {
   const updateQueryParam = (key: string, value: string) => {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set(key, value);
-    router.replace(`?${currentParams.toString()}`, { scroll: false });
+    router.push(`?${currentParams.toString()}`);
   };
 
   return (

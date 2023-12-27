@@ -6,6 +6,6 @@ export const useQueryParam = (key: string, value: string) => {
     const searchParams = useSearchParams();
     const currentParams = new URLSearchParams(searchParams.toString());
       currentParams.set(key, value);
-      router.replace(`?${currentParams.toString()}`, { scroll: false });
+      router.pus(`?${currentParams.toString()}`);
 
 }
