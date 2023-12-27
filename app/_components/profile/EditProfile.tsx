@@ -15,7 +15,6 @@ type Props = {
 
 export const EditProfile = (props: Props) => {
 
-
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     try {
       const inputs = e.target.elements;
@@ -29,6 +28,7 @@ export const EditProfile = (props: Props) => {
           e.preventDefault();
           tell(error.message,'error');
         });
+        tell('profile updated successfully','success')
     } catch (error: any) {
       e.preventDefault();
       tell(error.message,'error')   

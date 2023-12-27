@@ -11,8 +11,6 @@ import { ModulesPurchased, ModulesType } from "@/types/Modules";
 type Props = {
 };
 
-
-
 export const RecentPurchase = (props: Props) => {
   const router = useRouter();
   const { id } = useParams();
