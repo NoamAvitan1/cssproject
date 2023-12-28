@@ -8,13 +8,13 @@ import { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { tell } from "../teller/Tale";
 import { useSignOut } from "@/app/_hooks/useLogOut";
-import { getUserImg } from "@/utils/getUserImg";
 
 type Props = {
   setIsVeilOpen: Function;
 };
 
 export const ProfileButton = (props: Props) => {
+  const router = useRouter();
   const [user, setUser] = useAtom(userAtom);
   const [profile, setProfile] = useAtom(profileAtom);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +39,7 @@ export const ProfileButton = (props: Props) => {
   return (
     <div
       className="relative"
+      onClick={() => {if(!user){tell("Please Sign in",'alert'),router.push('/login')}}}
       onPointerEnter={() => setIsModalOpen(true)}
       onPointerLeave={() => setIsModalOpen(false)}
     >
