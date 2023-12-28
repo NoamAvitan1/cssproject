@@ -58,7 +58,7 @@ export const RecentPurchase = (props: Props) => {
         </div>
       ) : null}
     </div>
-  ) : (
+  ) : user?.id === id &&(
     <div className="mb-6 w-full flex h-[200px] items-center justify-center border border-secondary">
         <h1 className="text-2xl">No purchased modules found</h1>
     </div>
