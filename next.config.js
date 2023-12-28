@@ -8,6 +8,7 @@ const nextConfig = {
       ["@swc-jotai/react-refresh", {}],
     ],
   },
+    output: 'standalone'
 }
 
 module.exports = nextConfig
