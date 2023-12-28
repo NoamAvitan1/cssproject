@@ -6,6 +6,9 @@ RUN apk add --no-cache libc6-compat
 
 RUN apk add chromium
 
+RUN apk update && \
+    apk add --no-cache libc6-compat autoconf automake libtool make tiff jpeg zlib zlib-dev pkgconf nasm file gcc musl-dev
+
 WORKDIR /app
 
 COPY package*.json ./
