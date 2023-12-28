@@ -47,4 +47,4 @@ Please file feedback and issues over on the [Supabase GitHub org](https://github
 - [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
 - [Next.js Auth Helpers Docs](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
 
-have fun!!
+
