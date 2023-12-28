@@ -3,6 +3,8 @@ import { UserData } from "../../../_components/profile/UserData";
 import { SensitiveInfo } from "@/app/_components/profile/SensitiveInfo";
 import { SignOutBtn } from "@/app/_components/profile/SignOutBtn";
 
+export const revalidate = 0
+
 export default function Profile() {
   return (
     <article className="flex w-full justify-center">
