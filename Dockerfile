@@ -1,10 +1,34 @@
-FROM node:18-alpine
+FROM node:18-alpine AS base
+
+FROM base AS deps
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+FROM base AS builder
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+
+COPY . .
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN npm run build
 
 FROM base AS runner
 
 WORKDIR /app
 
 ENV NODE_ENV production
+
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 
@@ -28,18 +52,4 @@ ENV PORT 3000
 
 ENV HOSTNAME "0.0.0.0"
 
-COPY package*.json ./
-
-RUN npm install
-
-RUN apk add --no-cache libc6-compat
-
-RUN apk add chromium
-
-ENV NEXT_TELEMETRY_DISABLED 1
-
-ENV DB_PW=TT1LRw3hINBbtBFp NEXT_PUBLIC_SUPABASE_URL=https://ielhefdzhfesqnlbxztn.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImllbGhlZmR6aGZlc3FubGJ4enRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQwMDU4NTEsImV4cCI6MjAwOTU4MTg1MX0.0-Mmeji_YHVSbUEIk0Sm2hyIVoyygu6VZuFtNfuAJY0 NEXT_BASE_BUCKET_URL=https://ielhefdzhfesqnlbxztn.supabase.co/storage/v1/object/public/profile%20pic/
-
 CMD ["node", "server.js"]
-
-RUN npm run build
