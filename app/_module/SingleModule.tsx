@@ -1,6 +1,4 @@
-import { cookies } from "next/headers";
 import { SingleModuleImages } from "./SingleModuleImages";
-import { HiLockClosed } from "react-icons/hi2";
 import { SingleModuleCode } from "./SingleModuleCode";
 import { SingleModuleHeader } from "./SingleModuleHeader";
 import ServerClient from "@/supabase/ServerClient";
@@ -13,7 +11,7 @@ type Props = {
 };
 
 export default async function SingleModule(props: Props) {
-  const browser = await puppeteer.launch({
+  const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath,
     headless: chromium.headless,
