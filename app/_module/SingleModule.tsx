@@ -3,7 +3,6 @@ import { SingleModuleCode } from "./SingleModuleCode";
 import { SingleModuleHeader } from "./SingleModuleHeader";
 import ServerClient from "@/supabase/ServerClient";
 const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
 const htmlToImage = require("../../utils/htmlToImage");
 
 type Props = {
