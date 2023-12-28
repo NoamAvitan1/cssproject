@@ -26,6 +26,10 @@ export const ModuleSettings = (props: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!user){
+      tell('You must log in to create your module','alert')
+      return;
+    }
     const form = e.target as HTMLFormElement;
     let values: any = {};
     values.access_type = type.trim();
