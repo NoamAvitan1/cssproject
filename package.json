@@ -11,7 +11,6 @@
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
     "axios": "^1.5.0",
-    "chromium": "^3.0.3",
     "emmet-monaco-es": "^5.3.0",
     "jotai": "^2.4.2",
     "next": "13.5.1",
