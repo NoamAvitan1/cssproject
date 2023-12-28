@@ -4,6 +4,8 @@ import { HiLockClosed } from "react-icons/hi2";
 import { SingleModuleCode } from "./SingleModuleCode";
 import { SingleModuleHeader } from "./SingleModuleHeader";
 import ServerClient from "@/supabase/ServerClient";
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 const htmlToImage = require("../../utils/htmlToImage");
 
 type Props = {
@@ -11,6 +13,11 @@ type Props = {
 };
 
 export default async function SingleModule(props: Props) {
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
+});
   const images: Buffer[] = [];
 
   const { data: modulesArray }: any = await ServerClient()
@@ -23,6 +30,8 @@ export default async function SingleModule(props: Props) {
     if (!imageBinary || typeof imageBinary === "number") return;
     images.push(imageBinary);
   }
+
+  await browser.close()
 
   return (
     <article className="flex w-full flex-col items-center gap-6 p-3" id="app">
