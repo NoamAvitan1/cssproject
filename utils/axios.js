@@ -7,4 +7,3 @@ const Api = Axios.create({
 })
 
 export default Api
-
