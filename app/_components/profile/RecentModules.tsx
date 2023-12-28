@@ -60,7 +60,7 @@ export const RecentModules = (props: Props) => {
       ) : null}
     </div>
   ) : (
-    <div className="my-6 flex h-[200px] items-center justify-center border border-secondary">
+    <div className="mt-6 flex h-[200px] items-center justify-center border border-secondary">
       <div className="flex flex-col items-center gap-1">
         <h1 className="text-2xl">No recent modules found</h1>
         {user?.id === id && (

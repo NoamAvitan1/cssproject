@@ -12,7 +12,6 @@ import { Profile } from "@/types/Profile";
 import { RecentModules } from "./RecentModules";
 import { EditPic } from "./EditPic";
 import { useClient } from "@/app/_hooks/useClient";
-import next from "next";
 
 type Props = {};
 
