@@ -50,4 +50,8 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD ["npm", "start"] 
+ENV PORT 3000
+
+ENV HOSTNAME ::
+
+CMD ["node", "server.js"] 
