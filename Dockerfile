@@ -6,15 +6,13 @@ RUN apk add --no-cache libc6-compat
 
 RUN apk add chromium
 
-RUN apk update && \
-    apk add --no-cache libc6-compat autoconf automake libtool make tiff jpeg zlib zlib-dev pkgconf nasm file gcc musl-dev
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
-RUN npm install --global next 
+RUN npm ci
 
 FROM base AS builder
 
@@ -24,7 +22,7 @@ COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN npm run build
 
@@ -34,11 +32,13 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 
 RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
 
 RUN mkdir .next
 
@@ -56,4 +56,4 @@ ENV PORT 3000
 
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
