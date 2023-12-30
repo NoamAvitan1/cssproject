@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:18-ubuntu AS base
 
 FROM base AS deps
 
@@ -36,10 +36,8 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app ./
 
-# Remove existing .next directory if it exists
 RUN rm -rf .next
 
-# Create a new .next directory
 RUN mkdir .next
 
 RUN chown nextjs:nodejs .next
@@ -54,4 +52,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["npm" , "start"]
+CMD ["npm", "run", "dev"]
