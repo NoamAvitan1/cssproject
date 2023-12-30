@@ -1,10 +1,10 @@
-FROM node:18-alpine AS base
+FROM node:18-bookworm AS base
 
 FROM base AS deps
 
-RUN apk add --no-cache libc6-compat
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
-RUN apk add chromium
+RUN apt install ./google-chrome-stable_current_amd64.deb
 
 WORKDIR /app
 
@@ -52,4 +52,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
