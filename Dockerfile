@@ -16,6 +16,10 @@ COPY package*.json ./
 
 RUN npm ci
 
+RUN node node_modules/puppeteer/install.js
+
+RUN npm ci
+
 FROM base AS builder
 
 WORKDIR /app
