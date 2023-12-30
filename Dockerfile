@@ -2,11 +2,14 @@ FROM node:18-bookworm AS base
 
 FROM base AS deps
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
-RUN sudo apt update 
+RUN curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
 
-RUN sudo apt install ./google-chrome-stable_current_amd64.deb
+RUN echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+RUN sudo apt update
+
+RUN sudo apt install google-chrome-stable
 
 WORKDIR /app
 
