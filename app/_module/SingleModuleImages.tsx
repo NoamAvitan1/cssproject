@@ -39,7 +39,6 @@ export const SingleModuleImages = ({module}: Props) => {
     const getImages = async() => {
       if(!module?.id || !module?.html?.length || !module?.css) return;
       const imageProps = await Promise.all(module?.html.map((html) => htmlToImage(html,module?.css)))
-      console.log(imageProps);
       setImages(imageProps)
     }
     getImages();
