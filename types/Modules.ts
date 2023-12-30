@@ -14,6 +14,8 @@ export type SearchModule = {
 
 export type ModulesType = 
    {
+    html?:string[];
+    css?:string;
     examples_count: number;
     access_type: 'public' | 'private' | 'paid';
     created_at: string;
