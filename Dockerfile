@@ -6,8 +6,6 @@ RUN apk add --no-cache libc6-compat
 
 RUN apk add chromium
 
-RUN apk add --no-cache libc6-compat
-
 WORKDIR /app
 
 COPY package*.json ./
@@ -32,14 +30,16 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-# ENV NEXT_TELEMETRY_DISABLED 1
-
 RUN addgroup --system --gid 1001 nodejs
 
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app ./
 
+# Remove existing .next directory if it exists
+RUN rm -rf .next
+
+# Create a new .next directory
 RUN mkdir .next
 
 RUN chown nextjs:nodejs .next
@@ -56,4 +56,4 @@ ENV PORT 3000
 
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node" , "server.js"] 
+CMD ["node" , "server.js"]
