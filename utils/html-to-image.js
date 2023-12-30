@@ -27,11 +27,10 @@ export const htmlToImage = async (html, css) => {
   imageProps.w = w;
   imageProps.h = h;
   imageProps.url = url;
-  const img = new Image();
-  img.style.width = w;
-  img.style.height = h;
-  img.src = url;
-  console.log(url);
+  // const img = new Image();
+  // img.style.width = w;
+  // img.style.height = h;
+  // img.src = url;
   container.remove();
   return imageProps;
 };
