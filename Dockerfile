@@ -18,6 +18,10 @@ RUN npm ci
 
 RUN node node_modules/puppeteer/install.js
 
+RUN sudo apt-get install libgbm1
+
+RUN sudo apt-get install libasound2
+
 RUN npm ci
 
 FROM base AS builder
