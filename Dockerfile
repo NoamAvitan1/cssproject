@@ -48,16 +48,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Set custom DNS servers
-RUN echo "nameserver 10.0.0.2" > /etc/resolv.conf
-RUN echo "nameserver 8.8.8.8" >> /etc/resolv.conf
-
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-ENV HOSTNAME 0.0.0.0
-
-CMD ["node", "server.js"]
+CMD ["node" , "server.js"]
