@@ -17,7 +17,6 @@ export const htmlToImage = async (html, css) => {
   container.style.opacity = 0;
   container.style.overflow = "hidden";
   container.appendChild(element);
-  console.log(element.style)
 
   app.appendChild(container);
 
