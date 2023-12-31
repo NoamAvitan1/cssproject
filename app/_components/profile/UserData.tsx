@@ -47,7 +47,7 @@ export const UserData = (props: Props) => {
         if (typeof window !== undefined) tell("Couldn't find profile", "error");
         return;
       }
-      if (data === null) {
+      if (!data || !data[0]) {
         tell("Couldn't find profile", "error");
         return;
       }
