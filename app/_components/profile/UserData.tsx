@@ -120,7 +120,7 @@ export const UserData = (props: Props) => {
         </main>
       )}
       <div>
-        {isClient && <RecentModules user_name={profile?.user_name} />}
+        {isClient && profile?.id && <RecentModules user_name={profile.user_name} />}
       </div>
     </div>
   );
