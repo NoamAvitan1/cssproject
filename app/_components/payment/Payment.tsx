@@ -53,7 +53,7 @@ export const Payment = (props: Props) => {
         }
     }
   return (
-    <div className="mt-10 flex flex-col gap-10 h-full w-full items-center">
+    <div className="mt-10 flex flex-col gap-10 w-full items-center">
         <div className="flex gap-[3px]">
             <FaCcPaypal className="text-blue-600 text-4xl"/>
             <FaCcMastercard className="text-4xl text-orange-400"/>
